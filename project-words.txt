@@ -1,5 +1,5 @@
 passionfruit
-Greenleaf
+passionfruit
 Astro
 TypeScript
 Tailwind

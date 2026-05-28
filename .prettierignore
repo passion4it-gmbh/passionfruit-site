@@ -7,3 +7,7 @@ dist
 node_modules
 .cache
 .release-please-manifest.json
+
+# Astro files with `define:vars` inline scripts confuse prettier-plugin-astro
+src/components/PostHogAnalytics.astro
+src/components/GoogleAnalytics.astro

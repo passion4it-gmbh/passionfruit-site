@@ -1,48 +1,40 @@
 {
   "site": {
-    "name": "Greenleaf Digital",
-    "tagline": "Digital solutions with passion",
-    "description": "Greenleaf Digital — Your agency for modern web projects."
+    "name": "passionfruit",
+    "tagline": "A website template that turns Claude Code into your web developer",
+    "description": "passionfruit — the bilingual website template for Claude Code. Create a repo, type /onboard, ship."
   },
   "navigation": {
-    "home": "Home",
-    "about": "About",
-    "services": "Services",
+    "features": "Features",
     "blog": "Blog",
-    "team": "Team",
     "contact": "Contact"
   },
   "footer": {
-    "copyright": "© {year} Greenleaf Digital. All rights reserved.",
+    "copyright": "© {year} PASSION4IT GmbH. All rights reserved.",
     "builtWith": "Built with passionfruit",
-    "privacy": "Privacy Policy",
+    "privacy": "Privacy",
     "imprint": "Imprint"
   },
   "cta": {
     "contact": "Get in touch",
     "readMore": "Read more",
-    "backToBlog": "Back to Blog",
-    "backToTeam": "Back to Team"
+    "backToBlog": "Back to blog"
   },
   "blog": {
     "title": "Blog",
-    "description": "News and insights",
-    "publishedAt": "Published on {date}",
+    "description": "Release notes, deep-dives, and the story behind passionfruit.",
+    "publishedAt": "Published {date}",
     "author": "By {name}",
     "readMore": "Read more",
     "noPosts": "No posts yet."
   },
-  "team": {
-    "title": "Our Team",
-    "description": "Meet our team."
-  },
   "contact": {
     "title": "Contact",
-    "description": "Get in touch with us.",
+    "description": "Got a question about passionfruit, or want to work with PASSION4IT?",
     "info": {
-      "email": "hello@example.com",
-      "phone": "+49 123 456 789",
-      "address": "Musterstraße 1, 12345 Musterstadt"
+      "email": "info@passion4it.de",
+      "phone": "",
+      "address": "PASSION4IT GmbH"
     },
     "form": {
       "name": "Name",
@@ -50,7 +42,7 @@
       "message": "Message",
       "send": "Send",
       "sending": "Sending...",
-      "success": "Thank you! Your message has been sent.",
+      "success": "Thanks — your message is on its way.",
       "error": "Something went wrong. Please try again."
     }
   },
@@ -60,87 +52,40 @@
     "backHome": "Back to home"
   },
   "cookie": {
-    "title": "This website uses cookies",
-    "description": "We use cookies to improve your experience and analyze website traffic.",
+    "title": "This site uses cookies",
+    "description": "We use cookies to improve your experience and analyze site traffic.",
     "accept": "Accept all",
     "reject": "Reject",
     "preferences": "Preferences",
     "necessary": "Necessary",
-    "necessaryDescription": "These cookies are required for basic website functionality.",
+    "necessaryDescription": "These cookies are required for the site to function.",
     "analytics": "Analytics",
-    "analyticsDescription": "These cookies help us understand how visitors use our website."
+    "analyticsDescription": "These cookies help us understand how visitors use the site."
   },
   "home": {
     "hero": {
-      "headline": "Digital solutions with passion",
-      "subheadline": "We build modern websites that drive your business forward.",
+      "headline": "A website template that turns Claude Code into your web developer",
+      "subheadline": "Create a repo, type /onboard, answer a few questions — done. No coding required.",
       "cta": "Get started"
     },
     "features": {
-      "title": "What we offer",
-      "subtitle": "Tailored digital solutions for your business."
+      "title": "What you get",
+      "subtitle": "Everything a modern marketing site needs — out of the box."
     },
     "testimonials": {
-      "title": "What our clients say"
+      "title": "What users say"
     },
     "faq": {
       "title": "Frequently asked questions"
     },
     "ctaSection": {
-      "title": "Ready for the next step?",
-      "subtitle": "Let's shape your digital future together.",
-      "cta": "Get in touch"
+      "title": "Ready to build your own site?",
+      "subtitle": "One command, a few answers, done.",
+      "cta": "Get started"
     }
   },
-  "services": {
-    "title": "Our Services",
-    "description": "Discover our range of services.",
-    "webDesign": {
-      "title": "Web Design",
-      "description": "Modern, responsive websites that delight."
-    },
-    "development": {
-      "title": "Web Development",
-      "description": "Technically excellent solutions with cutting-edge technologies."
-    },
-    "consulting": {
-      "title": "Consulting",
-      "description": "Strategic consulting for your digital transformation."
-    }
-  },
-  "about": {
-    "title": "About Us",
-    "description": "Learn more about Greenleaf Digital.",
-    "story": {
-      "eyebrow": "Our Story",
-      "title": "We believe everyone deserves a great website",
-      "text": "Greenleaf Digital was founded on a simple idea: professional web development should be accessible to everyone. We believe modern technologies and AI-powered workflows are changing the way websites are built — and that this change should benefit everyone."
-    },
-    "values": {
-      "eyebrow": "Our Values",
-      "title": "What drives us",
-      "quality": {
-        "title": "Quality over quantity",
-        "description": "Every project deserves the highest care. We don't do mass production — we deliver tailored solutions."
-      },
-      "transparency": {
-        "title": "Transparency",
-        "description": "Open communication at every project step. No hidden costs, no surprises."
-      },
-      "innovation": {
-        "title": "Innovation",
-        "description": "We use the latest technologies — not for trend's sake, but because they deliver better results."
-      },
-      "accessibility": {
-        "title": "Accessibility",
-        "description": "Our websites are usable for everyone. Accessibility isn't a feature — it's the standard."
-      }
-    },
-    "stats": {
-      "projects": "Projects",
-      "satisfaction": "Client satisfaction",
-      "technologies": "Technologies",
-      "languages": "Languages"
-    }
+  "features": {
+    "title": "Features",
+    "description": "Everything passionfruit ships with — and why it matters."
   }
 }

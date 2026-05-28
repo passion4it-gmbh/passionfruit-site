@@ -1,8 +1,15 @@
-# passionfruit — Greenleaf Digital
+# passionfruit-site
 
 ## 1. Project
 
-This is a passionfruit website for Greenleaf Digital. passionfruit is a template for building professional, bilingual marketing websites with Claude Code. Non-technical users describe what they want; Claude builds it.
+This is the public marketing site for the **passionfruit** website template — meta on purpose. The site is itself a passionfruit project, so anything we ship here is also a live demo of what users get out of the box.
+
+- **Audience:** non-technical site owners (primary), curious developers (secondary).
+- **Primary CTA:** `pnpm create passionfruit my-site`.
+- **Languages:** German at root, English at `/en/` (bilingual is the framework's USP — we eat the dog food).
+- **Hosting:** Cloudflare Pages at `passionfruit.passion4it.de`.
+- **Pages:** Home, Features (`/funktionen/`, `/en/features/`), Blog, Contact, Imprint, Privacy. No About, no Team — the agency portfolio at passion4it.de fills that slot.
+- **Hard rule:** if you ever feel the urge to add a custom component, **ship it upstream to the passionfruit framework first**, then pull it in here. Customizing this site directly defeats the dogfood signal.
 
 ## 2. Self-improvement rule
 
@@ -19,7 +26,7 @@ This is not optional. These files are the project's memory. If they drift from r
 
 ## 3. First-time setup
 
-If the site still shows "Greenleaf Digital", run `/onboard` to personalize it for your business. After onboarding, run `/brand` to replace the placeholder favicon and social sharing image with your own logo.
+If the site still shows "passionfruit", run `/onboard` to personalize it for your business. After onboarding, run `/brand` to replace the placeholder favicon and social sharing image with your own logo.
 
 ## 4. Tech stack
 
