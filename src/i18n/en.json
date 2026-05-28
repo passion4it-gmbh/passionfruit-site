@@ -75,7 +75,7 @@
       "subtitle": "From empty terminal to a finished, bilingual marketing site.",
       "step1": {
         "title": "Create the project",
-        "description": "One line in your terminal: `pnpm create passionfruit my-site`. Downloads the template, initializes git, installs dependencies."
+        "description": "One line in your terminal: `pnpm create passionfruit my-site`. Or run `/create-passionfruit-site` from inside Claude Code. Either way: template downloaded, git initialized, dependencies installed."
       },
       "step2": {
         "title": "Open Claude and run /onboard",
@@ -95,6 +95,9 @@
       "command": "pnpm create passionfruit my-site",
       "commandLabel": "Copy command",
       "commandCopied": "Copied",
+      "altLabel": "Already using Claude Code?",
+      "commandClaudePrereq": "/plugin marketplace add passion4it-gmbh/passionfruit",
+      "commandClaude": "/create-passionfruit-site",
       "github": "View on GitHub",
       "releases": "Watch releases"
     }

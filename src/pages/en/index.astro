@@ -83,6 +83,17 @@ const installCommand = t("home.ctaSection.command");
               <Check class="check-icon w-4 h-4 hidden text-accent-glow" />
             </button>
           </div>
+          <div class="mt-6 mx-auto max-w-md text-center text-xs">
+            <p class="text-text-on-dark/50">
+              {t("home.ctaSection.altLabel")}
+            </p>
+            <div
+              class="mt-2 flex flex-col items-center gap-1 font-mono text-text-on-dark/70 break-words"
+            >
+              <code>{t("home.ctaSection.commandClaudePrereq")}</code>
+              <code>{t("home.ctaSection.commandClaude")}</code>
+            </div>
+          </div>
         </div>
 
         <div
@@ -207,21 +218,34 @@ const installCommand = t("home.ctaSection.command");
         {t("home.ctaSection.subtitle")}
       </p>
 
-      <div class="mt-10 flex justify-center">
-        <div
-          class="inline-flex items-center gap-2 rounded-lg bg-white/5 ring-1 ring-white/10 px-5 py-3 font-mono text-sm text-text-on-dark/90"
-        >
-          <span class="text-accent-glow">$</span>
-          <code id="cta-install-cmd">{installCommand}</code>
-          <button
-            type="button"
-            data-copy-target="cta-install-cmd"
-            aria-label={t("home.ctaSection.commandLabel")}
-            class="ml-2 inline-flex items-center justify-center w-8 h-8 rounded-md text-text-on-dark/60 hover:text-text-on-dark hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      <div class="mt-10">
+        <div class="flex justify-center">
+          <div
+            class="inline-flex items-center gap-2 rounded-lg bg-white/5 ring-1 ring-white/10 px-5 py-3 font-mono text-sm text-text-on-dark/90"
           >
-            <Copy class="copy-icon w-4 h-4" />
-            <Check class="check-icon w-4 h-4 hidden text-accent-glow" />
-          </button>
+            <span class="text-accent-glow">$</span>
+            <code id="cta-install-cmd">{installCommand}</code>
+            <button
+              type="button"
+              data-copy-target="cta-install-cmd"
+              aria-label={t("home.ctaSection.commandLabel")}
+              class="ml-2 inline-flex items-center justify-center w-8 h-8 rounded-md text-text-on-dark/60 hover:text-text-on-dark hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <Copy class="copy-icon w-4 h-4" />
+              <Check class="check-icon w-4 h-4 hidden text-accent-glow" />
+            </button>
+          </div>
+        </div>
+        <div class="mt-6 mx-auto max-w-md text-center text-xs">
+          <p class="text-text-on-dark/50">
+            {t("home.ctaSection.altLabel")}
+          </p>
+          <div
+            class="mt-2 flex flex-col items-center gap-1 font-mono text-text-on-dark/70 break-words"
+          >
+            <code>{t("home.ctaSection.commandClaudePrereq")}</code>
+            <code>{t("home.ctaSection.commandClaude")}</code>
+          </div>
         </div>
       </div>
 
