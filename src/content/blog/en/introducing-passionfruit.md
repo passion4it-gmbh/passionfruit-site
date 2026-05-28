@@ -4,6 +4,7 @@ title: "Introducing passionfruit"
 description: "An open-source template for bilingual marketing websites, built for Claude Code. Today we ship the first public release."
 publishedAt: 2026-05-28
 author: "PASSION4IT"
+heroImage: ../../../assets/blog/introducing-passionfruit.webp
 tags: ["release", "launch"]
 featured: true
 ---

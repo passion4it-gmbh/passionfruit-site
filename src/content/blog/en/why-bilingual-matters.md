@@ -4,6 +4,7 @@ title: "Why bilingual — from day one"
 description: "Most static site generators treat i18n as an afterthought. passionfruit makes bilingual the default. Why that difference matters."
 publishedAt: 2026-05-28
 author: "PASSION4IT"
+heroImage: ../../../assets/blog/why-bilingual-matters.webp
 tags: ["architecture", "i18n"]
 ---
 

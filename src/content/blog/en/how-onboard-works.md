@@ -4,6 +4,7 @@ title: "How /onboard works"
 description: "Eight questions, a personalized marketing site. We break down the /onboard skill step by step."
 publishedAt: 2026-05-28
 author: "PASSION4IT"
+heroImage: ../../../assets/blog/how-onboard-works.webp
 tags: ["skills", "tutorial"]
 ---
 
