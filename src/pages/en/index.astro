@@ -14,7 +14,7 @@ const { t } = useTranslations(lang);
 const testimonials = getTestimonials(lang);
 const faqItems = getFAQs(lang);
 const contactHref = getLocalizedPath("contact", lang);
-const servicesHref = getLocalizedPath("services", lang);
+const featuresHref = getLocalizedPath("features", lang);
 ---
 
 <BaseLayout
@@ -78,7 +78,7 @@ const servicesHref = getLocalizedPath("services", lang);
                 class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
               />
             </Button>
-            <Button href={servicesHref} variant="secondary" tone="on-dark">
+            <Button href={featuresHref} variant="secondary" tone="on-dark">
               {t("services.title")}
             </Button>
           </div>
