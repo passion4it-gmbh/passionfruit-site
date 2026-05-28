@@ -5,11 +5,18 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
 import Button from "~/components/Button.astro";
 import { getAlternateCollectionSlug } from "~/lib/page-registry";
 import {
-  Palette,
-  Code,
-  Lightbulb,
-  ArrowRight,
+  Languages,
+  FileText,
+  Sparkles,
+  Shield,
+  ShieldCheck,
+  Trophy,
+  Eye,
+  BookOpenCheck,
   CheckCircle,
+  Copy,
+  Check,
+  ExternalLink,
 } from "@lucide/astro";
 
 interface Props {
@@ -23,77 +30,221 @@ const { t } = useTranslations(lang);
 const alternateSlug = await getAlternateCollectionSlug(
   lang,
   "pages",
-  "services",
+  "features",
 );
-const contactHref = getLocalizedPath(
-  lang === "de" ? "kontakt" : "contact",
-  lang,
-);
+const repoUrl = "https://github.com/passion4it-gmbh/passionfruit";
+const installCommand = t("home.ctaSection.command");
+const isDe = lang === "de";
 
-const services = [
-  {
-    icon: Palette,
-    titleKey: "services.webDesign.title",
-    descKey: "services.webDesign.description",
-    features:
-      lang === "de"
-        ? [
-            "Responsive Design",
-            "Markengerechte Gestaltung",
-            "UI/UX Optimierung",
-            "Barrierefreiheit (WCAG AA)",
-          ]
-        : [
-            "Responsive design",
-            "Brand-aligned styling",
-            "UI/UX optimization",
-            "Accessibility (WCAG AA)",
-          ],
-  },
-  {
-    icon: Code,
-    titleKey: "services.development.title",
-    descKey: "services.development.description",
-    features:
-      lang === "de"
-        ? [
-            "Astro & TypeScript",
-            "Blitzschnelle Ladezeiten",
-            "SEO-optimiert",
-            "Mehrsprachig",
-          ]
-        : [
-            "Astro & TypeScript",
-            "Lightning-fast load times",
-            "SEO optimized",
-            "Multilingual",
-          ],
-  },
-  {
-    icon: Lightbulb,
-    titleKey: "services.consulting.title",
-    descKey: "services.consulting.description",
-    features:
-      lang === "de"
-        ? [
-            "Digitale Strategie",
-            "Technologie-Beratung",
-            "Workshop-Formate",
-            "KI-Integration",
-          ]
-        : [
-            "Digital strategy",
-            "Technology consulting",
-            "Workshop formats",
-            "AI integration",
-          ],
-  },
-];
+interface Feature {
+  icon: typeof Languages;
+  title: string;
+  description: string;
+  bullets: string[];
+}
+
+const features: Feature[] = isDe
+  ? [
+      {
+        icon: Languages,
+        title: "Zweisprachig ab Tag eins",
+        description:
+          "Deutsch und Englisch sind kein Aufpreis-Feature, sondern die Grundannahme. Jede Seite, jeder Blogbeitrag, jeder Footer-Eintrag existiert in beiden Sprachen — und ein Pre-Build-Check verhindert, dass eine halbübersetzte Version live geht.",
+        bullets: [
+          "Lokalisierte Slugs (`/leistungen` ↔ `/en/services`)",
+          "Hreflang und zweisprachige Sitemap automatisch",
+          "Sprachenumschalter zeigt nur Gegenstücke an, die wirklich existieren",
+          "`check-bilingual.mjs` bricht den Build ab, wenn Übersetzungen fehlen",
+        ],
+      },
+      {
+        icon: FileText,
+        title: "Blog und Inhaltsverwaltung",
+        description:
+          "Markdown-Sammlungen für Blog und langformatige Seiten. Frontmatter-Schemas erzwingen die Bilingual-Symmetrie über einen `translationKey`. Keine externen CMS, keine API-Calls — der Inhalt lebt im Repo neben dem Code.",
+        bullets: [
+          "Astro-Content-Collections mit Zod-Schemas",
+          "`/new-post`-Skill scaffoldet beide Sprachen auf einmal",
+          "Reading-Time, RSS-Feed, OG-Bilder pro Beitrag",
+          "Spell-Check mit deutschen und englischen Wörterbüchern",
+        ],
+      },
+      {
+        icon: Sparkles,
+        title: "Modernes Design ohne Kompromisse",
+        description:
+          "Scroll-getriebene Animationen über `animation-timeline`, Glassmorphism, fluide Typografie via `clamp()`. Tailwind v4 mit Design-Tokens in einer einzigen `@theme`-Direktive. Eine Akzentfarbe ändern bedeutet eine Zeile.",
+        bullets: [
+          "Astro 6, statische Builds, null JS standardmäßig",
+          "Tailwind v4 mit `@theme`-Tokens",
+          "View Transitions zwischen Seiten",
+          "Performance: < 1 s First Contentful Paint",
+        ],
+      },
+      {
+        icon: Shield,
+        title: "DSGVO-konform per Default",
+        description:
+          "Cookie-Consent ist eingebaut, Analytics sind über Umgebungsvariablen gesteuert. PostHog läuft auf EU-Servern (Frankfurt), Google Analytics 4 nutzt Consent Mode v2. Beide bleiben stumm, bis der Nutzer zustimmt.",
+        bullets: [
+          "vanilla-cookieconsent mit eigenem Branding",
+          "PostHog EU (Ingest auf `eu.i.posthog.com`)",
+          "GA4 mit `analytics_storage: granted` erst nach Consent",
+          "Datenschutzseite mit echten Provider-Disclosures",
+        ],
+      },
+      {
+        icon: ShieldCheck,
+        title: "Qualitätschecks aus der Box",
+        description:
+          "Jede passionfruit-Seite kommt mit einem vollständigen CI-Setup: ESLint, TypeScript strict, Astro-A11y-Linter, Prettier, cspell für Markdown, linkinator für tote Links. Pre-Commit-Hooks halten den Hauptbranch sauber.",
+        bullets: [
+          "lefthook für Pre-Commit-Hooks",
+          "commitlint mit Conventional-Commits-Regeln",
+          "Pre-Build-Bilingual-Check",
+          "TypeScript strict, `any` verboten",
+        ],
+      },
+      {
+        icon: Trophy,
+        title: "SEO ernst genommen",
+        description:
+          "Strukturierte Daten als JSON-LD, hreflang-Annotationen für jede Seite, kanonische URLs mit Trailing-Slash-Konsistenz. Sitemap.xml und robots.txt werden zur Build-Zeit generiert. Open-Graph-Bilder pro Seite überschreibbar.",
+        bullets: [
+          "Organisation und WebSite JSON-LD",
+          "hreflang `de`, `en` und `x-default` pro Seite",
+          "Open-Graph- und Twitter-Card-Tags",
+          "Zweisprachige sitemap.xml mit Alternate-Links",
+        ],
+      },
+      {
+        icon: Eye,
+        title: "Barrierefrei nach WCAG AA",
+        description:
+          "Semantisches HTML, sichtbare Fokus-Ringe auf jedem interaktiven Element, alt-Text-Pflicht für Bilder (als ESLint-Fehler, nicht Warnung), 44 px Mindest-Touchziele auf Mobilgeräten.",
+        bullets: [
+          "`jsx-a11y/alt-text` als `error`",
+          "Skip-Link für Tastaturnutzer",
+          "Reduzierte Animationen via `prefers-reduced-motion`",
+          "Hoher Kontrast in beiden Farbschemata",
+        ],
+      },
+      {
+        icon: BookOpenCheck,
+        title: "Selbstlernende Codebasis",
+        description:
+          "`CLAUDE.md` ist das Projekt-Gedächtnis. Wenn du eine Präferenz äußerst, wird sie ergänzt. Wenn ein Bug behoben wird, wandert die Erkenntnis in die Quality-Checkliste. Jede neue Session beginnt schlauer als die letzte.",
+        bullets: [
+          "`STYLE_GUIDE.md` für visuelle Konventionen",
+          "`CONTRIBUTING.md` für Content-Workflows",
+          "Skills im `.claude/skills/`-Verzeichnis",
+          "Git-Workflow mit Vorschau-Deployments",
+        ],
+      },
+    ]
+  : [
+      {
+        icon: Languages,
+        title: "Bilingual from day one",
+        description:
+          "German and English aren't a paid add-on — they're the baseline. Every page, every blog post, every footer entry exists in both languages, and a pre-build check refuses to ship a half-translated site.",
+        bullets: [
+          "Localized slugs (`/leistungen` ↔ `/en/services`)",
+          "hreflang and bilingual sitemap generated automatically",
+          "Language switcher only links to counterparts that actually exist",
+          "`check-bilingual.mjs` aborts the build when translations are missing",
+        ],
+      },
+      {
+        icon: FileText,
+        title: "Blog and content management",
+        description:
+          "Markdown collections for blog posts and long-form pages. Frontmatter schemas enforce bilingual symmetry via a `translationKey`. No external CMS, no API calls — content lives in the repo next to the code.",
+        bullets: [
+          "Astro content collections with Zod schemas",
+          "`/new-post` skill scaffolds both languages at once",
+          "Reading time, RSS feed, per-post OG images",
+          "Spell-check with German and English dictionaries",
+        ],
+      },
+      {
+        icon: Sparkles,
+        title: "Modern design without compromise",
+        description:
+          "Scroll-driven animations via `animation-timeline`, glassmorphism, fluid typography via `clamp()`. Tailwind v4 with design tokens in a single `@theme` directive. Changing an accent color is one line.",
+        bullets: [
+          "Astro 6, static builds, zero JS by default",
+          "Tailwind v4 with `@theme` tokens",
+          "View transitions between pages",
+          "Performance: under 1 s first contentful paint",
+        ],
+      },
+      {
+        icon: Shield,
+        title: "GDPR-ready by default",
+        description:
+          "Cookie consent is built in; analytics are gated by environment variables. PostHog runs on EU servers (Frankfurt), Google Analytics 4 uses Consent Mode v2. Both stay silent until the user opts in.",
+        bullets: [
+          "vanilla-cookieconsent with custom branding",
+          "PostHog EU (ingest on `eu.i.posthog.com`)",
+          "GA4 with `analytics_storage: granted` only after consent",
+          "Privacy page with real provider disclosures",
+        ],
+      },
+      {
+        icon: ShieldCheck,
+        title: "Quality gates out of the box",
+        description:
+          "Every passionfruit site ships with a full CI setup: ESLint, TypeScript strict, Astro a11y linter, Prettier, cspell for Markdown, linkinator for dead links. Pre-commit hooks keep main clean.",
+        bullets: [
+          "lefthook for pre-commit hooks",
+          "commitlint enforcing conventional commits",
+          "pre-build bilingual check",
+          "TypeScript strict, `any` forbidden",
+        ],
+      },
+      {
+        icon: Trophy,
+        title: "SEO taken seriously",
+        description:
+          "Structured data as JSON-LD, hreflang annotations on every page, canonical URLs with trailing-slash consistency. `sitemap.xml` and `robots.txt` generated at build time. Per-page Open Graph image overrides.",
+        bullets: [
+          "Organization and WebSite JSON-LD",
+          "hreflang `de`, `en`, and `x-default` per page",
+          "Open Graph and Twitter Card meta tags",
+          "Bilingual sitemap.xml with alternate links",
+        ],
+      },
+      {
+        icon: Eye,
+        title: "Accessible to WCAG AA",
+        description:
+          "Semantic HTML, visible focus rings on every interactive element, alt-text required on images (as an ESLint error, not a warning), 44 px minimum touch targets on mobile.",
+        bullets: [
+          "`jsx-a11y/alt-text` set to `error`",
+          "Skip-link for keyboard users",
+          "Reduced animations honored via `prefers-reduced-motion`",
+          "High contrast in both color schemes",
+        ],
+      },
+      {
+        icon: BookOpenCheck,
+        title: "Self-improving codebase",
+        description:
+          "`CLAUDE.md` is the project's memory. State a preference and it gets recorded. Fix a bug and the lesson moves into the quality checklist. Every new session starts smarter than the last.",
+        bullets: [
+          "`STYLE_GUIDE.md` for visual conventions",
+          "`CONTRIBUTING.md` for content workflows",
+          "Skills in the `.claude/skills/` directory",
+          "Git workflow with preview deploys",
+        ],
+      },
+    ];
 ---
 
 <BaseLayout
-  title={t("services.title")}
-  description={t("services.description")}
+  title={t("features.title")}
+  description={t("features.description")}
   lang={lang}
   currentSlug={currentSlug}
   alternateSlug={alternateSlug}
@@ -114,54 +265,48 @@ const services = [
         class="text-display text-text-on-dark mt-6 max-w-3xl hero-stagger"
         style="--delay: 200ms"
       >
-        {t("services.title")}
+        {t("features.title")}
       </h1>
       <p
         class="text-body-lg text-text-on-dark/60 mt-6 max-w-2xl hero-stagger"
         style="--delay: 400ms"
       >
-        {t("services.description")}
+        {t("features.description")}
       </p>
     </div>
   </section>
 
-  <!-- Service sections -->
+  <!-- Feature sections -->
   <section class="py-28 md:py-36">
     <div class="container">
       <div class="flex flex-col gap-20">
         {
-          services.map((svc, i) => (
+          features.map((feat, i) => (
             <div
-              class={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center anim-slide-up`}
-              style={`--delay: ${i * 100}ms`}
+              class="grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-start anim-slide-up"
+              style={`--delay: ${i * 60}ms`}
             >
-              <div class={i % 2 === 1 ? "lg:order-2" : ""}>
+              <div>
                 <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
-                  <svc.icon class="w-7 h-7 text-accent" />
+                  <feat.icon class="w-7 h-7 text-accent" />
                 </div>
-                <h2 class="text-h2 text-text-heading">{t(svc.titleKey)}</h2>
-                <p class="text-body-lg text-muted mt-4 leading-relaxed">
-                  {t(svc.descKey)}
+                <h2 class="text-h2 text-text-heading">{feat.title}</h2>
+                <p class="text-body-lg text-muted mt-4 leading-relaxed max-w-2xl">
+                  {feat.description}
                 </p>
-                <ul class="mt-8 flex flex-col gap-3">
-                  {svc.features.map((feature) => (
-                    <li class="flex items-center gap-3 text-text">
-                      <CheckCircle class="w-5 h-5 text-accent flex-shrink-0" />
-                      {feature}
+                <ul class="mt-8 grid sm:grid-cols-2 gap-3 max-w-2xl">
+                  {feat.bullets.map((bullet) => (
+                    <li class="flex items-start gap-3 text-text">
+                      <CheckCircle class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                      <span
+                        set:html={bullet.replace(
+                          /`([^`]+)`/g,
+                          '<code class="font-mono text-sm text-accent bg-accent/5 px-1.5 py-0.5 rounded">$1</code>',
+                        )}
+                      />
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div
-                class={`card p-0 overflow-hidden aspect-[4/3] bg-gradient-to-br ${
-                  i === 0
-                    ? "from-accent/5 to-warm/5"
-                    : i === 1
-                      ? "from-accent/5 to-accent-glow/5"
-                      : "from-warm/5 to-accent/5"
-                } flex items-center justify-center ${i % 2 === 1 ? "lg:order-1" : ""}`}
-              >
-                <svc.icon class="w-24 h-24 text-accent/20" />
               </div>
             </div>
           ))
@@ -192,17 +337,29 @@ const services = [
       <p class="text-body-lg text-text-on-dark/60 mt-6 max-w-xl mx-auto">
         {t("home.ctaSection.subtitle")}
       </p>
-      <div class="mt-10">
-        <Button
-          href={contactHref}
-          variant="primary"
-          tone="on-dark"
-          class="btn-glow group"
+
+      <div class="mt-10 flex justify-center">
+        <div
+          class="inline-flex items-center gap-2 rounded-lg bg-white/5 ring-1 ring-white/10 px-5 py-3 font-mono text-sm text-text-on-dark/90"
         >
-          {t("cta.contact")}
-          <ArrowRight
-            class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
-          />
+          <span class="text-accent-glow">$</span>
+          <code id="features-install-cmd">{installCommand}</code>
+          <button
+            type="button"
+            data-copy-target="features-install-cmd"
+            aria-label={t("home.ctaSection.commandLabel")}
+            class="ml-2 inline-flex items-center justify-center w-8 h-8 rounded-md text-text-on-dark/60 hover:text-text-on-dark hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            <Copy class="copy-icon w-4 h-4" />
+            <Check class="check-icon w-4 h-4 hidden text-accent-glow" />
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-4 justify-center">
+        <Button href={repoUrl} variant="secondary" tone="on-dark">
+          <ExternalLink class="w-4 h-4 mr-2" />
+          {t("home.ctaSection.github")}
         </Button>
       </div>
     </div>
@@ -228,6 +385,37 @@ const services = [
       )
       .forEach((el) => observer.observe(el));
   }
+
+  function initCopyButtons() {
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-copy-target]")
+      .forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const targetId = btn.dataset.copyTarget;
+          if (!targetId) return;
+          const target = document.getElementById(targetId);
+          if (!target?.textContent) return;
+          try {
+            await navigator.clipboard.writeText(target.textContent.trim());
+            const copyIcon = btn.querySelector(".copy-icon");
+            const checkIcon = btn.querySelector(".check-icon");
+            copyIcon?.classList.add("hidden");
+            checkIcon?.classList.remove("hidden");
+            setTimeout(() => {
+              copyIcon?.classList.remove("hidden");
+              checkIcon?.classList.add("hidden");
+            }, 1800);
+          } catch {
+            // Clipboard API unavailable — gracefully no-op.
+          }
+        });
+      });
+  }
+
   initScrollAnimations();
-  document.addEventListener("astro:after-swap", initScrollAnimations);
+  initCopyButtons();
+  document.addEventListener("astro:after-swap", () => {
+    initScrollAnimations();
+    initCopyButtons();
+  });
 </script>
