@@ -1,13 +1,8 @@
 ---
-translationKey: "services"
-title: "Our Services"
-description: "Discover our comprehensive range of digital services."
+translationKey: "features"
+title: "Features"
+description: "Everything passionfruit ships with — and why it matters."
+heroImage: ../../../assets/pages/features.webp
 ---
 
-## What We Can Do for You
-
-From concept to implementation — we guide you on the path to your digital presence. Our services include web design, web development, and strategic consulting.
-
-## Our Approach
-
-We use modern technologies like Astro and Tailwind CSS to create websites that are fast, secure, and maintainable. No WordPress, no plugins — just clean code.
+passionfruit ships with everything a modern marketing site needs — bilingual, GDPR-ready, fast, accessible, with quality gates and SEO baseline from the first commit.

@@ -4,6 +4,7 @@ title: "passionfruit ist da"
 description: "Eine Open-Source-Vorlage für zweisprachige Marketing-Websites, gebaut für Claude Code. Heute starten wir die erste öffentliche Version."
 publishedAt: 2026-05-28
 author: "PASSION4IT"
+heroImage: ../../../assets/blog/introducing-passionfruit.webp
 tags: ["release", "launch"]
 featured: true
 ---

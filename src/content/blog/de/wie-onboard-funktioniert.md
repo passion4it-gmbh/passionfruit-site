@@ -4,6 +4,7 @@ title: "Wie /onboard funktioniert"
 description: "Acht Fragen, eine personalisierte Marketing-Website. Wir zerlegen den /onboard-Skill Schritt für Schritt."
 publishedAt: 2026-05-28
 author: "PASSION4IT"
+heroImage: ../../../assets/blog/how-onboard-works.webp
 tags: ["skills", "tutorial"]
 ---
 

@@ -4,6 +4,7 @@ title: "Warum zweisprachig — von Anfang an"
 description: "Die meisten Static-Site-Generatoren behandeln i18n als Nachgedanken. passionfruit macht zweisprachig zum Default. Warum das ein Unterschied ist, der zählt."
 publishedAt: 2026-05-28
 author: "PASSION4IT"
+heroImage: ../../../assets/blog/why-bilingual-matters.webp
 tags: ["architecture", "i18n"]
 ---
 
