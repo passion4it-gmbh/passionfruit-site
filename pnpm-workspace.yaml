@@ -1,0 +1,7 @@
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  sharp: true
+minimumReleaseAgeExclude:
+  - "@lucide/astro@1.17.0"
+  - lucide-react@1.17.0

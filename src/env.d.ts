@@ -1,0 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="../.astro/types.d.ts" />
+
+declare module "*.astro" {
+  import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+  const component: AstroComponentFactory;
+  export default component;
+}

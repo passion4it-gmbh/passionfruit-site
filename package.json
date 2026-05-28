@@ -1,0 +1,77 @@
+{
+  "name": "passionfruit-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.4.0",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "prebuild": "node scripts/check-bilingual.mjs",
+    "build": "astro sync && pnpm lint && pnpm typecheck && astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check --minimumSeverity warning && tsc --noEmit",
+    "lint": "eslint --fix --cache --cache-location .cache/eslint . && prettier --write .",
+    "lint:a11y": "eslint --config eslint.astro.config.mjs 'src/**/*.astro'",
+    "test": "node --test scripts/check-bilingual.test.mjs",
+    "check:spelling": "cspell \"src/content/**/*.md\" --no-progress",
+    "check:links": "linkinator ./dist --recurse --skip \"^(?!http://localhost)\" --verbosity error",
+    "check:all": "pnpm check:spelling && pnpm lint:a11y && pnpm build && pnpm check:links",
+    "generate-image": "tsx scripts/generate-image.ts",
+    "prepare": "lefthook install"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix --cache --cache-location .cache/eslint"
+    ],
+    "src/**/*.astro": [
+      "eslint --config eslint.astro.config.mjs"
+    ],
+    "src/content/**/*.md": [
+      "cspell --no-progress"
+    ],
+    "*.{ts,tsx,astro,css,json,md,mjs}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@astrojs/react": "^5.0.5",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@lucide/astro": "^1.17.0",
+    "astro": "^6.3.8",
+    "lucide-react": "^1.17.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "rehype-external-links": "^3.0.0",
+    "sharp": "^0.34.5",
+    "vanilla-cookieconsent": "^3.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "@cspell/dict-de-de": "^4.1.2",
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.0",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/parser": "^8.60.0",
+    "cspell": "^10.0.0",
+    "eslint": "^10.4.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "globals": "^17.6.0",
+    "gray-matter": "^4.0.3",
+    "lefthook": "^2.1.8",
+    "linkinator": "^7.6.1",
+    "lint-staged": "^17.0.5",
+    "prettier": "^3.8.3",
+    "tailwindcss": "^4.3.0",
+    "tsx": "^4.22.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.60.0"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "site": {
+    "name": "Greenleaf Digital",
+    "tagline": "Digital solutions with passion",
+    "description": "Greenleaf Digital — Your agency for modern web projects."
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "blog": "Blog",
+    "team": "Team",
+    "contact": "Contact"
+  },
+  "footer": {
+    "copyright": "© {year} Greenleaf Digital. All rights reserved.",
+    "builtWith": "Built with passionfruit",
+    "privacy": "Privacy Policy",
+    "imprint": "Imprint"
+  },
+  "cta": {
+    "contact": "Get in touch",
+    "readMore": "Read more",
+    "backToBlog": "Back to Blog",
+    "backToTeam": "Back to Team"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "News and insights",
+    "publishedAt": "Published on {date}",
+    "author": "By {name}",
+    "readMore": "Read more",
+    "noPosts": "No posts yet."
+  },
+  "team": {
+    "title": "Our Team",
+    "description": "Meet our team."
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Get in touch with us.",
+    "info": {
+      "email": "hello@example.com",
+      "phone": "+49 123 456 789",
+      "address": "Musterstraße 1, 12345 Musterstadt"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send",
+      "sending": "Sending...",
+      "success": "Thank you! Your message has been sent.",
+      "error": "Something went wrong. Please try again."
+    }
+  },
+  "error": {
+    "notFound": "Page not found",
+    "notFoundDescription": "The page you're looking for doesn't exist.",
+    "backHome": "Back to home"
+  },
+  "cookie": {
+    "title": "This website uses cookies",
+    "description": "We use cookies to improve your experience and analyze website traffic.",
+    "accept": "Accept all",
+    "reject": "Reject",
+    "preferences": "Preferences",
+    "necessary": "Necessary",
+    "necessaryDescription": "These cookies are required for basic website functionality.",
+    "analytics": "Analytics",
+    "analyticsDescription": "These cookies help us understand how visitors use our website."
+  },
+  "home": {
+    "hero": {
+      "headline": "Digital solutions with passion",
+      "subheadline": "We build modern websites that drive your business forward.",
+      "cta": "Get started"
+    },
+    "features": {
+      "title": "What we offer",
+      "subtitle": "Tailored digital solutions for your business."
+    },
+    "testimonials": {
+      "title": "What our clients say"
+    },
+    "faq": {
+      "title": "Frequently asked questions"
+    },
+    "ctaSection": {
+      "title": "Ready for the next step?",
+      "subtitle": "Let's shape your digital future together.",
+      "cta": "Get in touch"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "description": "Discover our range of services.",
+    "webDesign": {
+      "title": "Web Design",
+      "description": "Modern, responsive websites that delight."
+    },
+    "development": {
+      "title": "Web Development",
+      "description": "Technically excellent solutions with cutting-edge technologies."
+    },
+    "consulting": {
+      "title": "Consulting",
+      "description": "Strategic consulting for your digital transformation."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Learn more about Greenleaf Digital.",
+    "story": {
+      "eyebrow": "Our Story",
+      "title": "We believe everyone deserves a great website",
+      "text": "Greenleaf Digital was founded on a simple idea: professional web development should be accessible to everyone. We believe modern technologies and AI-powered workflows are changing the way websites are built — and that this change should benefit everyone."
+    },
+    "values": {
+      "eyebrow": "Our Values",
+      "title": "What drives us",
+      "quality": {
+        "title": "Quality over quantity",
+        "description": "Every project deserves the highest care. We don't do mass production — we deliver tailored solutions."
+      },
+      "transparency": {
+        "title": "Transparency",
+        "description": "Open communication at every project step. No hidden costs, no surprises."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We use the latest technologies — not for trend's sake, but because they deliver better results."
+      },
+      "accessibility": {
+        "title": "Accessibility",
+        "description": "Our websites are usable for everyone. Accessibility isn't a feature — it's the standard."
+      }
+    },
+    "stats": {
+      "projects": "Projects",
+      "satisfaction": "Client satisfaction",
+      "technologies": "Technologies",
+      "languages": "Languages"
+    }
+  }
+}

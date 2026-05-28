@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en,de-DE",
+  "import": ["@cspell/dict-de-de/cspell-ext.json"],
+  "dictionaries": ["de-de", "project-words"],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": "./project-words.txt",
+      "addWords": true
+    }
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    ".astro",
+    ".git",
+    "pnpm-lock.yaml",
+    "project-words.txt",
+    "*.json",
+    "*.css",
+    "*.mjs"
+  ],
+  "languageSettings": [
+    {
+      "languageId": "markdown",
+      "locale": "*",
+      "dictionaries": ["de-de", "en-gb", "en_US", "project-words"]
+    }
+  ]
+}
