@@ -6,7 +6,7 @@ description: "Angaben gemäß § 5 TMG."
 
 ## Angaben gemäß § 5 TMG
 
-Greenleaf Digital
+passionfruit
 Musterstraße 1
 12345 Musterstadt
 

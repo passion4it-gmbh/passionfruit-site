@@ -10,7 +10,7 @@ const testimonials: Record<Locale, Testimonial[]> = {
   de: [
     {
       quote:
-        "Greenleaf Digital hat unsere Website in Rekordzeit umgesetzt. Das Ergebnis übertrifft unsere Erwartungen.",
+        "passionfruit hat unsere Website in Rekordzeit umgesetzt. Das Ergebnis übertrifft unsere Erwartungen.",
       author: "Thomas Berger",
       company: "Berger Consulting",
     },
@@ -24,7 +24,7 @@ const testimonials: Record<Locale, Testimonial[]> = {
   en: [
     {
       quote:
-        "Greenleaf Digital delivered our website in record time. The result exceeds our expectations.",
+        "passionfruit delivered our website in record time. The result exceeds our expectations.",
       author: "Thomas Berger",
       company: "Berger Consulting",
     },

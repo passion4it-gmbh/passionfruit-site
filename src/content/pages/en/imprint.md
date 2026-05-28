@@ -6,7 +6,7 @@ description: "Legal information in accordance with § 5 TMG."
 
 ## Information in accordance with § 5 TMG
 
-Greenleaf Digital
+passionfruit
 Musterstraße 1
 12345 Musterstadt
 

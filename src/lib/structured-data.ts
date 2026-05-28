@@ -6,27 +6,27 @@
 import type { CollectionEntry } from "astro:content";
 import type { Locale } from "~/i18n";
 
-const SITE_URL = "https://example.com";
-const LOGO_URL = `${SITE_URL}/logos/greenleaf-digital.svg`;
+const SITE_URL = "https://passionfruit.passion4it.de";
+const LOGO_URL = `${SITE_URL}/favicon.svg`;
 
 export const ORGANIZATION_LD = {
   "@id": `${SITE_URL}/#organization`,
-  name: "Greenleaf Digital",
-  url: SITE_URL,
+  name: "PASSION4IT GmbH",
+  url: "https://passion4it.de",
   logo: LOGO_URL,
 } as const;
 
 export const WEBSITE_LD = {
   "@id": `${SITE_URL}/#website`,
   url: SITE_URL,
-  name: "Greenleaf Digital",
+  name: "passionfruit",
   publisher: { "@id": `${SITE_URL}/#organization` },
   inLanguage: ["de-DE", "en-US"],
 } as const;
 
 export const PUBLISHER_REF = {
   "@type": "Organization",
-  name: "Greenleaf Digital",
+  name: "PASSION4IT GmbH",
   logo: {
     "@type": "ImageObject",
     url: LOGO_URL,
@@ -52,7 +52,7 @@ export function buildBlogPostingLd(
     datePublished: entry.data.publishedAt.toISOString(),
     author: {
       "@type": "Person",
-      name: author?.name ?? "Greenleaf Digital",
+      name: author?.name ?? "PASSION4IT",
       ...(author?.role ? { jobTitle: author.role } : {}),
     },
     publisher: PUBLISHER_REF,

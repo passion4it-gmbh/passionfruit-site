@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import rehypeExternalLinks from "rehype-external-links";
 
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://passionfruit.passion4it.de",
   output: "static",
   compressHTML: true,
   trailingSlash: "always",

@@ -4,15 +4,13 @@ import type { Locale } from "~/i18n";
 export type { Locale };
 
 export type PageKey =
-  | "about"
-  | "services"
+  | "features"
   | "blog-index"
-  | "team"
   | "contact"
   | "privacy"
   | "imprint";
 
-export type CollectionName = "blog" | "team" | "pages";
+export type CollectionName = "blog" | "pages";
 
 export interface PageEntry {
   key: PageKey;
@@ -41,24 +39,14 @@ export type RouteMatch = StaticPageMatch | CollectionDetailMatch;
 
 export const PAGES = [
   {
-    key: "about" as const,
-    slug: { de: "ueber-uns", en: "about" },
-    component: () => import("~/components/pages/about.astro"),
-  },
-  {
-    key: "services" as const,
-    slug: { de: "leistungen", en: "services" },
-    component: () => import("~/components/pages/services.astro"),
+    key: "features" as const,
+    slug: { de: "funktionen", en: "features" },
+    component: () => import("~/components/pages/features.astro"),
   },
   {
     key: "blog-index" as const,
     slug: { de: "blog", en: "blog" },
     component: () => import("~/components/pages/blog-index.astro"),
-  },
-  {
-    key: "team" as const,
-    slug: { de: "team", en: "team" },
-    component: () => import("~/components/pages/team.astro"),
   },
   {
     key: "contact" as const,
@@ -83,8 +71,7 @@ export const PAGES = [
 
 const COLLECTION_REGISTRY_KEY: Record<CollectionName, PageKey> = {
   blog: "blog-index",
-  team: "team",
-  pages: "about", // pages collection detail routes nest under about
+  pages: "features",
 };
 
 // ---------------------------------------------------------------------------
@@ -166,7 +153,6 @@ export async function getCollectionDetailPaths(): Promise<
   const locales: Locale[] = ["de", "en"];
   const paths: CollectionDetailPath[] = [];
 
-  // Team has no detail pages — shown on team index only.
   // Pages collection is consumed by static page components, not routed independently.
   const blog = await getCollection("blog");
   pushDetailPaths(paths, "blog", blog, locales);

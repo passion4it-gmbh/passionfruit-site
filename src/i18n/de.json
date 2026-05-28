@@ -1,19 +1,16 @@
 {
   "site": {
-    "name": "Greenleaf Digital",
-    "tagline": "Digitale Lösungen mit Leidenschaft",
-    "description": "Greenleaf Digital — Ihre Agentur für moderne Webprojekte."
+    "name": "passionfruit",
+    "tagline": "Eine Website-Vorlage, die Claude Code zu deinem Web-Entwickler macht",
+    "description": "passionfruit — die zweisprachige Website-Vorlage für Claude Code. Repo erstellen, /onboard tippen, fertig."
   },
   "navigation": {
-    "home": "Startseite",
-    "about": "Über uns",
-    "services": "Leistungen",
+    "features": "Funktionen",
     "blog": "Blog",
-    "team": "Team",
     "contact": "Kontakt"
   },
   "footer": {
-    "copyright": "© {year} Greenleaf Digital. Alle Rechte vorbehalten.",
+    "copyright": "© {year} PASSION4IT GmbH. Alle Rechte vorbehalten.",
     "builtWith": "Gebaut mit passionfruit",
     "privacy": "Datenschutz",
     "imprint": "Impressum"
@@ -21,28 +18,23 @@
   "cta": {
     "contact": "Kontakt aufnehmen",
     "readMore": "Weiterlesen",
-    "backToBlog": "Zurück zum Blog",
-    "backToTeam": "Zurück zum Team"
+    "backToBlog": "Zurück zum Blog"
   },
   "blog": {
     "title": "Blog",
-    "description": "Neuigkeiten und Einblicke",
+    "description": "Neuigkeiten, Release-Notes und Hintergründe rund um passionfruit.",
     "publishedAt": "Veröffentlicht am {date}",
     "author": "Von {name}",
     "readMore": "Weiterlesen",
     "noPosts": "Noch keine Beiträge."
   },
-  "team": {
-    "title": "Unser Team",
-    "description": "Lernen Sie unser Team kennen."
-  },
   "contact": {
     "title": "Kontakt",
-    "description": "Nehmen Sie Kontakt mit uns auf.",
+    "description": "Hast du Fragen zu passionfruit oder möchtest mit PASSION4IT zusammenarbeiten?",
     "info": {
-      "email": "hello@example.com",
-      "phone": "+49 123 456 789",
-      "address": "Musterstraße 1, 12345 Musterstadt"
+      "email": "info@passion4it.de",
+      "phone": "",
+      "address": "PASSION4IT GmbH"
     },
     "form": {
       "name": "Name",
@@ -50,8 +42,8 @@
       "message": "Nachricht",
       "send": "Absenden",
       "sending": "Wird gesendet...",
-      "success": "Vielen Dank! Ihre Nachricht wurde gesendet.",
-      "error": "Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      "success": "Vielen Dank! Deine Nachricht wurde gesendet.",
+      "error": "Leider ist ein Fehler aufgetreten. Bitte versuche es erneut."
     }
   },
   "error": {
@@ -61,86 +53,39 @@
   },
   "cookie": {
     "title": "Diese Website verwendet Cookies",
-    "description": "Wir verwenden Cookies, um Ihr Erlebnis zu verbessern und den Website-Traffic zu analysieren.",
+    "description": "Wir verwenden Cookies, um dein Erlebnis zu verbessern und den Website-Traffic zu analysieren.",
     "accept": "Alle akzeptieren",
     "reject": "Ablehnen",
     "preferences": "Einstellungen",
     "necessary": "Notwendig",
     "necessaryDescription": "Diese Cookies sind für die Grundfunktionen der Website erforderlich.",
     "analytics": "Analyse",
-    "analyticsDescription": "Diese Cookies helfen uns zu verstehen, wie Besucher unsere Website nutzen."
+    "analyticsDescription": "Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen."
   },
   "home": {
     "hero": {
-      "headline": "Digitale Lösungen mit Leidenschaft",
-      "subheadline": "Wir gestalten moderne Websites, die Ihr Unternehmen voranbringen.",
-      "cta": "Jetzt starten"
+      "headline": "Eine Website-Vorlage, die Claude Code zu deinem Web-Entwickler macht",
+      "subheadline": "Repo erstellen, /onboard tippen, ein paar Fragen beantworten — fertig. Kein Code nötig.",
+      "cta": "Jetzt loslegen"
     },
     "features": {
-      "title": "Was wir bieten",
-      "subtitle": "Maßgeschneiderte digitale Lösungen für Ihr Unternehmen."
+      "title": "Was du bekommst",
+      "subtitle": "Alles, was eine moderne Website braucht — sofort einsatzbereit."
     },
     "testimonials": {
-      "title": "Was unsere Kunden sagen"
+      "title": "Was Nutzer sagen"
     },
     "faq": {
       "title": "Häufig gestellte Fragen"
     },
     "ctaSection": {
-      "title": "Bereit für den nächsten Schritt?",
-      "subtitle": "Lassen Sie uns gemeinsam Ihre digitale Zukunft gestalten.",
-      "cta": "Kontakt aufnehmen"
+      "title": "Bereit für deine eigene Website?",
+      "subtitle": "Ein Befehl, ein paar Antworten, fertig.",
+      "cta": "Jetzt loslegen"
     }
   },
-  "services": {
-    "title": "Unsere Leistungen",
-    "description": "Entdecken Sie unser Leistungsangebot.",
-    "webDesign": {
-      "title": "Webdesign",
-      "description": "Moderne, responsive Websites, die begeistern."
-    },
-    "development": {
-      "title": "Webentwicklung",
-      "description": "Technisch einwandfreie Lösungen mit modernsten Technologien."
-    },
-    "consulting": {
-      "title": "Beratung",
-      "description": "Strategische Beratung für Ihre digitale Transformation."
-    }
-  },
-  "about": {
-    "title": "Über uns",
-    "description": "Erfahren Sie mehr über Greenleaf Digital.",
-    "story": {
-      "eyebrow": "Unsere Geschichte",
-      "title": "Wir glauben, dass jeder eine großartige Website verdient",
-      "text": "Greenleaf Digital wurde mit einer einfachen Idee gegründet: Professionelle Webentwicklung sollte für jeden zugänglich sein. Wir glauben, dass moderne Technologien und KI-gestützte Workflows die Art verändern, wie Websites entstehen — und dass diese Veränderung allen zugutekommen sollte."
-    },
-    "values": {
-      "eyebrow": "Unsere Werte",
-      "title": "Was uns antreibt",
-      "quality": {
-        "title": "Qualität vor Quantität",
-        "description": "Jedes Projekt verdient höchste Sorgfalt. Wir liefern keine Massenware, sondern maßgeschneiderte Lösungen."
-      },
-      "transparency": {
-        "title": "Transparenz",
-        "description": "Offene Kommunikation in jedem Projektschritt. Keine versteckten Kosten, keine Überraschungen."
-      },
-      "innovation": {
-        "title": "Innovation",
-        "description": "Wir nutzen die neuesten Technologien — nicht um des Trends willen, sondern weil sie bessere Ergebnisse liefern."
-      },
-      "accessibility": {
-        "title": "Zugänglichkeit",
-        "description": "Unsere Websites sind für alle Menschen nutzbar. Barrierefreiheit ist kein Feature, sondern Standard."
-      }
-    },
-    "stats": {
-      "projects": "Projekte",
-      "satisfaction": "Kundenzufriedenheit",
-      "technologies": "Technologien",
-      "languages": "Sprachen"
-    }
+  "features": {
+    "title": "Funktionen",
+    "description": "Alles, was passionfruit aus der Box mitbringt."
   }
 }

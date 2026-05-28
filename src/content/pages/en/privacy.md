@@ -6,7 +6,7 @@ description: "Information about data protection and the processing of your perso
 
 ## Data Controller
 
-Greenleaf Digital
+passionfruit
 Musterstraße 1
 12345 Musterstadt
 Email: hello@example.com

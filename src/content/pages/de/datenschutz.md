@@ -6,7 +6,7 @@ description: "Informationen zum Datenschutz und zur Verarbeitung Ihrer personenb
 
 ## Verantwortlicher
 
-Greenleaf Digital
+passionfruit
 Musterstraße 1
 12345 Musterstadt
 E-Mail: hello@example.com

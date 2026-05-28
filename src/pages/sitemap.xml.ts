@@ -53,15 +53,11 @@ function collectStaticBlocks(site: URL): string[] {
   return blocks;
 }
 
-type AnyEntry =
-  | CollectionEntry<"blog">
-  | CollectionEntry<"team">
-  | CollectionEntry<"pages">;
+type AnyEntry = CollectionEntry<"blog"> | CollectionEntry<"pages">;
 
 const COLLECTION_REGISTRY_KEY: Record<CollectionName, PageKey> = {
   blog: "blog-index",
-  team: "team",
-  pages: "about",
+  pages: "features",
 };
 
 function collectCollectionBlocks(
@@ -127,17 +123,13 @@ function collectCollectionBlocks(
 }
 
 export const GET: APIRoute = async ({ site }) => {
-  const siteUrl = site ?? new URL("https://greenleaf.digital");
+  const siteUrl = site ?? new URL("https://passionfruit.passion4it.de");
 
-  const [blog, team] = await Promise.all([
-    getCollection("blog"),
-    getCollection("team"),
-  ]);
+  const blog = await getCollection("blog");
 
   const urlBlocks: string[] = [
     ...collectStaticBlocks(siteUrl),
     ...collectCollectionBlocks(siteUrl, "blog", blog),
-    ...collectCollectionBlocks(siteUrl, "team", team),
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
