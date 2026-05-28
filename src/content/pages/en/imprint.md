@@ -1,29 +1,61 @@
 ---
 translationKey: "imprint"
 title: "Imprint"
-description: "Legal information in accordance with § 5 TMG."
+description: "Legal information in accordance with § 5 TMG and § 18 (2) MStV."
 ---
 
-## Information in accordance with § 5 TMG
+## Provider
 
-passionfruit
-Musterstraße 1
-12345 Musterstadt
+**PASSION4IT GmbH**
+Postackerweg 9
+94234 Viechtach
+Germany
+
+## Represented by
+
+Managing Director Christian Kirsch
 
 ## Contact
 
-Phone: +49 123 456 789
-Email: hello@example.com
+Phone: +49 (0) 9942 – 46 593 0
+Email: info@passion4it.de
 
-## VAT ID
+## Commercial Register
 
-VAT identification number according to §27a of the German VAT Act:
-DE123456789
+Amtsgericht Deggendorf, HRB 5793
 
-## Responsible for content according to § 55 Abs. 2 RStV
+## VAT Identification Number
 
-Anna Müller
-Musterstraße 1
-12345 Musterstadt
+VAT ID (§ 27a UStG): DE360995819
 
-_This imprint is a placeholder. Replace it with your own legally compliant imprint._
+## Tax Number
+
+162/123/30217
+
+## Responsible for content per § 18 (2) MStV
+
+Christian Kirsch, address as above.
+
+## Professional liability insurance
+
+Allianz Versicherungs AG, 10900 Berlin, Germany
+
+## Dispute resolution
+
+The European Commission provides a platform for online dispute resolution: <https://ec.europa.eu/consumers/odr>.
+
+We are not willing or obligated to participate in dispute resolution proceedings before a consumer arbitration board.
+
+## Liability for content
+
+As a service provider, we are responsible for our own content on these pages in accordance with § 7 (1) TMG and general law. Per §§ 8–10 TMG, however, we are not obligated to monitor third-party information transmitted or stored, or to investigate circumstances that suggest unlawful activity.
+
+## Liability for links
+
+This site contains links to external websites operated by third parties. We have no influence on their content and therefore cannot assume any liability for it. The respective operator is always responsible for the content of linked pages.
+
+## Copyright
+
+Content created by the site operators is protected by German copyright law. Reproduction, modification, distribution, or any use beyond the scope of copyright requires the written consent of the respective author or creator.
+
+The **passionfruit** source code is published under the MIT license — see the [GitHub repository](https://github.com/passion4it-gmbh/passionfruit).
