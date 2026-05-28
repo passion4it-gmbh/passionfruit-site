@@ -75,7 +75,7 @@
       "subtitle": "Vom leeren Terminal zur fertigen, zweisprachigen Marketing-Website.",
       "step1": {
         "title": "Projekt anlegen",
-        "description": "Eine Zeile im Terminal: `pnpm create passionfruit my-site`. Lädt die Vorlage, initialisiert Git, installiert Dependencies."
+        "description": "Eine Zeile im Terminal: `pnpm create passionfruit my-site`. Oder `/create-passionfruit-site` direkt aus Claude Code. So oder so: Vorlage geladen, Git initialisiert, Dependencies installiert."
       },
       "step2": {
         "title": "Claude öffnen und /onboard",
@@ -95,6 +95,9 @@
       "command": "pnpm create passionfruit my-site",
       "commandLabel": "Befehl kopieren",
       "commandCopied": "Kopiert",
+      "altLabel": "Schon dabei mit Claude Code?",
+      "commandClaudePrereq": "/plugin marketplace add passion4it-gmbh/passionfruit",
+      "commandClaude": "/create-passionfruit-site",
       "github": "Auf GitHub ansehen",
       "releases": "Releases beobachten"
     }
