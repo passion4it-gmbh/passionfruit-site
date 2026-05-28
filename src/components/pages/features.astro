@@ -254,61 +254,59 @@ const features: Feature[] = isDe
   <section class="bg-surface-dark noise relative overflow-hidden">
     <div class="absolute inset-0 bg-grid opacity-20"></div>
     <div
-      class="glow-orb absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-accent/15 blur-[120px] -translate-y-1/2 -translate-x-1/3"
+      class="glow-orb absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-accent/15 blur-[140px]"
     >
     </div>
-    <div class="container relative z-10 pt-48 pb-24 md:pt-56 md:pb-32">
-      <p class="eyebrow hero-stagger" style="--delay: 100ms">
-        {t("site.name")}
-      </p>
-      <h1
-        class="text-display text-text-on-dark mt-6 max-w-3xl hero-stagger"
-        style="--delay: 200ms"
-      >
-        {t("features.title")}
-      </h1>
-      <p
-        class="text-body-lg text-text-on-dark/60 mt-6 max-w-2xl hero-stagger"
-        style="--delay: 400ms"
-      >
-        {t("features.description")}
-      </p>
+    <div class="container relative z-10 pt-40 pb-20 md:pt-48 md:pb-24">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="eyebrow hero-stagger" style="--delay: 100ms">
+          {t("site.name")}
+        </p>
+        <h1
+          class="text-display text-text-on-dark mt-6 hero-stagger"
+          style="--delay: 200ms"
+        >
+          {t("features.title")}
+        </h1>
+        <p
+          class="text-body-lg text-text-on-dark/60 mt-6 mx-auto max-w-2xl hero-stagger"
+          style="--delay: 400ms"
+        >
+          {t("features.description")}
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- Feature sections -->
-  <section class="py-28 md:py-36">
+  <!-- Feature grid -->
+  <section class="py-24 md:py-32">
     <div class="container">
-      <div class="flex flex-col gap-20">
+      <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
         {
           features.map((feat, i) => (
-            <div
-              class="grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-start anim-slide-up"
-              style={`--delay: ${i * 60}ms`}
+            <article
+              class="card anim-card-enter h-full"
+              style={`--delay: ${(i % 2) * 80}ms`}
             >
-              <div>
-                <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
-                  <feat.icon class="w-7 h-7 text-accent" />
-                </div>
-                <h2 class="text-h2 text-text-heading">{feat.title}</h2>
-                <p class="text-body-lg text-muted mt-4 leading-relaxed max-w-2xl">
-                  {feat.description}
-                </p>
-                <ul class="mt-8 grid sm:grid-cols-2 gap-3 max-w-2xl">
-                  {feat.bullets.map((bullet) => (
-                    <li class="flex items-start gap-3 text-text">
-                      <CheckCircle class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span
-                        set:html={bullet.replace(
-                          /`([^`]+)`/g,
-                          '<code class="font-mono text-sm text-accent bg-accent/5 px-1.5 py-0.5 rounded">$1</code>',
-                        )}
-                      />
-                    </li>
-                  ))}
-                </ul>
+              <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
+                <feat.icon class="w-6 h-6 text-accent" />
               </div>
-            </div>
+              <h2 class="text-h3 text-text-heading">{feat.title}</h2>
+              <p class="text-muted mt-3 leading-relaxed">{feat.description}</p>
+              <ul class="mt-6 flex flex-col gap-2.5">
+                {feat.bullets.map((bullet) => (
+                  <li class="flex items-start gap-2.5 text-sm text-text">
+                    <CheckCircle class="w-4 h-4 text-accent flex-shrink-0 mt-1" />
+                    <span
+                      set:html={bullet.replace(
+                        /`([^`]+)`/g,
+                        '<code class="font-mono text-xs text-accent bg-accent/5 px-1.5 py-0.5 rounded">$1</code>',
+                      )}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </article>
           ))
         }
       </div>
