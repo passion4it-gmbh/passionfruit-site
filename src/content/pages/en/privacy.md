@@ -1,30 +1,65 @@
 ---
 translationKey: "privacy"
 title: "Privacy Policy"
-description: "Information about data protection and the processing of your personal data."
+description: "How passionfruit.passion4it.de handles your data — short, clear, GDPR-compliant."
 ---
 
-## Data Controller
+This site — `passionfruit.passion4it.de` — is the marketing website for the open-source template [passionfruit](https://github.com/passion4it-gmbh/passionfruit). It is operated by PASSION4IT GmbH. We only process what we actually need.
 
-passionfruit
-Musterstraße 1
-12345 Musterstadt
-Email: hello@example.com
+## Controller
 
-## Data Collection
+**PASSION4IT GmbH**
+Postackerweg 9, 94234 Viechtach, Germany
+Email: info@passion4it.de
 
-This website is operated as a static site. No personal data is automatically collected unless you give your explicit consent via the cookie consent banner.
+Managing Director: Christian Kirsch.
 
-## Cookies
+## Hosting — Cloudflare Pages
 
-We use technically necessary cookies and optional analytics cookies (PostHog). You can revoke your consent at any time via the cookie banner or the cookie settings in the footer.
+This site is delivered by **Cloudflare Pages** (Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA). When you access a page, technically necessary data (IP address, user agent, requested URL, timestamp) is processed so we can deliver the site and defend against attacks.
 
-## Analytics
+Legal basis: Art. 6 (1) f GDPR (legitimate interest in a stable, secure web presence). A data processing agreement and Standard Contractual Clauses are in place.
 
-With your consent, we use PostHog to analyze usage behavior. PostHog is operated on EU servers (eu.posthog.com). Data is processed anonymously.
+## Cookies and consent
 
-## Your Rights
+We set only technically necessary cookies (for example, the consent record from the cookie banner). Analytics cookies are loaded **only after you explicitly opt in** via the banner. You can revoke that decision at any time using the consent toggle in the lower left corner.
 
-You have the right to information, correction, deletion, and restriction of the processing of your personal data. Contact us at hello@example.com.
+## Analytics — PostHog (EU)
 
-_This privacy policy is a placeholder. Replace it with your own legally compliant privacy policy._
+If you allow analytics cookies, we load **PostHog** (PostHog Inc., 965 Mission St, San Francisco, USA — EU instance hosted in Frankfurt). PostHog records pseudonymized page views and clicks. IP addresses are truncated before storage on the EU instance.
+
+Legal basis: Art. 6 (1) a GDPR (consent).
+
+Any data transfer to the United States only happens as necessary, secured by Standard Contractual Clauses and the EU-US Data Privacy Framework.
+
+## Analytics — Google Analytics 4 (optional)
+
+If a Google Analytics measurement ID is configured and you've opted in, **Google Analytics 4** loads (Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Ireland). GA4 runs in Consent Mode v2: advertising cookies stay blocked by default, IP anonymization is on.
+
+Legal basis: Art. 6 (1) a GDPR (consent).
+
+## Server log files
+
+Cloudflare logs the following for up to 30 days per page request: IP address, timestamp, HTTP status, transferred volume, referrer, and user agent. These logs are used for debugging and abuse detection. They are not merged with other data sources.
+
+## Fonts — self-hosted
+
+All fonts are bundled directly into the build (`@fontsource-variable/inter`). **No** connections to third-party font services (Google Fonts, Adobe Fonts) are made.
+
+## Email contact
+
+If you reach out via `info@passion4it.de` or the contact form, we store your message to handle your request. Legal basis: Art. 6 (1) b or f GDPR. Messages are deleted once they are no longer needed.
+
+## Your rights
+
+You have the right to access, correction, deletion, restriction of processing, data portability, objection, and withdrawal of consent at any time. Email us at `info@passion4it.de`.
+
+You may file a complaint with the competent data protection authority (for PASSION4IT GmbH: Bayerisches Landesamt für Datenschutzaufsicht, Promenade 27, 91522 Ansbach, Germany).
+
+## SSL/TLS encryption
+
+This site is served exclusively over HTTPS. Cloudflare provisions the certificate automatically.
+
+## Changes
+
+We update this policy when features or service providers change. The current version is always available on this page.
