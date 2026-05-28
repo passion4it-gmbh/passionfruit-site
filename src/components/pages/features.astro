@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import type { Locale } from "~/i18n";
 import { useTranslations, getLocalizedPath } from "~/i18n";
 import BaseLayout from "~/layouts/BaseLayout.astro";
@@ -32,6 +34,13 @@ const alternateSlug = await getAlternateCollectionSlug(
   "pages",
   "features",
 );
+
+const pagesEntries = await getCollection("pages");
+const pageEntry = pagesEntries.find(
+  (p) => p.id.startsWith(`${lang}/`) && p.data.translationKey === "features",
+);
+const heroImage = pageEntry?.data.heroImage;
+
 const repoUrl = "https://github.com/passion4it-gmbh/passionfruit";
 const installCommand = t("home.ctaSection.command");
 const isDe = lang === "de";
@@ -254,26 +263,43 @@ const features: Feature[] = isDe
   <section class="bg-surface-dark noise relative overflow-hidden">
     <div class="absolute inset-0 bg-grid opacity-20"></div>
     <div
-      class="glow-orb absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-accent/15 blur-[140px]"
+      class="glow-orb absolute top-1/4 -left-32 w-[500px] h-[400px] rounded-full bg-accent/15 blur-[140px]"
     >
     </div>
     <div class="container relative z-10 pt-40 pb-20 md:pt-48 md:pb-24">
-      <div class="max-w-3xl mx-auto text-center">
-        <p class="eyebrow hero-stagger" style="--delay: 100ms">
-          {t("site.name")}
-        </p>
-        <h1
-          class="text-display text-text-on-dark mt-6 hero-stagger"
-          style="--delay: 200ms"
-        >
-          {t("features.title")}
-        </h1>
-        <p
-          class="text-body-lg text-text-on-dark/60 mt-6 mx-auto max-w-2xl hero-stagger"
-          style="--delay: 400ms"
-        >
-          {t("features.description")}
-        </p>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <p class="eyebrow hero-stagger" style="--delay: 100ms">
+            {t("site.name")}
+          </p>
+          <h1
+            class="text-display text-text-on-dark mt-6 hero-stagger"
+            style="--delay: 200ms"
+          >
+            {t("features.title")}
+          </h1>
+          <p
+            class="text-body-lg text-text-on-dark/60 mt-6 max-w-xl hero-stagger"
+            style="--delay: 400ms"
+          >
+            {t("features.description")}
+          </p>
+        </div>
+        {
+          heroImage && (
+            <div class="relative hero-stagger" style="--delay: 500ms">
+              <div class="absolute -inset-8 rounded-[2rem] bg-gradient-to-br from-accent/20 via-transparent to-warm/20 blur-2xl" />
+              <Image
+                src={heroImage}
+                alt=""
+                class="relative rounded-2xl shadow-2xl shadow-accent/10 ring-1 ring-white/10"
+                widths={[400, 600, 800, 1200]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                loading="eager"
+              />
+            </div>
+          )
+        }
       </div>
     </div>
   </section>

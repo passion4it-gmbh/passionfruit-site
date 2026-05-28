@@ -1,13 +1,8 @@
 ---
-translationKey: "services"
-title: "Unsere Leistungen"
-description: "Entdecken Sie unser umfassendes Angebot an digitalen Dienstleistungen."
+translationKey: "features"
+title: "Funktionen"
+description: "Alles, was passionfruit aus der Box mitbringt."
+heroImage: ../../../assets/pages/features.webp
 ---
 
-## Was wir für Sie tun können
-
-Von der Konzeption bis zur Umsetzung — wir begleiten Sie auf dem Weg zu Ihrem digitalen Auftritt. Unsere Leistungen umfassen Webdesign, Webentwicklung und strategische Beratung.
-
-## Unser Ansatz
-
-Wir setzen auf moderne Technologien wie Astro und Tailwind CSS, um Websites zu erstellen, die schnell, sicher und wartungsfreundlich sind. Kein WordPress, keine Plugins — nur sauberer Code.
+passionfruit bringt alles mit, was eine moderne Marketing-Website braucht — zweisprachig, DSGVO-konform, schnell, barrierefrei, mit Qualitäts-Gates und SEO-Grundausstattung ab dem ersten Commit.
