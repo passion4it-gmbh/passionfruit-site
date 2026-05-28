@@ -66,22 +66,37 @@
     "hero": {
       "headline": "A website template that turns Claude Code into your web developer",
       "subheadline": "Create a repo, type /onboard, answer a few questions — done. No coding required.",
-      "cta": "Get started"
+      "cta": "Get started",
+      "ctaSecondary": "See features"
     },
-    "features": {
-      "title": "What you get",
-      "subtitle": "Everything a modern marketing site needs — out of the box."
-    },
-    "testimonials": {
-      "title": "What users say"
+    "howItWorks": {
+      "eyebrow": "How it works",
+      "title": "Three steps to your site",
+      "subtitle": "From empty terminal to a finished, bilingual marketing site.",
+      "step1": {
+        "title": "Create the project",
+        "description": "One line in your terminal: `pnpm create passionfruit my-site`. Downloads the template, initializes git, installs dependencies."
+      },
+      "step2": {
+        "title": "Open Claude and run /onboard",
+        "description": "Eight questions — company name, languages, colors, pages, contact details. Claude personalizes the template, rewrites i18n, branding, and content."
+      },
+      "step3": {
+        "title": "Go live with /deploy",
+        "description": "Claude sets up Cloudflare Pages, points your domain, and wires preview deploys for every PR. Every push to main publishes."
+      }
     },
     "faq": {
       "title": "Frequently asked questions"
     },
     "ctaSection": {
       "title": "Ready to build your own site?",
-      "subtitle": "One command, a few answers, done.",
-      "cta": "Get started"
+      "subtitle": "One command, a few answers, done. Free hosting, free template, MIT-licensed.",
+      "command": "pnpm create passionfruit my-site",
+      "commandLabel": "Copy command",
+      "commandCopied": "Copied",
+      "github": "View on GitHub",
+      "releases": "Watch releases"
     }
   },
   "features": {
