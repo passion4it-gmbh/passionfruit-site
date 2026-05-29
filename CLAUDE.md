@@ -118,7 +118,7 @@ Before committing:
 
 ### Social sharing (OG) image — `pnpm generate-og`
 
-Produces the site's bilingual OG sharing image from project data (no API key, runs in <1 second). Inputs are auto-discovered: `site.name` + `site.tagline` from `src/i18n/{de,en}.json`, accent color from `src/styles/global.css`, logo from `public/favicon.svg`. Outputs land at `public/og-default-de.png` and `public/og-default-en.png` (1200×630). `BaseLayout` picks the locale-specific file per page.
+Produces the site's bilingual OG sharing image from project data (no API key, runs in <1 second). Inputs are auto-discovered: `site.name` + `site.tagline` from `src/i18n/{de,en}.json`, accent color from `src/styles/global.css`, logo from `public/favicon.svg`. Optional: drop a photo at `src/assets/og/bg.png` and it gets composited full-cover behind the text (with a left-anchored scrim for legibility). Outputs land at `public/og-default-de.png` and `public/og-default-en.png` (1200×630). `BaseLayout` picks the locale-specific file per page.
 
 ```bash
 pnpm generate-og              # regenerate both locales
@@ -126,7 +126,7 @@ pnpm generate-og --lang de    # only DE
 pnpm generate-og --lang en    # only EN
 ```
 
-Re-run when `site.name` / `site.tagline` / favicon / accent color changes. The bilingual check (`scripts/check-bilingual.mjs`) fails a build if one locale's PNG is present without the other — no half-state can ship.
+Re-run when `site.name` / `site.tagline` / favicon / accent color / `src/assets/og/bg.png` changes. The bilingual check (`scripts/check-bilingual.mjs`) fails a build if one locale's PNG is present without the other — no half-state can ship.
 
 ### Content images — `pnpm generate-image`
 
