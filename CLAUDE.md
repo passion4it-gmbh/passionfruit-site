@@ -116,7 +116,21 @@ Before committing:
 
 ## 12. Image generation
 
-Generate images for blog heroes, page backgrounds, and assets using GPT Image models:
+### Social sharing (OG) image — `pnpm generate-og`
+
+Produces the site's bilingual OG sharing image from project data (no API key, runs in <1 second). Inputs are auto-discovered: `site.name` + `site.tagline` from `src/i18n/{de,en}.json`, accent color from `src/styles/global.css`, logo from `public/favicon.svg`. Optional: drop a photo at `src/assets/og/bg.png` and it gets composited full-cover behind the text (with a left-anchored scrim for legibility). Outputs land at `public/og-default-de.png` and `public/og-default-en.png` (1200×630). `BaseLayout` picks the locale-specific file per page.
+
+```bash
+pnpm generate-og              # regenerate both locales
+pnpm generate-og --lang de    # only DE
+pnpm generate-og --lang en    # only EN
+```
+
+Re-run when `site.name` / `site.tagline` / favicon / accent color / `src/assets/og/bg.png` changes. The bilingual check (`scripts/check-bilingual.mjs`) fails a build if one locale's PNG is present without the other — no half-state can ship.
+
+### Content images — `pnpm generate-image`
+
+Generate hero / background / decorative images using GPT Image models:
 
 ```bash
 pnpm generate-image "your prompt here" -o src/assets/blog/my-image.png
@@ -160,6 +174,8 @@ The deploy job is gated on `CLOUDFLARE_PROJECT_NAME` being set — when unset, t
 
 **Security headers + caching** live in `public/_headers` (Cloudflare Pages auto-picks this up). Includes HSTS, CSP, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, and long-cache rules for `/_astro/*`. The CSP is scoped to what's actually used (PostHog + GA4); **if you add a new third-party script, iframe, or asset host, update the CSP or it will be blocked silently in the browser console.**
 
+**CSP violation reporting** is opt-in: when `PUBLIC_POSTHOG_API_KEY` is set at build time, `scripts/postbuild-headers.mjs` injects `Reporting-Endpoints` + `report-uri`/`report-to` directives pointing at PostHog's `/report/` ingest. The script is a no-op without the key, so forks ship safely with reporting disabled. Bump the `v=1` tag in the script when materially changing the CSP so historical noise doesn't drown out fresh regressions.
+
 ## 15. Git workflow
 
 **Never push directly to `main`.** Every change goes through a pull request, even if it's just you.
@@ -193,20 +209,21 @@ The deploy job is gated on `CLOUDFLARE_PROJECT_NAME` being set — when unset, t
 
 ## 16. Commands
 
-| Command               | Purpose                                                  |
-| --------------------- | -------------------------------------------------------- |
-| `pnpm dev`            | Local dev server                                         |
-| `pnpm build`          | Production build (sync + lint + typecheck + astro build) |
-| `pnpm preview`        | Preview built output                                     |
-| `pnpm typecheck`      | `astro check` + `tsc --noEmit`                           |
-| `pnpm lint`           | ESLint + Prettier with autofix                           |
-| `pnpm lint:a11y`      | Accessibility lint (alt-text = error, rest = warn)       |
-| `pnpm test`           | Bilingual check unit tests                               |
-| `pnpm check:spelling` | Spell check content markdown (DE + EN)                   |
-| `pnpm check:links`    | Broken link check on built output                        |
-| `pnpm check:all`      | Spelling + a11y + build + link check (full CI locally)   |
-| `pnpm generate-image` | Generate images via GPT Image (needs `OPENAI_API_KEY`)   |
-| `/brand`              | Replace placeholder favicon and OG image with your own   |
-| `/deploy`             | Interactive Cloudflare Pages deployment setup            |
-| `/new-post`           | Scaffold a bilingual blog post (DE + EN)                 |
-| `/new-team-member`    | Scaffold a bilingual team member entry (DE + EN)         |
+| Command               | Purpose                                                                      |
+| --------------------- | ---------------------------------------------------------------------------- |
+| `pnpm dev`            | Local dev server                                                             |
+| `pnpm build`          | Production build (sync + lint + typecheck + astro build + postbuild headers) |
+| `pnpm preview`        | Preview built output                                                         |
+| `pnpm typecheck`      | `astro check` + `tsc --noEmit`                                               |
+| `pnpm lint`           | ESLint + Prettier with autofix                                               |
+| `pnpm lint:a11y`      | Accessibility lint (alt-text = error, rest = warn)                           |
+| `pnpm test`           | Bilingual + og-generator unit tests                                          |
+| `pnpm check:spelling` | Spell check content markdown (DE + EN)                                       |
+| `pnpm check:links`    | Broken link check on built output                                            |
+| `pnpm check:all`      | Spelling + a11y + build + link check (full CI locally)                       |
+| `pnpm generate-og`    | Regenerate localized OG sharing images from project data                     |
+| `pnpm generate-image` | Generate images via GPT Image (needs `OPENAI_API_KEY`)                       |
+| `/brand`              | Replace placeholder favicon and OG image with your own                       |
+| `/deploy`             | Interactive Cloudflare Pages deployment setup                                |
+| `/new-post`           | Scaffold a bilingual blog post (DE + EN)                                     |
+| `/new-team-member`    | Scaffold a bilingual team member entry (DE + EN)                             |
