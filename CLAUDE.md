@@ -98,7 +98,22 @@ Key rules:
 
 You can run either, both, or neither. Most users want GA4 (familiar dashboard); PostHog is for those who want session replay, funnels, and feature flags.
 
-## 10. Routing
+## 10. Contact form
+
+The contact form (`src/components/pages/contact.astro`) submits a JSON body `{name, email, message, company}` via POST to `/api/contact`. The `company` field is a honeypot — any non-empty value causes the request to be silently dropped (200 returned to the visitor, no email sent).
+
+**Delivery:** `functions/api/contact.ts` (Cloudflare Pages Function) calls the Brevo transactional email API. To: `info@passion4it.de`, From: `kontakt@passion4it.de`, Reply-To: the visitor's address.
+
+**Env vars:**
+
+- `PUBLIC_FORM_ENDPOINT=/api/contact` — build-time flag; enables real delivery via the Function. Leave EMPTY (default in `.env.example`) to fall back to a `mailto:` link — no Function is called.
+- `BREVO_API_KEY` — secret. Set in the Cloudflare Pages project dashboard (Settings → Environment Variables) for production. For local testing with `wrangler pages dev`, add it to a git-ignored `.dev.vars` file (never commit this file).
+
+**DNS on `passion4it.de`:** To authenticate the sending domain in Brevo, add the Brevo code TXT record, the DKIM TXT record, and a DMARC record if none already exists. **SPF and MX records are NOT changed — Microsoft 365 keeps the mailboxes.** Brevo sends via its own return-path and achieves DMARC compliance through DKIM alignment.
+
+**Testing:** The Function is not exercised by `pnpm build`. End-to-end delivery is verified on the Cloudflare preview or production environment with `BREVO_API_KEY` set, or locally via `wrangler pages dev`.
+
+## 11. Routing
 
 - URL scheme: **apex-locale** — DE at root (`/`), EN under `/en/`.
 - Localized slugs: `/leistungen` (DE) ↔ `/en/services` (EN).
@@ -106,7 +121,7 @@ You can run either, both, or neither. Most users want GA4 (familiar dashboard); 
 - Catch-all route: `src/pages/[...path].astro`.
 - Home pages: `src/pages/index.astro` (DE), `src/pages/en/index.astro` (EN).
 
-## 11. Quality checklist
+## 12. Quality checklist
 
 Before committing:
 
@@ -119,7 +134,7 @@ Before committing:
 - [ ] New i18n strings added to both `de.json` and `en.json`
 - [ ] Changes align with STYLE_GUIDE.md
 
-## 12. Image generation
+## 13. Image generation
 
 ### Social sharing (OG) image — `pnpm generate-og`
 
@@ -153,7 +168,7 @@ Options: `--size` (1536x1024 for landscapes, 1024x1536 for portraits), `--qualit
 - Always end with "No text, no logos" unless text is wanted
 - Use `--size 1536x1024` for hero/banner images, `1024x1024` for square thumbnails
 
-## 13. Quality tooling
+## 14. Quality tooling
 
 **Commit hooks** (lefthook): pre-commit runs lint-staged (ESLint, Prettier, cspell on changed files) + bilingual check. Commit-msg runs commitlint (conventional commits: `feat:`, `fix:`, `chore:`, `docs:`).
 
@@ -163,7 +178,7 @@ Options: `--size` (1536x1024 for landscapes, 1024x1536 for portraits), `--qualit
 
 **Alt text** enforcement: `jsx-a11y/alt-text` is set to `error` (not warn) in the a11y ESLint config. Missing alt text on images blocks the build.
 
-## 14. Deployment
+## 15. Deployment
 
 **Default host: Cloudflare Pages** (free, fast, automatic HTTPS). Run `/deploy` to set it up.
 
@@ -172,6 +187,8 @@ Options: `--size` (1536x1024 for landscapes, 1024x1536 for portraits), `--qualit
 - `CLOUDFLARE_API_TOKEN` (secret) — from Cloudflare dashboard → API Tokens
 - `CLOUDFLARE_ACCOUNT_ID` (secret) — from Cloudflare dashboard sidebar
 - `CLOUDFLARE_PROJECT_NAME` (variable) — the Cloudflare Pages project name
+- `BREVO_API_KEY` (secret) — Brevo transactional API key for contact-form delivery (see §10)
+- `PUBLIC_FORM_ENDPOINT` (variable, value `/api/contact`) — enables the contact form's server-side send
 
 The deploy job is gated on `CLOUDFLARE_PROJECT_NAME` being set — when unset, the deploy workflow shows as "skipped" instead of failing. This keeps the template green out of the box.
 
@@ -181,7 +198,7 @@ The deploy job is gated on `CLOUDFLARE_PROJECT_NAME` being set — when unset, t
 
 **CSP violation reporting** is opt-in: when `PUBLIC_POSTHOG_API_KEY` is set at build time, `scripts/postbuild-headers.mjs` injects `Reporting-Endpoints` + `report-uri`/`report-to` directives pointing at PostHog's `/report/` ingest. The script is a no-op without the key, so forks ship safely with reporting disabled. Bump the `v=1` tag in the script when materially changing the CSP so historical noise doesn't drown out fresh regressions.
 
-## 15. Git workflow
+## 16. Git workflow
 
 **Never push directly to `main`.** Every change goes through a pull request, even if it's just you.
 
@@ -212,7 +229,7 @@ The deploy job is gated on `CLOUDFLARE_PROJECT_NAME` being set — when unset, t
 
 **Preview deployments:** Every PR gets a unique preview URL like `https://<branch-name>.<project>.pages.dev`. Updates on every push to the branch. The bot comment on the PR is updated in place — no spam.
 
-## 16. Commands
+## 17. Commands
 
 | Command               | Purpose                                                                      |
 | --------------------- | ---------------------------------------------------------------------------- |
