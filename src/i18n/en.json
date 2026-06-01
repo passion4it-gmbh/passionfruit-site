@@ -105,5 +105,27 @@
   "features": {
     "title": "Features",
     "description": "Everything passionfruit ships with — and why it matters."
+  },
+  "comparison": {
+    "feature": "Feature",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "state": {
+    "loading": "Loading",
+    "empty": {
+      "posts": {
+        "headline": "No posts yet",
+        "body": "Something will land here soon. In the meantime, take a look at what we offer.",
+        "cta": "See our services"
+      }
+    },
+    "error": {
+      "generic": {
+        "headline": "Something went wrong",
+        "body": "We couldn't complete your request just now. Please try again."
+      },
+      "retry": "Try again"
+    }
   }
 }
