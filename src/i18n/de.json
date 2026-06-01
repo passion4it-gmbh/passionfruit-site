@@ -105,5 +105,27 @@
   "features": {
     "title": "Funktionen",
     "description": "Alles, was passionfruit aus der Box mitbringt."
+  },
+  "comparison": {
+    "feature": "Merkmal",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "state": {
+    "loading": "Wird geladen",
+    "empty": {
+      "posts": {
+        "headline": "Noch keine Beiträge",
+        "body": "Hier entsteht in Kürze etwas. Bis dahin lohnt sich ein Blick auf unsere Leistungen.",
+        "cta": "Zu den Leistungen"
+      }
+    },
+    "error": {
+      "generic": {
+        "headline": "Da ist etwas schiefgelaufen",
+        "body": "Wir konnten Ihre Anfrage gerade nicht verarbeiten. Bitte versuchen Sie es erneut."
+      },
+      "retry": "Erneut versuchen"
+    }
   }
 }
