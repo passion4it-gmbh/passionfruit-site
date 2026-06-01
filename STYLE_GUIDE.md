@@ -121,7 +121,7 @@ Wrap rendered Markdown bodies in `<Prose>` (from `~/components/Prose.astro`). It
 | `dropCap` | `true \| false` (default `false`) | `true` for blog posts; default elsewhere.                    |
 | `measure` | `"tight" \| "default" \| "wide"`  | `"wide"` for legal copy; `"default"` (70ch) everywhere else. |
 
-Consumers: `BlogPost`, `LegalDocument`, `PageContent`, contact page.
+Consumers: `BlogPost`, `PageContent`, contact page.
 
 ### Pattern vs. anti-pattern
 
@@ -611,10 +611,10 @@ When you reach one of these decision points, take the shortcut.
 | Need a color                                                 | Check `@theme` in `src/styles/global.css` first. If missing, add a `--color-*` token there; never hex.                           |
 | Need a font size                                             | `--text-*` token (or matching `.text-*` utility). Never raw `font-size: Xrem`.                                                   |
 | Need to display a blog entry as a card                       | Use `BlogCard`.                                                                                                                  |
-| Need long-form Markdown rendering                            | Use `<Prose>` wrapping the rendered body; or the existing `BlogPost` / `PageContent` / `LegalDocument` patterns.                 |
+| Need long-form Markdown rendering                            | Use `<Prose>` wrapping the rendered body; or the existing `BlogPost` / `PageContent` patterns.                                   |
 | Need an icon                                                 | Import from `@lucide/astro`. Never an emoji.                                                                                     |
 | Need to add a third-party host (script, iframe, font, asset) | Update `public/_headers` CSP first, then add the resource. Forgotten CSPs silently block in production.                          |
-| Need to add a translation string                             | Edit both `src/i18n/de.json` and `src/i18n/en.json` together (the `passionfruit-content` skill reminds you).                     |
+| Need to add a translation string                             | Edit both `src/i18n/de.json` and `src/i18n/en.json` together (see CLAUDE.md §5 Bilingual rule).                                  |
 | Need an animation                                            | CSS keyframes inside a `@media (prefers-reduced-motion: no-preference)` block. No JS animation libs.                             |
 | Need a section frame                                         | `<Section tone="..." padding="..." container="...">` or pick the right archetype from `sections/`.                               |
 | Need an editorial section pattern (hero / quote / grid)      | Use the archetype — `AsymmetricHero`, `MagazineGrid`, `StickyStory`, `EditorialQuote`, `SplitFeature`. Don't compose one ad-hoc. |
