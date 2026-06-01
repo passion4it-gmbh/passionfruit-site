@@ -170,6 +170,20 @@ const inputClasses =
             >
             </div>
 
+            <div
+              aria-hidden="true"
+              style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"
+            >
+              <label for="company">Company</label>
+              <input
+                id="company"
+                name="company"
+                type="text"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
             <Button
               type="submit"
               variant="primary"
@@ -250,6 +264,8 @@ const inputClasses =
       const name = nameInput.value.trim();
       const email = emailInput.value.trim();
       const message = messageInput.value.trim();
+      const company =
+        form.querySelector<HTMLInputElement>("#company")?.value ?? "";
 
       if (!name || !email || !message) return;
 
@@ -266,7 +282,7 @@ const inputClasses =
           const response = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, message }),
+            body: JSON.stringify({ name, email, message, company }),
           });
 
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
