@@ -4,7 +4,7 @@ import type { Locale } from "~/i18n";
 import { useTranslations } from "~/i18n";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Button from "~/components/Button.astro";
-import { getAlternateCollectionSlug } from "~/lib/page-registry";
+import { getAlternateCollectionSlug, findPageByKey } from "~/lib/page-registry";
 import { Mail, Phone, MapPin, Send } from "@lucide/astro";
 
 interface Props {
@@ -32,6 +32,16 @@ const alternateSlug = await getAlternateCollectionSlug(
 );
 
 const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+const privacyEntry = findPageByKey("privacy");
+const privacyHref = privacyEntry
+  ? lang === "de"
+    ? `/${privacyEntry.slug.de}`
+    : `/en/${privacyEntry.slug.en}`
+  : lang === "de"
+    ? "/datenschutz"
+    : "/en/privacy";
 const contactEmail = t("contact.info.email");
 
 const inputClasses =
@@ -117,6 +127,7 @@ const inputClasses =
             data-msg-success={t("contact.form.success")}
             data-msg-error={t("contact.form.error")}
             data-msg-send={t("contact.form.send")}
+            data-lang={lang}
             novalidate
             class="card flex flex-col gap-5 p-8"
           >
@@ -186,6 +197,24 @@ const inputClasses =
               />
             </div>
 
+            {
+              turnstileSiteKey && (
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={turnstileSiteKey}
+                  data-theme="auto"
+                />
+              )
+            }
+
+            <p class="text-sm text-muted">
+              {t("contact.form.privacyNoticePrefix")}<a
+                href={privacyHref}
+                class="underline hover:text-accent"
+                >{t("contact.form.privacyLinkLabel")}</a
+              >{t("contact.form.privacyNoticeSuffix")}
+            </p>
+
             <Button
               type="submit"
               variant="primary"
@@ -223,6 +252,17 @@ const inputClasses =
       </div>
     </div>
   </section>
+
+  {
+    turnstileSiteKey && (
+      <script
+        is:inline
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer
+      />
+    )
+  }
 </BaseLayout>
 
 <script>
@@ -249,6 +289,7 @@ const inputClasses =
 
     const endpoint = form.dataset.endpoint ?? "";
     const contactEmail = form.dataset.contactEmail ?? "";
+    const lang = form.dataset.lang ?? "en";
     const msgSending = form.dataset.msgSending ?? "Sending...";
     const msgSuccess = form.dataset.msgSuccess ?? "Message sent.";
     const msgError = form.dataset.msgError ?? "Something went wrong.";
@@ -266,8 +307,12 @@ const inputClasses =
       const name = nameInput.value.trim();
       const email = emailInput.value.trim();
       const message = messageInput.value.trim();
-      const company =
+      const honeypot =
         form.querySelector<HTMLInputElement>("#company")?.value ?? "";
+      const turnstileToken =
+        form.querySelector<HTMLInputElement>(
+          'input[name="cf-turnstile-response"]',
+        )?.value ?? "";
 
       if (!name || !email || !message) return;
 
@@ -284,7 +329,14 @@ const inputClasses =
           const response = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, message, company }),
+            body: JSON.stringify({
+              name,
+              email,
+              message,
+              honeypot,
+              turnstileToken,
+              lang,
+            }),
           });
 
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
