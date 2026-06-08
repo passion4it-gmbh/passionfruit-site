@@ -1,80 +1,111 @@
-/**
- * Cloudflare Pages Function: POST /api/contact
- *
- * Validates the honeypot, validates the payload, then forwards to Brevo.
- */
+import { sendContactEmail } from "./_provider.js";
 
-import {
-  buildBrevoPayload,
-  isHoneypotTripped,
-  validateContact,
-} from "./_contact.ts";
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
-interface Env {
-  BREVO_API_KEY: string;
+export interface Env {
+  CONTACT_RECIPIENT?: string;
+  CONTACT_SENDER?: string;
+  BREVO_API_KEY?: string;
+  TURNSTILE_SECRET_KEY?: string;
+  CONTACT_SENDER_NAME?: string;
 }
 
-// ---------------------------------------------------------------------------
-// Helper
-// ---------------------------------------------------------------------------
+interface ContactBody {
+  name?: string;
+  email?: string;
+  message?: string;
+  honeypot?: string;
+  turnstileToken?: string;
+  lang?: string;
+}
 
-function json(status: number, obj: Record<string, unknown>): Response {
-  return new Response(JSON.stringify(obj), {
+type JsonErrorCode = "validation" | "config" | "delivery";
+
+function json(
+  body: { ok: boolean; error?: JsonErrorCode },
+  status: number,
+): Response {
+  return new Response(JSON.stringify(body), {
     status,
     headers: { "content-type": "application/json" },
   });
 }
 
-// ---------------------------------------------------------------------------
-// Handler
-// ---------------------------------------------------------------------------
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-export async function onRequestPost(context: {
-  request: Request;
-  env: Env;
-}): Promise<Response> {
-  let body: unknown;
+// Spam protection: Turnstile + honeypot + Cloudflare edge limits — no app-level rate limiting by design.
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+  const { request, env } = context;
+
+  // 1. Parse JSON
+  let body: ContactBody;
   try {
-    body = await context.request.json();
+    body = (await request.json()) as ContactBody;
   } catch {
-    return json(400, { ok: false, error: "invalid" });
+    return json({ ok: false, error: "validation" }, 400);
   }
 
-  // Silent drop for bots that fill in the honeypot field.
-  if (isHoneypotTripped(body)) {
-    return json(200, { ok: true });
+  // 2. Honeypot
+  if (body.honeypot) {
+    return json({ ok: true }, 200);
   }
 
-  const result = validateContact(body);
-  if (!result.ok) {
-    return json(400, { ok: false, error: "invalid" });
-  }
-
-  if (!context.env.BREVO_API_KEY) {
-    return json(500, { ok: false, error: "config" });
-  }
-
-  try {
-    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST",
-      headers: {
-        "api-key": context.env.BREVO_API_KEY,
-        accept: "application/json",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(buildBrevoPayload(result.data)),
+  // 3. Turnstile (gated)
+  if (env.TURNSTILE_SECRET_KEY) {
+    const params = new URLSearchParams({
+      secret: env.TURNSTILE_SECRET_KEY,
+      response: body.turnstileToken ?? "",
     });
-
-    if (!res.ok) {
-      return json(502, { ok: false, error: "send" });
+    const verifyRes = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      { method: "POST", body: params },
+    );
+    const { success } = (await verifyRes.json()) as { success: boolean };
+    if (!success) {
+      return json({ ok: false, error: "validation" }, 400);
     }
-
-    return json(200, { ok: true });
-  } catch {
-    return json(502, { ok: false, error: "send" });
   }
-}
+
+  // 4. Validate
+  const name = (body.name ?? "").trim();
+  const email = (body.email ?? "").trim();
+  const message = (body.message ?? "").trim();
+
+  if (
+    !name ||
+    !email ||
+    !message ||
+    !EMAIL_RE.test(email) ||
+    name.length > 100 ||
+    email.length > 254 ||
+    message.length > 5000
+  ) {
+    return json({ ok: false, error: "validation" }, 400);
+  }
+
+  // 5. Config
+  const recipient = env.CONTACT_RECIPIENT;
+  const sender = env.CONTACT_SENDER;
+  const apiKey = env.BREVO_API_KEY;
+
+  if (!recipient || !sender || !apiKey) {
+    return json({ ok: false, error: "config" }, 500);
+  }
+
+  // 6. Dispatch
+  const lang: "de" | "en" = body.lang === "de" ? "de" : "en";
+  try {
+    await sendContactEmail({
+      name,
+      email,
+      message,
+      recipient,
+      sender,
+      apiKey,
+      senderName: env.CONTACT_SENDER_NAME,
+      lang,
+    });
+  } catch {
+    return json({ ok: false, error: "delivery" }, 502);
+  }
+
+  return json({ ok: true }, 200);
+};
