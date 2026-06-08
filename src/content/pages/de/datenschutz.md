@@ -48,7 +48,7 @@ Alle Schriftarten sind direkt im Build verpackt (`@fontsource-variable/inter`). 
 
 ## Kontakt per E-Mail
 
-Wenn du uns über `info@passion4it.de` oder das Kontaktformular schreibst, speichern wir deine Nachricht für die Bearbeitung deines Anliegens. Rechtsgrundlage: Art. 6 Abs. 1 lit. b oder f DSGVO. Die Nachrichten löschen wir, sobald sie nicht mehr benötigt werden.
+Wenn du uns über `info@passion4it.de` oder das Kontaktformular schreibst, speichern wir deine Nachricht für die Bearbeitung deines Anliegens. Rechtsgrundlage: Art. 6 Abs. 1 lit. b oder f DSGVO. Die Nachrichten löschen wir, sobald sie nicht mehr benötigt werden. Nachrichten, die über das Kontaktformular eingehen, werden mithilfe von **Brevo** (Auftragsverarbeiter gem. Art. 28 DSGVO) zugestellt; die Verarbeitung findet ausschließlich innerhalb der EU statt, sodass kein Drittlandtransfer erfolgt.
 
 ## Deine Rechte
 

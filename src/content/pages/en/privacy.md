@@ -48,7 +48,7 @@ All fonts are bundled directly into the build (`@fontsource-variable/inter`). **
 
 ## Email contact
 
-If you reach out via `info@passion4it.de` or the contact form, we store your message to handle your request. Legal basis: Art. 6 (1) b or f GDPR. Messages are deleted once they are no longer needed.
+If you reach out via `info@passion4it.de` or the contact form, we store your message to handle your request. Legal basis: Art. 6 (1) b or f GDPR. Messages are deleted once they are no longer needed. Messages submitted via the contact form are delivered using **Brevo** as a processor under Art. 28 GDPR; processing takes place exclusively within the EU, so no third-country transfer occurs.
 
 ## Your rights
 
