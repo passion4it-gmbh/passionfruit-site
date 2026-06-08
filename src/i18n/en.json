@@ -43,7 +43,10 @@
       "send": "Send",
       "sending": "Sending...",
       "success": "Thanks — your message is on its way.",
-      "error": "Something went wrong. Please try again."
+      "error": "Something went wrong. Please try again.",
+      "privacyNoticePrefix": "By submitting, you agree to our ",
+      "privacyLinkLabel": "Privacy Policy",
+      "privacyNoticeSuffix": "."
     }
   },
   "error": {

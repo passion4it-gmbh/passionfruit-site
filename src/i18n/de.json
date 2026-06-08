@@ -43,7 +43,10 @@
       "send": "Absenden",
       "sending": "Wird gesendet...",
       "success": "Vielen Dank! Deine Nachricht wurde gesendet.",
-      "error": "Leider ist ein Fehler aufgetreten. Bitte versuche es erneut."
+      "error": "Leider ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+      "privacyNoticePrefix": "Mit dem Absenden stimmen Sie unserer ",
+      "privacyLinkLabel": "Datenschutzerklärung",
+      "privacyNoticeSuffix": " zu."
     }
   },
   "error": {
