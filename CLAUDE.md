@@ -74,6 +74,7 @@ See CONTRIBUTING.md for full details. Summary:
 - **Motion primitives:** `<Motion effect="fade-up" duration="base">` or its sugars `<FadeUp>` / `<FadeIn>` for entrance animations. Reduced-motion is handled for you — don't author per-element keyframes.
 - **Section archetypes** (`src/components/sections/`): `AsymmetricHero`, `MagazineGrid`, `StickyStory`, `EditorialQuote`, `SplitFeature`, `Trust`, `Comparison`, `FAQ`. Pick the right archetype before reaching for a custom layout.
 - **State surfaces** (`src/components/state/`): `<Skeleton variant="...">` for loading states, `<EmptyState>` (CTA required — no dead-end empties), `<ErrorState tone="warning|error|info">`. Don't roll custom gray boxes or ad-hoc error text.
+- **Sidecar docs:** every `*.astro` in `src/components/` has a sibling `*.md` sidecar (purpose, props, slots, owned i18n keys, gotchas) plus a generated index in `src/components/CLAUDE.md`. Props describe the local component, never upstream. Update the sidecar in the same commit as the component — a build-time check (`scripts/check-component-docs.mjs`, run in `prebuild`) fails on missing/malformed sidecars; `pnpm sync:component-catalog` regenerates the catalog. See `src/components/CLAUDE.md` for the schema.
 - The `passionfruit-design`, `passionfruit-a11y`, and `passionfruit-perf` skills auto-load on design, accessibility, and performance work respectively — read them for the full decision-shortcut cheat sheets.
 
 ## 8. Styling
