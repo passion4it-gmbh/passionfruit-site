@@ -1,6 +1,11 @@
 # release-please owns the CHANGELOG — prettier reformatting fights its output
 CHANGELOG.md
 
+# pnpm owns the lockfile — prettier reserializes it into verbose YAML (double
+# quotes, expanded resolution blocks) and re-churns the whole file on every
+# `pnpm lint`. Machine-generated; never hand-format.
+pnpm-lock.yaml
+
 # Auto-generated
 .astro
 dist
