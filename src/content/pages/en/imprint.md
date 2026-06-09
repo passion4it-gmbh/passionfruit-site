@@ -42,8 +42,6 @@ Allianz Versicherungs AG, 10900 Berlin, Germany
 
 ## Dispute resolution
 
-The European Commission provides a platform for online dispute resolution: <https://ec.europa.eu/consumers/odr>.
-
 We are not willing or obligated to participate in dispute resolution proceedings before a consumer arbitration board.
 
 ## Liability for content
