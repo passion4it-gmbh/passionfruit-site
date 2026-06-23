@@ -90,14 +90,6 @@ background: var(--color-overlay-scrim-strong);
 | `.text-h3`      | 1.25rem – 1.75rem   | Card titles, subsections    |
 | `.text-body-lg` | 1.0625rem – 1.25rem | Lead paragraphs, subtitles  |
 
-The clamp values from `src/styles/global.css` `@theme`:
-
-- `.text-display`: `clamp(3rem, 6vw + 0.5rem, 5.5rem)`
-- `.text-h1`: `clamp(2.25rem, 4vw + 0.5rem, 3.5rem)`
-- `.text-h2`: `clamp(1.75rem, 3vw + 0.25rem, 2.75rem)`
-- `.text-h3`: `clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem)`
-- `.text-body-lg`: `clamp(1.0625rem, 0.5vw + 0.9rem, 1.25rem)`
-
 ### Tracking
 
 | Token                | Value    | Usage               |
@@ -121,7 +113,7 @@ Wrap rendered Markdown bodies in `<Prose>` (from `~/components/Prose.astro`). It
 | `dropCap` | `true \| false` (default `false`) | `true` for blog posts; default elsewhere.                    |
 | `measure` | `"tight" \| "default" \| "wide"`  | `"wide"` for legal copy; `"default"` (70ch) everywhere else. |
 
-Consumers: `BlogPost`, `PageContent`, contact page.
+Consumers: `BlogPost`, `LegalDocument`, `PageContent`, `CareerPost`, `EventDetail`, `CaseStudyDetail`, contact page. See `src/components/CLAUDE.md` for the full list and rationale.
 
 ### Pattern vs. anti-pattern
 
@@ -178,7 +170,7 @@ Consumers: `BlogPost`, `PageContent`, contact page.
 
 ## 4. Cards
 
-**Use when:** displaying an entry from a content collection — blog post. Use the per-type component (`BlogCard`). For decorative tile-like content inside a section (values, features, stats), the `.card` global utility is fine.
+**Use when:** displaying an entry from a content collection — blog post, team member, career, case study, event. Use the per-type component (`BlogCard`, `TeamCard`, …). For decorative tile-like content inside a section (values, features, stats), the `.card` global utility is fine.
 
 **Don't use when:** wrapping arbitrary content in a generic `<Card>`. passionfruit deliberately has one card per content type — that's how design intent (image ratios, badge placement, hover behavior) stays consistent. If a new content type appears, add a new card component; don't shoehorn into an existing one.
 
@@ -186,7 +178,7 @@ Consumers: `BlogPost`, `PageContent`, contact page.
 
 - Background: `--color-surface-elevated`, radius: `--radius-xl` (1.5rem), padding: 2rem
 - Hover: accent-tinted border via `color-mix()`, subtle `shadow-accent/8`
-- `p-0 overflow-hidden` variant for image-topped cards (BlogCard)
+- `p-0 overflow-hidden` variant for image-topped cards (BlogCard, TeamCard)
 
 ### `.glass` (dark sections)
 
@@ -196,6 +188,7 @@ Consumers: `BlogPost`, `PageContent`, contact page.
 ### Content Cards
 
 - **BlogCard**: full-bleed image with hover zoom (scale-105), date+tags, title, excerpt, "Read more" arrow. Entire card is `<a>`.
+- **TeamCard**: 4:3 photo with hover zoom, name/role, specialization badges, social links with border-t separator
 - **Value card**: horizontal layout — icon container left, text right
 
 ### Pattern vs. anti-pattern
@@ -498,9 +491,9 @@ import { Image } from 'astro:assets';
 
 ## 10. Social proof
 
-**Use when:** displaying partner/client logos or feature comparisons. Use `<Trust>` (`sections/Trust`) for logo strips and `<Comparison>` (`sections/Comparison`) for feature grids — both already encode the patterns below.
+**Use when:** displaying testimonials, partner/client logos, or feature comparisons. Use `<Trust>` (`sections/Trust`) for logo strips and `<Comparison>` (`sections/Comparison`) for feature grids — both already encode the patterns below.
 
-**Don't use when:** partner logos at inconsistent heights (band reads as visual noise), or boolean comparison cells rendered as bare "Yes/No" text without a screen-reader label.
+**Don't use when:** generic praise without attribution (testimonial loses credibility), partner logos at inconsistent heights (band reads as visual noise), or boolean comparison cells rendered as bare "Yes/No" text without a screen-reader label.
 
 ### Logo strips (`<Trust>`)
 
@@ -540,7 +533,46 @@ Feature comparison grids follow a **semantic table on desktop, per-column cards 
 
 ---
 
-## 11. State surfaces
+## 11. Media embeds
+
+**Use when:** embedding any third-party video or audio (YouTube, Spotify, and the additional providers as they appear). Always go through the facade component (`<YouTubeFacade>`, `<SpotifyFacade>`) — a static poster + Play button, with the real iframe injected only on click.
+
+**Don't use when:** raw `<iframe>` to a third-party host. It skips the consent gate, fires tracking pixels on passive page view, and bloats LCP because the iframe and its sub-resources land on the critical path.
+
+Facades exist for two reasons:
+
+- **Privacy:** no third-party requests, cookies, or tracking pixels fire before user intent — nothing to consent-gate on a passive page view.
+- **Performance:** the heavy iframe and its sub-resources never touch the critical path; LCP stays a local image.
+
+### Rules
+
+- **Never embed YouTube, Spotify, Vimeo, etc. with a raw `<iframe>`.** Facades exist precisely to keep third-party connections gated behind user intent — bypassing them defeats both reasons above.
+- **`youtube-nocookie.com` is non-negotiable** for YouTube. Don't switch back to `youtube.com/embed` — it sets cookies before consent.
+- **CSP is scoped per provider** in `public/_headers`. Adding a new provider (Vimeo, SoundCloud, …) means a new facade **and** a CSP update for that provider's `frame-src`/`img-src`/`media-src` — never loosen the policy to "fix" a blocked embed in DevTools.
+- **Posters are local `ImageMetadata`**, not remote URLs — `astro:assets` optimizes them and serves from the same origin.
+
+### Pattern vs. anti-pattern
+
+**Don't** — raw third-party iframe, fires on page load, ignores consent:
+
+```html
+<iframe
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  allow="autoplay"
+></iframe>
+```
+
+**Do** — the facade, which defers the real iframe until the user clicks Play:
+
+```
+<YouTubeFacade videoId="dQw4w9WgXcQ" poster={posterImg} title="…" />
+```
+
+Component usage (props, examples, locale wiring) lives in [`src/components/CLAUDE.md`](./src/components/CLAUDE.md) — Claude Code auto-loads it when working in that directory.
+
+---
+
+## 12. State surfaces
 
 **Use when:** rendering a loading placeholder, an empty results state, or an inline error/warning surface. The primitives in `src/components/state/` carry the visual contract — shimmer animation, illustration slot, tone-aware coloring — so consumers don't re-roll them.
 
@@ -569,6 +601,8 @@ Empty results placeholder. `headline` + `body` + `cta` are all required — the 
   cta={{ label: t("state.empty.filters.cta"), href: baseUrl }}
 />
 ```
+
+Wired into `CollectionFilter` for zero-results on tag/category filters.
 
 ### Error (`<ErrorState>`)
 
@@ -605,20 +639,21 @@ Inline error / warning / info surface. `tone` picks the visual and the lucide ic
 
 When you reach one of these decision points, take the shortcut.
 
-| Situation                                                    | Shortcut                                                                                                                         |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| Need a CTA                                                   | `<Button variant="primary\|secondary\|ghost" tone="on-light\|on-dark" href="…">…</Button>`                                       |
-| Need a color                                                 | Check `@theme` in `src/styles/global.css` first. If missing, add a `--color-*` token there; never hex.                           |
-| Need a font size                                             | `--text-*` token (or matching `.text-*` utility). Never raw `font-size: Xrem`.                                                   |
-| Need to display a blog entry as a card                       | Use `BlogCard`.                                                                                                                  |
-| Need long-form Markdown rendering                            | Use `<Prose>` wrapping the rendered body; or the existing `BlogPost` / `PageContent` patterns.                                   |
-| Need an icon                                                 | Import from `@lucide/astro`. Never an emoji.                                                                                     |
-| Need to add a third-party host (script, iframe, font, asset) | Update `public/_headers` CSP first, then add the resource. Forgotten CSPs silently block in production.                          |
-| Need to add a translation string                             | Edit both `src/i18n/de.json` and `src/i18n/en.json` together (see CLAUDE.md §5 Bilingual rule).                                  |
-| Need an animation                                            | CSS keyframes inside a `@media (prefers-reduced-motion: no-preference)` block. No JS animation libs.                             |
-| Need a section frame                                         | `<Section tone="..." padding="..." container="...">` or pick the right archetype from `sections/`.                               |
-| Need an editorial section pattern (hero / quote / grid)      | Use the archetype — `AsymmetricHero`, `MagazineGrid`, `StickyStory`, `EditorialQuote`, `SplitFeature`. Don't compose one ad-hoc. |
-| Need an entrance animation primitive                         | `<Motion effect="fade-up">` (or the `<FadeUp>` / `<FadeIn>` sugars). Don't author per-element keyframes.                         |
-| Need a loading skeleton / empty state / error surface        | `<Skeleton variant="...">`, `<EmptyState>`, `<ErrorState tone="...">`. Don't roll your own gray box.                             |
+| Situation                                                                   | Shortcut                                                                                                                         |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Need a CTA                                                                  | `<Button variant="primary\|secondary\|ghost" tone="on-light\|on-dark" href="…">…</Button>`                                       |
+| Need a color                                                                | Check `@theme` in `src/styles/global.css` first. If missing, add a `--color-*` token there; never hex.                           |
+| Need a font size                                                            | `--text-*` token (or matching `.text-*` utility). Never raw `font-size: Xrem`.                                                   |
+| Need to display a blog / team / career / case-study / event entry as a card | Use the per-type card (`BlogCard`, `TeamCard`, `CareerCard`, `CaseStudyCard`, `EventCard`).                                      |
+| Need to embed a YouTube or Spotify video                                    | Use the facade (`<YouTubeFacade>` / `<SpotifyFacade>`), never a raw `<iframe>`.                                                  |
+| Need long-form Markdown rendering                                           | Use the existing `BlogPost` / `PageContent` / `LegalDocument` patterns; don't re-roll prose styling.                             |
+| Need an icon                                                                | Import from `@lucide/astro`. Never an emoji.                                                                                     |
+| Need to add a third-party host (script, iframe, font, asset)                | Update `public/_headers` CSP first, then add the resource. Forgotten CSPs silently block in production.                          |
+| Need to add a translation string                                            | Edit both `src/i18n/de.json` and `src/i18n/en.json` together (the `passionfruit-content` skill reminds you).                     |
+| Need an animation                                                           | CSS keyframes inside a `@media (prefers-reduced-motion: no-preference)` block. No JS animation libs.                             |
+| Need a section frame                                                        | `<Section tone="..." padding="..." container="...">` or pick the right archetype from `sections/`.                               |
+| Need an editorial section pattern (hero / quote / grid)                     | Use the archetype — `AsymmetricHero`, `MagazineGrid`, `StickyStory`, `EditorialQuote`, `SplitFeature`. Don't compose one ad-hoc. |
+| Need an entrance animation primitive                                        | `<Motion effect="fade-up">` (or the `<FadeUp>` / `<FadeIn>` sugars). Don't author per-element keyframes.                         |
+| Need a loading skeleton / empty state / error surface                       | `<Skeleton variant="...">`, `<EmptyState>`, `<ErrorState tone="...">`. Don't roll your own gray box.                             |
 
 If you don't see your situation here, ask. Don't guess.

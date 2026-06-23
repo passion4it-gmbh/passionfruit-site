@@ -1,13 +1,13 @@
 ---
 component: blog-index
-oneLiner: Blog index page with dark hero and chronological post grid
+oneLiner: Renders the bilingual blog index with a dark hero and chronological post grid
 status: stable
 tags: [page]
 ---
 
 ## Purpose
 
-Renders the bilingual blog index page. Queries the `blog` collection for the current locale, sorts posts newest-first, and displays them in a responsive three-column grid of `BlogCard` components below a dark hero. Falls back to a centered empty-state message when no posts exist for the locale.
+Renders the bilingual blog index page. Queries the `blog` collection for the current locale, sorts posts newest-first, and displays them in a responsive grid of `BlogCard` components below a dark hero.
 
 ## When to use
 
@@ -15,8 +15,7 @@ On a site that has the `blog-index` entry in `PAGES` (`src/lib/page-registry.ts`
 
 ## When NOT to use
 
-- For a single post full-page view, use `BlogPost` via the content-collection dynamic route, not this template.
-- For a homepage featured post teaser, embed a `BlogCard` inline rather than using this full page.
+For a single post full-page view, use `BlogPost` via the content-collection dynamic route, not this template. For a homepage featured post teaser, embed a `BlogCard` inline rather than using this full page.
 
 ## Props
 
@@ -27,16 +26,11 @@ On a site that has the `blog-index` entry in `PAGES` (`src/lib/page-registry.ts`
 
 ## Example
 
-```astro
----
-import BlogIndex from "~/components/pages/blog-index.astro";
----
+Composes:
 
-<!-- Invoked by src/pages/[...path].astro via PageContent — do not call directly -->
-<BlogIndex lang="de" currentSlug="blog" />
-```
-
-Composes: `<BaseLayout>` (headerVariant: "on-dark"), dark hero with `site.name` eyebrow, `blog.title` heading and `blog.description` lead, followed by a `<BlogCard>` grid or `blog.noPosts` empty-state text.
+- `<BaseLayout>` (headerVariant: "on-dark")
+- Dark hero section with `site.name` eyebrow, `blog.title` heading, and `blog.description` lead
+- `<BlogCard>` repeated for each locale-matching post, or `blog.noPosts` empty-state text
 
 ## i18n keys
 
@@ -49,8 +43,7 @@ Composes: `<BaseLayout>` (headerVariant: "on-dark"), dark hero with `site.name` 
 
 ## Gotchas
 
-- **No `heroImage` support.** The hero is text-only; no image slot exists.
-- **No filter or pagination.** Posts are listed chronologically without tag filtering. Adding tag filtering requires a new query strategy and a filter UI component.
-- **Bilingual entries required.** Both `de` and `en` blog posts must use the same `translationKey` — `scripts/check-bilingual.mjs` enforces this at build time.
-- **Scroll animations require re-init on view transitions.** The inline `<script>` re-attaches the `IntersectionObserver` on `astro:after-swap` to handle Astro View Transitions correctly.
+- **No `heroImage` support.** Unlike `about` and `services`, this template has no optional hero image — the hero is text-only.
+- **No filter bar.** Posts are listed chronologically without tag filtering. If you need tag filtering, wire `CollectionFilter` into the page and rebuild the filtered query server-side — see `CollectionFilter.astro` docs in `src/components/CLAUDE.md`.
+- **Bilingual entries required.** Both `de` and `en` blog posts must use the same `translationKey` — the check script enforces this at build time.
 - **`currentSlug` has no default.** The catch-all route always supplies it; do not use this page outside that routing context.

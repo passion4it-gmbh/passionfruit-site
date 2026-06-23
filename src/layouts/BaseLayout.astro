@@ -1,12 +1,14 @@
 ---
 import "~/styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import { getAlternateLocaleSlug } from "~/lib/page-registry";
-import { getLocalizedPath, type Locale } from "~/i18n";
+import { getLocalizedPath, useTranslations, type Locale } from "~/i18n";
 import Header from "~/components/Header.astro";
 import Footer from "~/components/Footer.astro";
 import CookieConsent from "~/components/CookieConsent.astro";
 import PostHogAnalytics from "~/components/PostHogAnalytics.astro";
 import GoogleAnalytics from "~/components/GoogleAnalytics.astro";
+import GTMAnalytics from "~/components/GTMAnalytics.astro";
 
 interface Props {
   title: string;
@@ -60,9 +62,9 @@ const deUrl = hreflangUrl("de", deSlug);
 const enUrl = hreflangUrl("en", enSlug);
 
 // Title: append brand suffix unless already present.
-const pageTitle = title.includes("passionfruit")
-  ? title
-  : `${title} | passionfruit`;
+const { t } = useTranslations(lang);
+const siteName = t("site.name");
+const pageTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
 ---
 
 <!doctype html>
@@ -103,6 +105,9 @@ const pageTitle = title.includes("passionfruit")
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- Astro ClientRouter — opt into View Transitions site-wide -->
+    <ClientRouter />
+
     <!-- Structured data slot — inject JSON-LD from per-page components -->
     <slot name="structured-data" />
   </head>
@@ -121,7 +126,10 @@ const pageTitle = title.includes("passionfruit")
       variant={headerVariant}
     />
 
-    <main id="main-content" class={headerVariant === "on-dark" ? "-mt-16" : ""}>
+    <main
+      id="main-content"
+      class={`pf-vt-main ${headerVariant === "on-dark" ? "-mt-16" : ""}`}
+    >
       <slot />
     </main>
 
@@ -130,5 +138,6 @@ const pageTitle = title.includes("passionfruit")
     <CookieConsent lang={lang} />
     <PostHogAnalytics />
     <GoogleAnalytics />
+    <GTMAnalytics />
   </body>
 </html>

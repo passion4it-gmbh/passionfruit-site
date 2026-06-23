@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Button from "~/components/Button.astro";
 import FAQ from "~/components/sections/FAQ.astro";
+import heroFruit from "~/assets/og/bg.png";
 import { useTranslations, getLocalizedPath } from "~/i18n";
 import { getFAQs } from "~/data/faqs";
 import {
@@ -35,16 +37,31 @@ const installCommand = t("home.ctaSection.command");
     class="relative min-h-dvh flex items-center overflow-hidden bg-surface-dark noise"
   >
     <div class="absolute inset-0">
+      <!-- Full-bleed passion-fruit photo (same shot as the OG image), fruit anchored right -->
+      <Image
+        src={heroFruit}
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover object-[78%_center]"
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <!-- Legibility scrims: dark where the copy sits, fruit glows toward the right -->
       <div
-        class="glow-orb absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full bg-accent/20 blur-[120px]"
+        class="absolute inset-0 bg-gradient-to-r from-surface-dark via-surface-dark/80 to-surface-dark/30"
       >
       </div>
       <div
-        class="glow-orb absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-warm/15 blur-[100px]"
-        style="animation-delay: 4s"
+        class="absolute inset-0 bg-gradient-to-t from-surface-dark via-transparent to-surface-dark/50"
       >
       </div>
-      <div class="absolute inset-0 bg-grid opacity-30"></div>
+      <!-- Brand-colour bloom behind the fruit -->
+      <div
+        class="glow-orb absolute top-1/3 right-0 w-[420px] h-[420px] rounded-full bg-accent/15 blur-[130px]"
+      >
+      </div>
+      <div class="absolute inset-0 bg-grid opacity-10"></div>
     </div>
 
     <div class="container relative z-10 py-24">

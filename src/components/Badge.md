@@ -7,13 +7,13 @@ tags: [primitive]
 
 ## Purpose
 
-Renders an inline pill-shaped label used to tag content items (e.g., blog topics, categories). Provides two semantic variants (`default` and `status`) each adapted for light and dark backgrounds via the `tone` prop.
+Renders an inline pill-shaped label used to tag content items (e.g., job types, blog topics, case study categories). Provides two semantic variants (`default` and `status`) each adapted for light and dark backgrounds via the `tone` prop.
 
 ## When to use
 
-- Tagging a blog post or collection entry with a category or label.
-- Indicating a status (e.g., "New", "Open") within a card or list.
-- Rendering tag chips inside `BlogCard` or `BlogPost` hero sections.
+- Tagging a blog post, case study, or career entry with a category or label.
+- Indicating a status (e.g., "Open", "New") within a card or list.
+- Rendering filter chip labels inside a collection listing.
 
 ## When NOT to use
 
@@ -36,7 +36,7 @@ Content is passed via the default slot.
 import Badge from "~/components/Badge.astro";
 ---
 
-<Badge>Design</Badge>
+<Badge>AI</Badge>
 <Badge variant="status">Open</Badge>
 <Badge variant="default" tone="on-dark">Remote</Badge>
 ```
@@ -49,4 +49,4 @@ None
 
 - Content is slotted — no text prop. An empty slot renders an empty pill.
 - `status` variant (`green-100/green-800` on light, `green-900/30/green-400` on dark) is purely visual. It carries no semantic ARIA role; add `aria-label` or surrounding context when the color conveys meaning.
-- The `on-dark` palette uses `text-text-on-dark` — ensure the parent background is actually dark or contrast will be insufficient.
+- The `on-dark` palette uses `text-text-on-dark` (maps to `--color-text-on-dark` in `global.css`) — ensure the parent background is dark or the contrast will be insufficient.

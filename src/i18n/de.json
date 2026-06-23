@@ -5,9 +5,10 @@
     "description": "passionfruit — die zweisprachige Website-Vorlage für Claude Code. Repo erstellen, /onboard tippen, fertig."
   },
   "navigation": {
-    "features": "Funktionen",
+    "home": "Startseite",
     "blog": "Blog",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "features": "Funktionen"
   },
   "footer": {
     "copyright": "© {year} PASSION4IT GmbH. Alle Rechte vorbehalten.",
@@ -18,7 +19,8 @@
   "cta": {
     "contact": "Kontakt aufnehmen",
     "readMore": "Weiterlesen",
-    "backToBlog": "Zurück zum Blog"
+    "backToBlog": "Zurück zum Blog",
+    "backToTeam": "Zurück zum Team"
   },
   "blog": {
     "title": "Blog",
@@ -54,6 +56,38 @@
     "notFoundDescription": "Die gesuchte Seite existiert leider nicht.",
     "backHome": "Zurück zur Startseite"
   },
+  "state": {
+    "404": {
+      "title": "Diese Seite gibt es nicht (mehr)",
+      "body": "Vielleicht ist sie umgezogen, vielleicht hat sie nie existiert. Zurück auf bekanntem Terrain:",
+      "cta": "Zur Startseite"
+    },
+    "500": {
+      "title": "Etwas ist schiefgelaufen — auf unserer Seite",
+      "body": "Wir wissen davon und arbeiten daran. Bitte versuchen Sie es in einem Moment erneut, oder kehren Sie zur Startseite zurück.",
+      "cta": "Zur Startseite"
+    },
+    "empty": {
+      "posts": {
+        "headline": "Noch keine Beiträge",
+        "body": "Hier entsteht in Kürze etwas. Bis dahin lohnt sich ein Blick auf unsere Leistungen.",
+        "cta": "Zu den Leistungen"
+      },
+      "filters": {
+        "headline": "Keine Treffer für diese Auswahl",
+        "body": "Mit den aktuellen Filtern finden wir nichts. Setzen Sie sie zurück und stöbern Sie weiter.",
+        "cta": "Filter zurücksetzen"
+      }
+    },
+    "error": {
+      "generic": {
+        "headline": "Da ist etwas schiefgelaufen",
+        "body": "Wir konnten Ihre Anfrage gerade nicht verarbeiten. Bitte versuchen Sie es erneut."
+      },
+      "retry": "Erneut versuchen"
+    },
+    "loading": "Wird geladen"
+  },
   "cookie": {
     "title": "Diese Website verwendet Cookies",
     "description": "Wir verwenden Cookies, um dein Erlebnis zu verbessern und den Website-Traffic zu analysieren.",
@@ -72,6 +106,29 @@
       "cta": "Loslegen",
       "ctaSecondary": "Funktionen ansehen"
     },
+    "features": {
+      "title": "Was wir bieten",
+      "subtitle": "Maßgeschneiderte digitale Lösungen für Ihr Unternehmen."
+    },
+    "testimonials": {
+      "title": "Was unsere Kunden sagen"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen"
+    },
+    "ctaSection": {
+      "title": "Bereit für deine eigene Website?",
+      "subtitle": "Ein Befehl, ein paar Antworten, fertig. Kostenloses Hosting, kostenlose Vorlage, MIT-Lizenz.",
+      "cta": "Kontakt aufnehmen",
+      "command": "pnpm create passionfruit my-site",
+      "commandLabel": "Befehl kopieren",
+      "commandCopied": "Kopiert",
+      "altLabel": "Schon dabei mit Claude Code?",
+      "commandClaudePrereq": "/plugin marketplace add passion4it-gmbh/passionfruit",
+      "commandClaude": "/create-passionfruit-site",
+      "github": "Auf GitHub ansehen",
+      "releases": "Releases beobachten"
+    },
     "howItWorks": {
       "eyebrow": "So funktioniert's",
       "title": "Drei Schritte zu deiner Website",
@@ -88,47 +145,24 @@
         "title": "Live gehen mit /deploy",
         "description": "Claude richtet Cloudflare Pages ein, verknüpft die Domain, schaltet Vorschau-Deployments für PRs ein. Jeder Push auf main veröffentlicht."
       }
-    },
-    "faq": {
-      "title": "Häufig gestellte Fragen"
-    },
-    "ctaSection": {
-      "title": "Bereit für deine eigene Website?",
-      "subtitle": "Ein Befehl, ein paar Antworten, fertig. Kostenloses Hosting, kostenlose Vorlage, MIT-Lizenz.",
-      "command": "pnpm create passionfruit my-site",
-      "commandLabel": "Befehl kopieren",
-      "commandCopied": "Kopiert",
-      "altLabel": "Schon dabei mit Claude Code?",
-      "commandClaudePrereq": "/plugin marketplace add passion4it-gmbh/passionfruit",
-      "commandClaude": "/create-passionfruit-site",
-      "github": "Auf GitHub ansehen",
-      "releases": "Releases beobachten"
     }
   },
-  "features": {
-    "title": "Funktionen",
-    "description": "Alles, was passionfruit aus der Box mitbringt."
+  "legal": {
+    "lastUpdated": "Zuletzt aktualisiert:"
+  },
+  "podcast": {
+    "play": "{title} auf Spotify abspielen"
+  },
+  "video": {
+    "play": "Video abspielen: {title}"
   },
   "comparison": {
     "feature": "Merkmal",
     "yes": "Ja",
     "no": "Nein"
   },
-  "state": {
-    "loading": "Wird geladen",
-    "empty": {
-      "posts": {
-        "headline": "Noch keine Beiträge",
-        "body": "Hier entsteht in Kürze etwas. Bis dahin lohnt sich ein Blick auf unsere Leistungen.",
-        "cta": "Zu den Leistungen"
-      }
-    },
-    "error": {
-      "generic": {
-        "headline": "Da ist etwas schiefgelaufen",
-        "body": "Wir konnten Ihre Anfrage gerade nicht verarbeiten. Bitte versuchen Sie es erneut."
-      },
-      "retry": "Erneut versuchen"
-    }
+  "features": {
+    "title": "Funktionen",
+    "description": "Alles, was passionfruit aus der Box mitbringt."
   }
 }

@@ -30,17 +30,18 @@ If the site still shows "passionfruit", run `/onboard` to personalize it for you
 
 ## 4. Tech stack
 
-| Tool            | Version / notes                                                              |
-| --------------- | ---------------------------------------------------------------------------- |
-| Astro           | 6, static output                                                             |
-| Tailwind        | v4 via `@tailwindcss/vite` (theme in `src/styles/global.css` `@theme` block) |
-| TypeScript      | strict — no `any`, ever                                                      |
-| Package manager | pnpm                                                                         |
-| Icons           | `@lucide/astro` (no emojis)                                                  |
-| Consent         | vanilla-cookieconsent                                                        |
-| Analytics       | PostHog (EU instance, env-var-gated)                                         |
-| Font            | Inter Variable (self-hosted via `@fontsource-variable/inter`)                |
-| React           | Dependency present; only use when interactivity genuinely demands it         |
+| Tool            | Version / notes                                                                    |
+| --------------- | ---------------------------------------------------------------------------------- |
+| Astro           | 7, static output                                                                   |
+| Markdown        | Sätteri (Astro 7's engine); external links via a hast plugin in `astro.config.mjs` |
+| Tailwind        | v4 via `@tailwindcss/vite` (theme in `src/styles/global.css` `@theme` block)       |
+| TypeScript      | strict — no `any`, ever                                                            |
+| Package manager | pnpm                                                                               |
+| Icons           | `@lucide/astro` (no emojis)                                                        |
+| Consent         | vanilla-cookieconsent                                                              |
+| Analytics       | PostHog (EU instance, env-var-gated)                                               |
+| Font            | Inter Variable (self-hosted via `@fontsource-variable/inter`)                      |
+| React           | Dependency present; only use when interactivity genuinely demands it               |
 
 ## 5. Bilingual rule
 
@@ -178,6 +179,8 @@ Options: `--size` (1536x1024 for landscapes, 1024x1536 for portraits), `--qualit
 **Link checker** (linkinator): runs against built `dist/` output after `astro build`. Catches broken internal links — pages referenced in nav or content that don't exist. Runs in CI after build.
 
 **Alt text** enforcement: `jsx-a11y/alt-text` is set to `error` (not warn) in the a11y ESLint config. Missing alt text on images blocks the build.
+
+**Fixture-leak gate** (`scripts/check-fixtures.mjs`, runs in `prebuild`): fails the build if the upstream template's demo brand leaks into shipped code (`.astro/.ts/.js/.css`). Brand identity in code must come from the `site.name` i18n string + `Astro.site`, never string literals.
 
 ## 15. Deployment
 
