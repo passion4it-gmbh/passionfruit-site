@@ -1,22 +1,21 @@
 ---
 component: imprint
-oneLiner: Imprint (Impressum) page rendered from the pages collection
+oneLiner: Renders the bilingual imprint (Impressum) page via LegalDocument
 status: stable
-tags: [page]
+tags: [page, legal]
 ---
 
 ## Purpose
 
-Renders the bilingual imprint page. Fetches the `imprint` pages-collection entry for the current locale, renders its markdown body inside a `blog-prose` article block, and wires the hreflang alternate link. Uses the default (light) header — no dark hero.
+Renders the bilingual imprint page. Fetches the `imprint` pages-collection entry for the current locale, renders its markdown body inside `LegalDocument`, and wires the hreflang alternate link.
 
 ## When to use
 
-On any site with a German or Austrian commercial web presence — an Impressum is legally required. Invoked by the catch-all route `src/pages/[...path].astro` via the `imprint` key in `PAGES`.
+On any site — imprint is legally required in Germany and Austria for commercial web presence. Invoked by the catch-all route `src/pages/[...path].astro` via the `imprint` key in `PAGES`.
 
 ## When NOT to use
 
-- For privacy policy content, use `privacy` instead.
-- For any other legal document (AGB, terms of service), follow the same pattern but create a new page component — do not extend this one.
+For privacy policy content, use `privacy` instead. For any other legal document (terms, AGB), create a new page component following the same `LegalDocument` pattern — do not extend this component.
 
 ## Props
 
@@ -27,25 +26,21 @@ On any site with a German or Austrian commercial web presence — an Impressum i
 
 ## Example
 
-```astro
----
-import Imprint from "~/components/pages/imprint.astro";
----
+Composes:
 
-<!-- Invoked by src/pages/[...path].astro via PageContent — do not call directly -->
-<Imprint lang="de" currentSlug="impressum" />
-```
+- `<BaseLayout>` (no `headerVariant` — uses the default light header)
+- `<LegalDocument title={entry.data.title} lang={lang}>` wrapping `<Content />`
 
-Composes: `<BaseLayout>` (no `headerVariant` — default light header), a single `<section>` with `container` inner padding, and a `blog-prose` `<article>` containing an `<h1>` from `entry.data.title` followed by the rendered markdown `<Content />`.
+Title and description are read from `entry.data`, not from i18n keys. `LegalDocument` renders the `<h1>`, optional last-updated timestamp, and the `blog-prose` markdown body.
 
 ## i18n keys
 
-None. This component makes no `t()` calls. Title and description come from `entry.data`. Content lives in `src/content/pages/{de,en}/imprint.md`.
+None. This page template itself makes no `t()` calls. The `legal.lastUpdated` key is consumed by `LegalDocument.astro` when `lastUpdated` is passed — see the `LegalDocument` docs in `src/components/CLAUDE.md`. Ensure both `de.json` and `en.json` carry that key.
 
 ## Gotchas
 
-- **Pages collection entry is required.** If no `pages` entry with `translationKey: "imprint"` exists for the locale, the component redirects to `/404`. Both DE and EN entries must be present.
-- **No dark hero.** The imprint page uses the default light header with no hero section — do not add `headerVariant="on-dark"` without also adding corresponding hero markup.
-- **Content is in the collection, not i18n.** Update imprint text in `src/content/pages/{de,en}/imprint.md`, not in `de.json` / `en.json`.
-- **Alternate slug requires both locales.** `getAlternateCollectionSlug` is called for hreflang; if the alternate-locale entry is absent, the hreflang link is silently omitted.
-- **`useTranslations` is imported but unused.** The import is present for consistency with other page composers; the compiler trims it. Do not add `t()` calls here.
+- **Page entry is required.** If no `pages` collection entry with `translationKey: "imprint"` exists for the locale, the component redirects to `/404`. Both DE and EN entries must exist.
+- **No `heroImage` rendered.** Legal pages intentionally skip the image hero — `LegalDocument` provides no slot for it.
+- **No `headerVariant="on-dark"`.** The imprint page uses the default (light) header; do not add a dark header variant without also adding hero markup to justify it.
+- **Content lives in the collection, not i18n.** Update imprint text in `src/content/pages/{de,en}/imprint.md`, not in the i18n JSON files.
+- **Alternate slug requires both locales.** `getAlternateCollectionSlug` is called for hreflang; the alternate entry must exist or the tag is silently absent.

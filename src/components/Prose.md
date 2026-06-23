@@ -11,7 +11,7 @@ Wraps a rendered Markdown body so it sits inside a comfortable reading measure (
 
 ## When to use
 
-- Any place a `<Content />` from `astro:content` is rendered — `BlogPost`, `PageContent`, the `imprint`/`privacy` page composers, the contact page sidebar.
+- Any place a `<Content />` from `astro:content` is rendered — `BlogPost`, `CareerPost`, `EventDetail`, `CaseStudyDetail`, `PageContent`, `LegalDocument`, the contact page sidebar.
 - Static long-form prose authored inline that should obey the same measure as Markdown bodies.
 - When you want the optional drop cap on long editorial reads (`BlogPost` uses `dropCap`).
 

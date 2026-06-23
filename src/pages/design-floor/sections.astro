@@ -11,9 +11,9 @@ import FAQ from "~/components/sections/FAQ.astro";
 import heroImage from "~/assets/home/hero.png";
 import blogA from "~/assets/blog/ai-websites.png";
 import blogB from "~/assets/blog/digital-transformation.png";
-import portraitA from "~/assets/team/max.png";
-import portraitB from "~/assets/team/anna.png";
-import logoConsulting from "~/assets/home/hero.png";
+import portraitA from "~/assets/case-studies/portrait-manufacturing.png";
+import portraitB from "~/assets/case-studies/portrait-shopify.png";
+import logoConsulting from "~/assets/case-studies/logo-consulting.png";
 import anna from "~/assets/team/anna.png";
 import lena from "~/assets/team/lena.png";
 import max from "~/assets/team/max.png";
@@ -127,26 +127,11 @@ const comparisonRows = [
 ];
 
 const trustLogos = [
-  {
-    src: logoConsulting,
-    alt: "Demo placeholder logo (hero image used as stand-in)",
-  },
-  {
-    src: logoConsulting,
-    alt: "Demo placeholder logo (hero image used as stand-in)",
-  },
-  {
-    src: logoConsulting,
-    alt: "Demo placeholder logo (hero image used as stand-in)",
-  },
-  {
-    src: logoConsulting,
-    alt: "Demo placeholder logo (hero image used as stand-in)",
-  },
-  {
-    src: logoConsulting,
-    alt: "Demo placeholder logo (hero image used as stand-in)",
-  },
+  { src: logoConsulting, alt: "Acme Consulting" },
+  { src: logoConsulting, alt: "Beta Partners" },
+  { src: logoConsulting, alt: "Gamma Studio" },
+  { src: logoConsulting, alt: "Delta Group" },
+  { src: logoConsulting, alt: "Epsilon Labs" },
 ];
 
 const faqItems = [
@@ -190,7 +175,7 @@ const faqItems = [
     headline="Image left, text right"
     lede="The mirrored composition. Useful when the image is portrait-oriented or carries more narrative weight than the copy."
     image={portraitA}
-    imageAlt="Team member portrait used as demo stand-in for portrait variant"
+    imageAlt="Editorial portrait, manufacturing client"
     imagePosition="left"
     tone="elevated"
   />
@@ -280,7 +265,7 @@ const faqItems = [
     headline="Accent-wash tone for breaks in rhythm"
     lede="A subtle tinted background that signals 'something different' without going fully dark."
     image={portraitB}
-    imageAlt="Team member portrait used as demo stand-in for accent-wash variant"
+    imageAlt="Editorial portrait, Shopify client"
     imagePosition="right"
     tone="accent-wash"
   />

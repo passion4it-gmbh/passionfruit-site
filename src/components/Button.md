@@ -25,13 +25,21 @@ Single CTA primitive covering three visual variants (`primary`, `secondary`, `gh
 
 | Prop      | Type                                  | Required | Default      | Notes                                                                           |
 | --------- | ------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------- |
-| `variant` | `"primary" \| "secondary" \| "ghost"` | no       | `"primary"`  | Visual style.                                                                   |
+| `variant` | `"primary" \| "secondary" \| "ghost"` | no       | `"primary"`  | Visual style. See matrix below.                                                 |
 | `tone`    | `"on-light" \| "on-dark"`             | no       | `"on-light"` | Surface context. Affects secondary and ghost colors; primary is accent on both. |
 | `href`    | `string`                              | no       | —            | When present, renders an `<a>`; absent → `<button>`.                            |
 | `type`    | `"button" \| "submit"`                | no       | `"button"`   | Only applied when rendering as `<button>`.                                      |
 | `class`   | `string`                              | no       | `""`         | Extra classes merged onto the root element.                                     |
 
 Additional HTML attributes (e.g., `aria-label`, `data-*`, `disabled`) are spread through `...rest`.
+
+### Variant × tone matrix
+
+| Variant     | on-light                                          | on-dark                                       |
+| ----------- | ------------------------------------------------- | --------------------------------------------- |
+| `primary`   | accent fill, white text, hover accent-hover       | accent fill, white text, hover accent-hover   |
+| `secondary` | border-border, heading text, hover surface-dark/5 | border-white/20, on-dark text, hover white/10 |
+| `ghost`     | accent text, hover underline                      | on-dark text, hover underline                 |
 
 ## Example
 
@@ -47,7 +55,7 @@ import Button from "~/components/Button.astro";
 <Button type="submit" variant="secondary">Abschicken</Button>
 
 <!-- Ghost button on dark surface -->
-<Button variant="ghost" tone="on-dark" href="/en/features">Learn more</Button>
+<Button variant="ghost" tone="on-dark" href="/en/about">Learn more</Button>
 ```
 
 ## i18n keys
@@ -57,6 +65,6 @@ None
 ## Gotchas
 
 - When `href` is set, `type` is ignored — the element is an `<a>`, not a `<button>`.
-- The `disabled:` Tailwind modifier fires on `<button>` but never on `<a>` — anchors have no `:disabled` pseudo-class. When rendering as a link, add `aria-disabled="true"` and prevent navigation in JS manually.
+- `baseClasses` uses Tailwind's `disabled:` modifier, which maps to the CSS `:disabled` pseudo-class. This fires correctly on `<button>` elements but never fires on `<a>` — anchors have no `:disabled` state. When rendering as a link, `pointer-events-none opacity-50` will not apply; add `aria-disabled="true"` and prevent navigation in JS manually.
 - Minimum height is 44px (`min-h-[44px]`) for touch compliance; don't override this with a tighter height utility.
 - Focus ring uses `focus-visible`, so it only appears on keyboard navigation — no visual noise for mouse users.

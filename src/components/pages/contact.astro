@@ -1,9 +1,11 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import type { Locale } from "~/i18n";
 import { useTranslations } from "~/i18n";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Button from "~/components/Button.astro";
+import Prose from "~/components/Prose.astro";
 import { getAlternateCollectionSlug, findPageByKey } from "~/lib/page-registry";
 import { Mail, Phone, MapPin, Send } from "@lucide/astro";
 
@@ -30,19 +32,20 @@ const alternateSlug = await getAlternateCollectionSlug(
   "pages",
   "contact",
 );
+const heroImage = entry.data.heroImage;
 
 const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT;
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const contactEmail = t("contact.info.email");
 
-const privacyEntry = findPageByKey("privacy");
-const privacyHref = privacyEntry
+const privacyPage = findPageByKey("privacy");
+const privacyHref = privacyPage
   ? lang === "de"
-    ? `/${privacyEntry.slug.de}`
-    : `/en/${privacyEntry.slug.en}`
+    ? "/" + privacyPage.slug.de
+    : "/en/" + privacyPage.slug.en
   : lang === "de"
     ? "/datenschutz"
     : "/en/privacy";
-const contactEmail = t("contact.info.email");
 
 const inputClasses =
   "w-full px-4 py-3 rounded-[var(--radius-md)] border border-border bg-surface-elevated text-text placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-[var(--transition-fast)]";
@@ -62,22 +65,46 @@ const inputClasses =
       class="glow-orb absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-accent/15 blur-[120px] -translate-y-1/2 translate-x-1/3"
     >
     </div>
-    <div class="container relative z-10 pt-48 pb-20 md:pt-56 md:pb-28">
-      <p class="eyebrow hero-stagger" style="--delay: 100ms">
-        {t("site.name")}
-      </p>
-      <h1
-        class="text-h1 text-text-on-dark mt-4 max-w-2xl hero-stagger"
-        style="--delay: 200ms"
+    <div class="container relative z-10 pt-40 pb-16 md:pt-48 md:pb-20">
+      <div
+        class:list={[
+          "grid items-center gap-12 lg:gap-16",
+          heroImage && "lg:grid-cols-2",
+        ]}
       >
-        {entry.data.title}
-      </h1>
-      <p
-        class="text-body-lg text-text-on-dark/60 mt-4 max-w-lg hero-stagger"
-        style="--delay: 300ms"
-      >
-        {entry.data.description}
-      </p>
+        <div>
+          <p class="eyebrow hero-stagger" style="--delay: 100ms">
+            {t("site.name")}
+          </p>
+          <h1
+            class="text-h1 text-text-on-dark mt-4 max-w-2xl hero-stagger"
+            style="--delay: 200ms"
+          >
+            {entry.data.title}
+          </h1>
+          <p
+            class="text-body-lg text-text-on-dark/60 mt-4 max-w-lg hero-stagger"
+            style="--delay: 300ms"
+          >
+            {entry.data.description}
+          </p>
+        </div>
+        {
+          heroImage && (
+            <div class="relative hero-stagger" style="--delay: 500ms">
+              <div class="absolute -inset-8 rounded-[2rem] bg-gradient-to-br from-accent/20 via-transparent to-warm/20 blur-2xl" />
+              <Image
+                src={heroImage}
+                alt=""
+                class="relative rounded-2xl shadow-2xl shadow-accent/10 ring-1 ring-white/10"
+                widths={[400, 600, 800, 1200]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                loading="eager"
+              />
+            </div>
+          )
+        }
+      </div>
     </div>
   </section>
 
@@ -87,7 +114,9 @@ const inputClasses =
         <!-- Contact info -->
         <div class="lg:col-span-2 anim-slide-up">
           <article class="blog-prose mb-8">
-            <Content />
+            <Prose>
+              <Content />
+            </Prose>
           </article>
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3 text-muted">
@@ -102,9 +131,7 @@ const inputClasses =
             <div class="flex items-center gap-3 text-muted">
               <Phone class="w-5 h-5 text-accent flex-shrink-0" />
               <a
-                href={`tel:${t("contact.info.phone")
-                  .replace(/\(0\)/g, "")
-                  .replace(/[^\d+]/g, "")}`}
+                href={`tel:${t("contact.info.phone").replace(/\s/g, "")}`}
                 class="hover:text-accent transition-colors duration-[var(--transition-fast)]"
               >
                 {t("contact.info.phone")}
@@ -183,20 +210,19 @@ const inputClasses =
             >
             </div>
 
-            <div
-              aria-hidden="true"
-              style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"
-            >
+            {/* Honeypot — hidden from real users, traps bots */}
+            <div class="sr-only" aria-hidden="true">
               <label for="company">Company</label>
               <input
                 id="company"
-                name="company"
                 type="text"
+                name="company"
                 tabindex="-1"
                 autocomplete="off"
               />
             </div>
 
+            {/* Turnstile widget — only rendered when sitekey is configured */}
             {
               turnstileSiteKey && (
                 <div
@@ -207,12 +233,13 @@ const inputClasses =
               )
             }
 
+            {/* Privacy notice */}
             <p class="text-sm text-muted">
-              {t("contact.form.privacyNoticePrefix")}<a
-                href={privacyHref}
-                class="underline hover:text-accent"
-                >{t("contact.form.privacyLinkLabel")}</a
-              >{t("contact.form.privacyNoticeSuffix")}
+              {t("contact.form.privacyNoticePrefix")}
+              <a href={privacyHref} class="underline hover:text-accent">
+                {t("contact.form.privacyLinkLabel")}
+              </a>
+              {t("contact.form.privacyNoticeSuffix")}
             </p>
 
             <Button
@@ -288,8 +315,8 @@ const inputClasses =
     ) as HTMLParagraphElement | null;
 
     const endpoint = form.dataset.endpoint ?? "";
-    const contactEmail = form.dataset.contactEmail ?? "";
     const lang = form.dataset.lang ?? "en";
+    const contactEmail = form.dataset.contactEmail ?? "";
     const msgSending = form.dataset.msgSending ?? "Sending...";
     const msgSuccess = form.dataset.msgSuccess ?? "Message sent.";
     const msgError = form.dataset.msgError ?? "Something went wrong.";
@@ -307,12 +334,6 @@ const inputClasses =
       const name = nameInput.value.trim();
       const email = emailInput.value.trim();
       const message = messageInput.value.trim();
-      const honeypot =
-        form.querySelector<HTMLInputElement>("#company")?.value ?? "";
-      const turnstileToken =
-        form.querySelector<HTMLInputElement>(
-          'input[name="cf-turnstile-response"]',
-        )?.value ?? "";
 
       if (!name || !email || !message) return;
 
@@ -323,6 +344,15 @@ const inputClasses =
         errorBox.textContent = "";
         errorBox.classList.add("hidden");
       }
+
+      const honeypotInput = form.querySelector<HTMLInputElement>(
+        'input[name="company"]',
+      );
+      const turnstileInput = form.querySelector<HTMLInputElement>(
+        'input[name="cf-turnstile-response"]',
+      );
+      const honeypot = honeypotInput?.value ?? "";
+      const turnstileToken = turnstileInput?.value ?? "";
 
       if (endpoint) {
         try {

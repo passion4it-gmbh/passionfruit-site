@@ -9,8 +9,18 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import BlogPost from "~/components/BlogPost.astro";
 import PageContent from "~/components/PageContent.astro";
+import CareerPost from "~/components/CareerPost.astro";
+import EventDetail from "~/components/EventDetail.astro";
+import CaseStudyDetail from "~/components/CaseStudyDetail.astro";
 import StructuredData from "~/components/StructuredData.astro";
-import { buildBlogPostingLd } from "~/lib/structured-data";
+import {
+  buildBlogPostingLd,
+  buildJobPostingLd,
+  buildEventLd,
+  buildReviewLd,
+  getSiteIdentity,
+} from "~/lib/structured-data";
+import { useTranslations } from "~/i18n";
 
 export async function getStaticPaths() {
   return getAllPaths();
@@ -23,11 +33,20 @@ type Props =
       lang: Locale;
       slug: string;
       collection: CollectionName;
-      entry: CollectionEntry<"blog"> | CollectionEntry<"pages">;
+      entry:
+        | CollectionEntry<"blog">
+        | CollectionEntry<"pages">
+        | CollectionEntry<"careers">
+        | CollectionEntry<"events">
+        | CollectionEntry<"caseStudies">;
     };
 
 const props = Astro.props as Props;
 const { lang, slug } = props;
+
+// Brand identity for JSON-LD — derived from config + i18n, never hardcoded.
+const { t } = useTranslations(lang);
+const siteIdentity = getSiteIdentity(Astro.site, t("site.name"));
 
 type AstroPageDefault =
   (typeof import("~/components/pages/about.astro"))["default"];
@@ -36,15 +55,31 @@ let collectionTitle = "";
 let collectionDescription = "";
 let collectionAlternateSlug: string | undefined;
 let blogPostingLd: Record<string, unknown> | undefined;
+let jobPostingLd: Record<string, unknown> | undefined;
+let eventLd: Record<string, unknown> | undefined;
+let reviewLd: Record<string, unknown> | undefined;
 let StaticComponent: AstroPageDefault | undefined;
 
 if (props.kind === "collection-detail") {
   const data = props.entry.data as Record<string, unknown>;
 
+  // title: blog/careers/events/pages — quote-based title: caseStudies
   collectionTitle =
-    typeof data["title"] === "string" ? data["title"] : props.entry.id;
+    typeof data["title"] === "string"
+      ? data["title"]
+      : typeof data["quote"] === "string"
+        ? `${data["personName"] as string} | ${data["clientName"] as string}`
+        : props.entry.id;
+
+  // description: prefer explicit description, then summary (events/careers), then quote (caseStudies)
   collectionDescription =
-    typeof data["description"] === "string" ? data["description"] : "";
+    typeof data["description"] === "string"
+      ? data["description"]
+      : typeof data["summary"] === "string"
+        ? data["summary"]
+        : typeof data["quote"] === "string"
+          ? (data["quote"] as string)
+          : "";
 
   const { translationKey } = data as { translationKey: string };
   collectionAlternateSlug = await getAlternateCollectionSlug(
@@ -62,7 +97,27 @@ if (props.kind === "collection-detail") {
       `${Astro.site?.href ?? ""}og-default-${lang}.png`,
       canonicalUrl,
       lang,
+      siteIdentity,
     );
+  }
+
+  if (props.collection === "careers") {
+    const careersEntry = props.entry as CollectionEntry<"careers">;
+    const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+    jobPostingLd = buildJobPostingLd(careersEntry, canonicalUrl, siteIdentity);
+    collectionDescription = careersEntry.data.summary;
+  }
+
+  if (props.collection === "events") {
+    const eventEntry = props.entry as CollectionEntry<"events">;
+    const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+    eventLd = buildEventLd(eventEntry, canonicalUrl, lang, siteIdentity);
+  }
+
+  if (props.collection === "caseStudies") {
+    const csEntry = props.entry as CollectionEntry<"caseStudies">;
+    const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+    reviewLd = buildReviewLd(csEntry, canonicalUrl, lang, siteIdentity);
   }
 } else {
   const pageEntry = findPageBySlug(lang, slug);
@@ -90,12 +145,43 @@ if (props.kind === "collection-detail") {
           data={blogPostingLd}
         />
       )}
+      {jobPostingLd && (
+        <StructuredData
+          slot="structured-data"
+          type="JobPosting"
+          data={jobPostingLd}
+        />
+      )}
+      {eventLd && (
+        <StructuredData slot="structured-data" type="Event" data={eventLd} />
+      )}
+      {reviewLd && (
+        <StructuredData slot="structured-data" type="Review" data={reviewLd} />
+      )}
       {props.collection === "blog" && (
         <BlogPost entry={props.entry as CollectionEntry<"blog">} lang={lang} />
       )}
       {props.collection === "pages" && (
         <PageContent
           entry={props.entry as CollectionEntry<"pages">}
+          lang={lang}
+        />
+      )}
+      {props.collection === "careers" && (
+        <CareerPost
+          entry={props.entry as CollectionEntry<"careers">}
+          lang={lang}
+        />
+      )}
+      {props.collection === "events" && (
+        <EventDetail
+          entry={props.entry as CollectionEntry<"events">}
+          lang={lang}
+        />
+      )}
+      {props.collection === "caseStudies" && (
+        <CaseStudyDetail
+          entry={props.entry as CollectionEntry<"caseStudies">}
           lang={lang}
         />
       )}

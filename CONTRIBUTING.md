@@ -4,6 +4,44 @@ Content workflows for the passionfruit template. All content is bilingual (DE + 
 
 ---
 
+## Recommended Claude Code plugins
+
+The template's `.claude/settings.json` **enables** four plugins from the default `claude-plugins-official` marketplace, but Claude Code does not auto-install them. If you see "plugin not found" warnings on first run, install them once with:
+
+```bash
+/plugin install frontend-design@claude-plugins-official
+/plugin install code-review@claude-plugins-official
+/plugin install claude-md-management@claude-plugins-official
+/plugin install playwright-skill@claude-plugins-official
+```
+
+| Plugin                 | What it gives you                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| `frontend-design`      | Production-grade frontend design system guidance (used by `/onboard` and styling work) |
+| `code-review`          | Multi-agent PR review with confidence scoring — run before squash-merging              |
+| `claude-md-management` | Audit and improve CLAUDE.md across the repo as it grows                                |
+| `playwright-skill`     | Browser automation for visual verification of UI changes                               |
+
+Process-discipline plugins like `superpowers` are deliberately not enabled at project level — they're overkill for non-technical users editing content. If you maintain the template and want them, enable them in your user-level `~/.claude/settings.json`.
+
+The project skills (`passionfruit-content`, `/onboard`, `/brand`, `/deploy`, `/new-post`, `/new-team-member`) ship in `.claude/skills/` and load automatically — no install needed.
+
+### Bootstrapping from the plugin marketplace
+
+For users who installed the passionfruit plugin without cloning the template first, `/create-passionfruit-site` does the equivalent of `pnpm create passionfruit my-site`: clones the template into a new directory, initializes git, runs `pnpm install`, and hands off to `/onboard`. This is the plugin-marketplace-first install path.
+
+### Astro Docs MCP (recommended)
+
+Add the first-party Astro Docs MCP for current Astro 7 docs without web search:
+
+```bash
+claude mcp add --transport http astro https://mcp.docs.astro.build/mcp
+```
+
+This is a project- or user-level config (your choice). It makes the difference between Claude guessing at Astro APIs and Claude reading them.
+
+---
+
 ## Blog Posts
 
 **Path:** `src/content/blog/{de,en}/<slug>.md`
@@ -65,11 +103,183 @@ heroImage: "./_images/about-hero.jpg" # Optional
 ---
 ```
 
+When `heroImage` is set, the matching static page component (`about.astro`, `services.astro`, `contact.astro`) automatically renders it as a split-layout hero — text on the left, optimized `<Image>` on the right. Drop the field to fall back to the single-column hero. `imprint.astro` and `privacy.astro` are legal pages and intentionally ignore `heroImage` — adding a glamour shot to a privacy policy is tasteless. New page components can opt in by looking up the entry: `(await getCollection('pages')).find(p => p.id.startsWith(\`${lang}/\`) && p.data.translationKey === '<key>')?.data.heroImage`.
+
 After creating a new page, also:
 
 1. Add a component in `src/components/pages/`
 2. Add an entry to the `PAGES` array in `src/lib/page-registry.ts` with `{ de, en }` slugs
 3. Add navigation items in Header and Footer if needed
+
+---
+
+## Components
+
+Every `.astro` file under `src/components/` and `src/components/pages/` must have a sibling sidecar `.md` with the same basename. The prebuild check (`scripts/check-component-docs.mjs`) exits 1 if any component is missing its sidecar — the build fails.
+
+**File layout:**
+
+```
+src/components/
+  MyWidget.astro
+  MyWidget.md          ← sidecar
+  pages/
+    about.astro
+    about.md           ← sidecar
+```
+
+**Required frontmatter:**
+
+```yaml
+---
+component: MyWidget # PascalCase; must match the .astro filename
+oneLiner: "One sentence, ≤80 chars — used in the component catalog"
+status: stable # stable | beta | deprecated
+tags: ["ui"] # free-form; page sidecars include "page"
+---
+```
+
+**Required H2 sections** (all seven must be present; write `None` if empty):
+
+1. `## Purpose` — what problem the component solves (1–3 sentences)
+2. `## When to use` — bulleted positive triggers
+3. `## When NOT to use` — bulleted anti-triggers; name the right alternative
+4. `## Props` — table with columns `Prop | Type | Required | Default | Notes`
+5. `## Example` — minimal copy-paste-ready Astro snippet with imports
+6. `## i18n keys` — table of every `t('…')` call, or `None`
+7. `## Gotchas` — bulleted constraints that bite, or `None`
+
+See `docs/superpowers/specs/2026-05-28-component-sidecar-docs-design.md` for the canonical template and full contract.
+
+**Running the check manually:**
+
+```bash
+pnpm sync:component-catalog
+```
+
+This validates all sidecars and rewrites the auto-generated catalog block in `src/components/CLAUDE.md`. Run it after adding or renaming a component, or after editing sidecar frontmatter. The catalog is regenerated deterministically — commit the result.
+
+**Fixing a stale catalog:** If the build complains about a missing sidecar, create `<Component>.md` next to `<Component>.astro` with the frontmatter and seven H2 sections above, then run `pnpm sync:component-catalog` and commit both files together.
+
+---
+
+## Careers (Job Postings)
+
+**Path:** `src/content/careers/{de,en}/<slug>.md`
+
+**Important:** The template uses a plain markdown `glob` loader — there is no Personio or other HR-platform dependency. Downstream users can add job postings directly as markdown files without any external service or API key.
+
+**Frontmatter:**
+
+```yaml
+---
+translationKey: senior-frontend-developer # Same value in both locale files
+title: "Senior Frontend Developer"
+location: "Berlin, Germany (Hybrid)"
+department: "Engineering" # Optional
+employmentType: "full-time" # full-time | part-time | contractor | internship
+seniority: "Senior" # Optional
+applyUrl: "https://your-ats.example.com/apply/job-id"
+summary: "One-paragraph summary shown on the card and at the top of the detail page."
+postedAt: 2026-05-01
+closesAt: 2026-07-31 # Optional — application deadline
+salaryMin: 75000 # Optional — Schema.org baseSalary
+salaryMax: 95000 # Optional
+salaryCurrency: "EUR" # Default EUR
+tags: ["TypeScript", "React"] # Optional, default []
+---
+```
+
+The **body** of the markdown file is the long-form job description, rendered as prose on the detail page. Use standard markdown headings and bullet lists.
+
+Always create both `de/<slug>.md` and `en/<slug>.md` with a matching `translationKey`.
+
+**Routing:**
+
+- Index: `/karriere/` (DE) and `/en/careers/` (EN)
+- Detail: `/karriere/<slug>/` (DE) and `/en/careers/<slug>/` (EN)
+
+**Structured data:** Each detail page automatically emits a Schema.org `JobPosting` JSON-LD block via `buildJobPostingLd` in `src/lib/structured-data.ts`. `employmentType` is mapped to Schema.org values (`FULL_TIME`, `PART_TIME`, `CONTRACTOR`, `INTERN`).
+
+---
+
+## Events
+
+**Path:** `src/content/events/{de,en}/<slug>.md`
+
+**Frontmatter:**
+
+```yaml
+---
+translationKey: my-event # Same value in both locale files
+title: "Event title"
+summary: "Short description shown on cards and as meta description"
+startsAt: 2026-09-10T10:00:00
+endsAt: 2026-09-10T11:30:00 # Optional
+category: "Webinar" # Open string — name your own categories
+tags: ["AI", "SME"] # Optional, open string array for filtering
+location:
+  kind: "online" # "online" | "in-person" | "hybrid"
+  venue: "Event Hall" # Optional — for in-person/hybrid
+  city: "Berlin" # Optional — for in-person/hybrid
+  url: "https://example.com" # Optional — map or stream link
+registrationUrl: "https://example.com/register/my-event" # Optional
+heroImage: "./_images/event-hero.jpg" # Optional
+speakers: # Optional — references team collection entries
+  - de/jane-doe
+---
+```
+
+Always create both `de/<slug>.md` and `en/<slug>.md` with matching `translationKey`. The bilingual check runs as `prebuild` and exits 1 if any entry is unpaired.
+
+**Routing:**
+
+- DE detail: `/veranstaltungen/<slug>/`
+- EN detail: `/en/events/<slug>/`
+- Index pages are static pages registered in `src/lib/page-registry.ts` under key `events-index`.
+
+**Adding a new event:**
+
+1. Create `src/content/events/de/<slug>.md` and `src/content/events/en/<slug>.md`
+2. Both files must share a `translationKey`
+3. Add any new i18n strings to `src/i18n/de.json` and `src/i18n/en.json`
+4. Run `pnpm build` — bilingual check, typecheck, and build must pass
+
+---
+
+## Case Studies
+
+**Paths:** `src/content/caseStudies/{de,en}/<slug>.md`
+
+**Frontmatter:**
+
+```yaml
+---
+translationKey: my-case-study # Same value in both locale files
+personName: "Maria Musterfrau"
+personRole: "Geschäftsführerin" # or "CEO" etc.
+clientName: "Muster GmbH"
+category: "Case Study" # Open string: "Testimonial", "Case Study", "Success Story"
+tags:
+  - "E-Commerce"
+  - "Conversion"
+quote: "Kurzes, prägnantes Zitat der Person über die Zusammenarbeit."
+portraitImage: "../../../assets/case-studies/portrait-musterfrau.png"
+portraitFit: "cover" # "contain" for logos, "cover" for portraits (default)
+videoId: "EXAMPLE0001" # Optional — 11-char YouTube ID
+publishedAt: "2026-01-15" # Optional
+---
+```
+
+**Image placement:** Put portrait images in `src/assets/case-studies/`. Use `.png` or `.webp`. Portraits should be square or 4:5 ratio. Logos should be square — set `portraitFit: "contain"` so they are not cropped.
+
+**translationKey rule:** Both locale files must share the same `translationKey`. The `check-bilingual.mjs` script (runs as `prebuild`) will fail if any key is missing from either locale.
+
+**optional videoId:** When set, `CaseStudyDetail` embeds a `YouTubeFacade` below the portrait layout, using `portraitImage` as the video poster. For fixture/development purposes, any valid 11-character YouTube ID works even if the video is not publicly accessible — the facade only loads the iframe on click.
+
+**Routing:** Case study detail pages are served from the catch-all `src/pages/[...path].astro`. The index page lives at `/referenzen/` (DE) and `/en/case-studies/` (EN). No additional route files are needed — `getCollectionDetailPaths()` in `page-registry.ts` handles path generation.
+
+After adding a new entry, run `pnpm build` to verify the bilingual check, types, and image resolution all pass.
 
 ---
 
@@ -96,3 +306,4 @@ Before committing:
 - [ ] New collection entries have `translationKey` in both locales
 - [ ] New i18n strings added to both `de.json` and `en.json`
 - [ ] Changes align with STYLE_GUIDE.md
+- [ ] New components have a sidecar `.md`

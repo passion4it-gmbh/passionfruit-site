@@ -1,31 +1,30 @@
 ---
 component: Header
-oneLiner: Sticky site header with locale-aware nav, variant tones, and mobile menu
+oneLiner: Sticky site header with locale-aware nav and mobile menu
 status: stable
-tags: [navigation]
+tags: [layout]
 ---
 
 ## Purpose
 
-Renders the persistent top bar of every page: the site logo (linked to the locale home), a three-item desktop nav (Features, Blog, Contact), a `LanguageSwitcher`, and a collapsible mobile hamburger menu. Handles state-aware background for the `on-dark` variant — transparent at the top of the page, filling to `bg-surface-dark/80` after 80 px of scroll or while the mobile menu is open.
+Renders the persistent top bar of every page: the site logo, a horizontal desktop nav, a `LanguageSwitcher`, and a collapsible mobile hamburger menu. Handles state-aware background for the `on-dark` variant (transparent at top, `bg-surface-dark/80` after 80 px of scroll or while the mobile menu is open).
 
 ## When to use
 
-Include once in every page layout, directly before the page `<main>`. Pass `currentSlug` and `alternateSlug` from the page's `getStaticPaths` entry so the embedded `LanguageSwitcher` can produce the correct cross-locale link.
+Include once in every page layout, directly inside the `<body>` or a root layout component before the page `<main>`. Pass `currentSlug` and `alternateSlug` from the page's `getStaticPaths` entry so the `LanguageSwitcher` can produce the correct cross-locale link.
 
 ## When NOT to use
 
 - Do not render `Header` inside individual page components — it belongs in the shared layout only.
 - Do not pass `variant="on-dark"` on light-background pages; the transparent-to-dark scroll transition looks wrong against a light surface.
-- Do not add extra nav items directly here — ship the change to the passionfruit framework first, then pull it into this site.
 
 ## Props
 
 | Prop            | Type                      | Required | Default      | Notes                                                                                  |
 | --------------- | ------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------- |
-| `lang`          | `Locale`                  | yes      | —            | Drives nav link paths and the `LanguageSwitcher`.                                      |
-| `currentSlug`   | `string`                  | no       | `undefined`  | Slug of the current page within its locale; sets the active nav state.                 |
-| `alternateSlug` | `string`                  | no       | `undefined`  | Slug of the equivalent page in the other locale; forwarded to `LanguageSwitcher`.      |
+| `lang`          | `Locale`                  | yes      | —            | Drives nav link paths and `LanguageSwitcher`.                                          |
+| `currentSlug`   | `string`                  | no       | `undefined`  | Slug of the current page within its locale; used for active state.                     |
+| `alternateSlug` | `string`                  | no       | `undefined`  | Slug of the equivalent page in the other locale.                                       |
 | `variant`       | `"on-dark" \| "on-light"` | no       | `"on-light"` | Controls logo, link, and hamburger colours. Use `on-dark` for hero-over-image layouts. |
 
 ## Example
@@ -44,18 +43,23 @@ import Header from "~/components/Header.astro";
 
 ## i18n keys
 
-- `site.name`
-- `navigation.features`
-- `navigation.blog`
-- `navigation.contact`
+| Key                      | DE                | EN                |
+| ------------------------ | ----------------- | ----------------- |
+| `site.name`              | Greenleaf Digital | Greenleaf Digital |
+| `navigation.home`        | Startseite        | Home              |
+| `navigation.about`       | Über uns          | About             |
+| `navigation.services`    | Leistungen        | Services          |
+| `navigation.blog`        | Blog              | Blog              |
+| `navigation.caseStudies` | Referenzen        | Case Studies      |
+| `navigation.team`        | Team              | Team              |
+| `navigation.contact`     | Kontakt           | Contact           |
 
-Nav link slugs are resolved inline via `lang === "de"` ternaries: `funktionen` ↔ `features`, `kontakt` ↔ `contact`. `blog` is the same in both locales. These must stay in sync with `src/lib/page-registry.ts`.
+Nav links are hardcoded as `navItems` in the component frontmatter. Localized slugs (`ueber-uns` ↔ `about`, `leistungen` ↔ `services`, etc.) are defined inline via `lang === "de"` ternaries — `page-registry.ts` is not imported; the two must be kept in sync manually.
 
 ## Gotchas
 
 - **Nav data source.** Nav items are a static array inside `Header.astro`, not derived from `page-registry.ts`. If you add or rename a page, update both `page-registry.ts` and the `navItems` array.
-- **Site nav differs from the framework template.** This site has three nav items (Features, Blog, Contact). The framework seed has additional entries (About, Services, Team, Case Studies) that are absent here.
-- **Mobile menu JS.** The mobile toggle is driven by an inline `<script>` that re-initialises on `astro:after-swap`. If a second `Header` is added to a page the script will wire up duplicate listeners.
+- **Mobile menu JS.** The mobile toggle is driven by an inline `<script>` that re-initialises on `astro:after-swap`. If you add a second `Header` to a page the script will wire up duplicate listeners.
 - **Background state.** The script toggles a `data-solid` attribute on the header (`isOpen || scrollY > 80`); the `on-dark` variant styles it via `data-solid:` Tailwind variants. The menu-open condition is load-bearing: the open mobile menu grows the sticky header beyond the hero's `-mt-16` pull-up in `BaseLayout`, so a still-transparent header would show the light page body behind the menu links. On `on-light` pages the attribute is set but unstyled — the header stays `bg-surface/80` regardless.
 - **Keyboard.** Pressing `Escape` while the mobile menu is open closes it and returns focus to the toggle button.
-- **No slots.** Header renders no `<slot />`. Extra content (e.g., announcement banners) belongs above or below the `<Header />` call in the layout.
+- **No slots.** Header renders no `<slot />`. Extra content (e.g., banners) belongs above or below the `<Header />` call in the layout.

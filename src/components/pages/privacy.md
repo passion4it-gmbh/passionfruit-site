@@ -1,22 +1,21 @@
 ---
 component: privacy
-oneLiner: Privacy policy page rendered from the pages collection
+oneLiner: Renders the bilingual privacy policy page via LegalDocument
 status: stable
-tags: [page]
+tags: [page, legal]
 ---
 
 ## Purpose
 
-Renders the bilingual privacy policy page. Fetches the `privacy` pages-collection entry for the current locale, renders its markdown body inside a `blog-prose` article block, and wires the hreflang alternate link. Structurally identical to `imprint` — only the `translationKey` lookup (`"privacy"` vs `"imprint"`) and the legal content differ.
+Renders the bilingual privacy policy page. Fetches the `privacy` pages-collection entry for the current locale, renders its markdown body inside `LegalDocument`, and wires the hreflang alternate link.
 
 ## When to use
 
-On any site that processes personal data — a privacy policy is legally required under GDPR. Invoked by the catch-all route `src/pages/[...path].astro` via the `privacy` key in `PAGES`.
+On any site that processes personal data — this page is legally required under GDPR. Invoked by the catch-all route `src/pages/[...path].astro` via the `privacy` key in `PAGES`.
 
 ## When NOT to use
 
-- For imprint (Impressum) content, use `imprint` instead.
-- For terms of service or cookie policy, follow the same pattern but create a new page component — do not extend this one.
+For imprint (Impressum) content, use `imprint` instead. For terms of service or cookie policy, create a new page component following the same `LegalDocument` pattern — do not extend this component.
 
 ## Props
 
@@ -27,26 +26,22 @@ On any site that processes personal data — a privacy policy is legally require
 
 ## Example
 
-```astro
----
-import Privacy from "~/components/pages/privacy.astro";
----
+Composes:
 
-<!-- Invoked by src/pages/[...path].astro via PageContent — do not call directly -->
-<Privacy lang="de" currentSlug="datenschutz" />
-```
+- `<BaseLayout>` (no `headerVariant` — uses the default light header)
+- `<LegalDocument title={entry.data.title} lang={lang}>` wrapping `<Content />`
 
-Composes: `<BaseLayout>` (no `headerVariant` — default light header), a single `<section>` with `container` inner padding, and a `blog-prose` `<article>` containing an `<h1>` from `entry.data.title` followed by the rendered markdown `<Content />`.
+Structurally identical to `imprint` — only the `translationKey` lookup (`"privacy"` vs `"imprint"`) and the content differ.
 
 ## i18n keys
 
-None. This component makes no `t()` calls. Title and description come from `entry.data`. Content lives in `src/content/pages/{de,en}/privacy.md`.
+None. This page template itself makes no `t()` calls. The `legal.lastUpdated` key is consumed by `LegalDocument.astro` when `lastUpdated` is passed — see the `LegalDocument` docs in `src/components/CLAUDE.md`. Ensure both `de.json` and `en.json` carry that key.
 
 ## Gotchas
 
-- **Pages collection entry is required.** If no `pages` entry with `translationKey: "privacy"` exists for the locale, the component redirects to `/404`. Both DE and EN entries must be present.
-- **No dark hero.** The privacy page uses the default light header with no hero section, consistent with `imprint`.
-- **Content is in the collection, not i18n.** Update privacy policy text in `src/content/pages/{de,en}/privacy.md`, not in `de.json` / `en.json`.
-- **GDPR compliance is the site owner's responsibility.** The template ships placeholder privacy text. Replace it with a legally reviewed policy before going live.
-- **Alternate slug requires both locales.** `getAlternateCollectionSlug` is called for hreflang; if the alternate-locale entry is absent, the hreflang link is silently omitted.
-- **The contact page links here dynamically.** `contact.astro` resolves the privacy page href via `findPageByKey("privacy")` — do not change the `translationKey` in the collection entries without updating that lookup.
+- **Page entry is required.** If no `pages` collection entry with `translationKey: "privacy"` exists for the locale, the component redirects to `/404`. Both DE and EN entries must exist.
+- **No `heroImage` rendered.** Legal pages intentionally skip the image hero.
+- **No `headerVariant="on-dark"`.** Privacy uses the default light header, consistent with `imprint`.
+- **Content lives in the collection, not i18n.** Update privacy policy text in `src/content/pages/{de,en}/privacy.md`, not in the i18n JSON files.
+- **GDPR compliance is your responsibility.** The template ships placeholder privacy text; downstream users must replace it with an actual legal review before going live.
+- **Alternate slug requires both locales.** `getAlternateCollectionSlug` is called for hreflang; the alternate entry must exist or the tag is silently absent.
