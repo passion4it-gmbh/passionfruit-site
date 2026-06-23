@@ -10,7 +10,7 @@ tags:
   - "Content"
 quote: "With Greenleaf Digital we finally have a website that truly reflects our consulting quality. New clients approach us directly because of our online presence."
 portraitImage: "../../../assets/case-studies/logo-consulting.png"
-portraitFit: "contain"
+portraitFit: "cover"
 publishedAt: "2025-11-05"
 ---
 
