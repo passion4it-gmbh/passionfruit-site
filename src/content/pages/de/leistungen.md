@@ -2,6 +2,7 @@
 translationKey: "services"
 title: "Unsere Leistungen"
 description: "Entdecken Sie unser umfassendes Angebot an digitalen Dienstleistungen."
+heroImage: "../../../assets/pages/services-hero.webp"
 ---
 
 ## Was wir für Sie tun können

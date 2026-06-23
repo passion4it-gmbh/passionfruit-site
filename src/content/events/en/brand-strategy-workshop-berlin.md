@@ -2,6 +2,7 @@
 translationKey: "brand-strategy-workshop-berlin"
 title: "Brand Strategy Workshop in Berlin"
 summary: "A full-day workshop for founders and marketing leads who want to sharpen their brand identity and develop a clear positioning — with practical tools and direct feedback."
+heroImage: "../../../assets/events/workshop.webp"
 startsAt: 2026-10-14T09:00:00
 endsAt: 2026-10-14T17:00:00
 category: "Workshop"

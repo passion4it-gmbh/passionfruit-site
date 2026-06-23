@@ -2,6 +2,7 @@
 translationKey: "about"
 title: "Über uns"
 description: "Erfahren Sie mehr über Greenleaf Digital und unsere Mission."
+heroImage: "../../../assets/pages/about-hero.webp"
 ---
 
 ## Unsere Geschichte

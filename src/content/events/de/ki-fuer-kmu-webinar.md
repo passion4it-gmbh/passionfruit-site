@@ -2,6 +2,7 @@
 translationKey: "ai-for-sme-webinar"
 title: "KI für kleine Unternehmen: Praktische Anwendungsfälle"
 summary: "In diesem kostenlosen Webinar zeigen wir Ihnen, wie kleine und mittlere Unternehmen KI-Tools gewinnbringend einsetzen können — ohne großes Budget und ohne technisches Vorwissen."
+heroImage: "../../../assets/events/webinar.webp"
 startsAt: 2026-09-10T10:00:00
 endsAt: 2026-09-10T11:30:00
 category: "Webinar"

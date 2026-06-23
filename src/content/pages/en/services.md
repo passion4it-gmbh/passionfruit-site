@@ -2,6 +2,7 @@
 translationKey: "services"
 title: "Our Services"
 description: "Discover our comprehensive range of digital services."
+heroImage: "../../../assets/pages/services-hero.webp"
 ---
 
 ## What We Can Do for You

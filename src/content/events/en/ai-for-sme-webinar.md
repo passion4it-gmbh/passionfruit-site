@@ -2,6 +2,7 @@
 translationKey: "ai-for-sme-webinar"
 title: "AI for Small Business: Practical Use Cases"
 summary: "In this free webinar we show you how small and medium-sized businesses can put AI tools to profitable use — no big budget, no technical background required."
+heroImage: "../../../assets/events/webinar.webp"
 startsAt: 2026-09-10T10:00:00
 endsAt: 2026-09-10T11:30:00
 category: "Webinar"

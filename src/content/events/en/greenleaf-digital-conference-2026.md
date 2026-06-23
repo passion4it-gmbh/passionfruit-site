@@ -2,6 +2,7 @@
 translationKey: "greenleaf-digital-conference-2026"
 title: "Greenleaf Digital Conference 2026"
 summary: "Our annual conference on digital transformation, AI and modern web design — this year for the first time as a hybrid format with an in-person programme in Hamburg and a live stream for everyone joining from home."
+heroImage: "../../../assets/events/conference.webp"
 startsAt: 2026-11-19T09:00:00
 endsAt: 2026-11-20T18:00:00
 category: "Conference"
