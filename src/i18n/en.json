@@ -6,11 +6,7 @@
   },
   "navigation": {
     "home": "Home",
-    "about": "About",
-    "services": "Services",
     "blog": "Blog",
-    "caseStudies": "Case Studies",
-    "team": "Team",
     "contact": "Contact",
     "features": "Features"
   },
@@ -33,10 +29,6 @@
     "author": "By {name}",
     "readMore": "Read more",
     "noPosts": "No posts yet."
-  },
-  "team": {
-    "title": "Our Team",
-    "description": "Meet our team."
   },
   "contact": {
     "title": "Contact",
@@ -155,64 +147,8 @@
       }
     }
   },
-  "services": {
-    "title": "Our Services",
-    "description": "Discover our range of services.",
-    "webDesign": {
-      "title": "Web Design",
-      "description": "Modern, responsive websites that delight."
-    },
-    "development": {
-      "title": "Web Development",
-      "description": "Technically excellent solutions with cutting-edge technologies."
-    },
-    "consulting": {
-      "title": "Consulting",
-      "description": "Strategic consulting for your digital transformation."
-    }
-  },
-  "about": {
-    "title": "About Us",
-    "description": "Learn more about Greenleaf Digital.",
-    "story": {
-      "eyebrow": "Our Story",
-      "title": "We believe everyone deserves a great website",
-      "text": "Greenleaf Digital was founded on a simple idea: professional web development should be accessible to everyone. We believe modern technologies and AI-powered workflows are changing the way websites are built — and that this change should benefit everyone."
-    },
-    "values": {
-      "eyebrow": "Our Values",
-      "title": "What drives us",
-      "quality": {
-        "title": "Quality over quantity",
-        "description": "Every project deserves the highest care. We don't do mass production — we deliver tailored solutions."
-      },
-      "transparency": {
-        "title": "Transparency",
-        "description": "Open communication at every project step. No hidden costs, no surprises."
-      },
-      "innovation": {
-        "title": "Innovation",
-        "description": "We use the latest technologies — not for trend's sake, but because they deliver better results."
-      },
-      "accessibility": {
-        "title": "Accessibility",
-        "description": "Our websites are usable for everyone. Accessibility isn't a feature — it's the standard."
-      }
-    },
-    "stats": {
-      "projects": "Projects",
-      "satisfaction": "Client satisfaction",
-      "technologies": "Technologies",
-      "languages": "Languages"
-    }
-  },
   "legal": {
     "lastUpdated": "Last updated:"
-  },
-  "filter": {
-    "reset": "Reset filters",
-    "allLabel": "All",
-    "ariaLabel": "Filter content"
   },
   "podcast": {
     "play": "Play {title} on Spotify"
@@ -224,64 +160,6 @@
     "feature": "Feature",
     "yes": "Yes",
     "no": "No"
-  },
-  "careers": {
-    "title": "Careers",
-    "description": "Join our team. Open positions at Greenleaf Digital.",
-    "apply": "Apply now",
-    "openPosition": "Open position",
-    "postedOn": "Posted on",
-    "closesOn": "Closes on",
-    "noOpenings": "No open positions currently",
-    "backToCareers": "Back to Careers",
-    "opensInNewTab": "Opens in a new tab",
-    "employmentType": {
-      "full-time": "Full-time",
-      "part-time": "Part-time",
-      "contractor": "Contractor",
-      "internship": "Internship"
-    }
-  },
-  "events": {
-    "title": "Events",
-    "description": "Webinars, workshops and conferences by Greenleaf Digital.",
-    "noResults": "No events found.",
-    "register": "Register now",
-    "details": "View details",
-    "backToEvents": "Back to events",
-    "dateTime": "Date & Time",
-    "speakers": "Speakers",
-    "openMap": "View on map",
-    "location": {
-      "online": "Online",
-      "inPerson": "In person",
-      "hybrid": "Hybrid (in person + online)",
-      "atVenue": "Venue"
-    },
-    "filter": {
-      "category": "Category",
-      "tag": "Topic"
-    }
-  },
-  "caseStudies": {
-    "title": "Case Studies",
-    "description": "See how our clients benefit from working with Greenleaf Digital.",
-    "noResults": "No case studies found.",
-    "readMore": "Read more",
-    "watchInterview": "Watch interview",
-    "videoAvailable": "Video available",
-    "tagsLabel": "Topics",
-    "filterCategory": "Category",
-    "filterTag": "Topic",
-    "backToCaseStudies": "Back to case studies",
-    "siblingNav": "More case studies",
-    "previousReference": "Previous",
-    "nextReference": "Next",
-    "srName": "Name",
-    "srRole": "Role",
-    "srCompany": "Company",
-    "quoteOpen": "“",
-    "quoteClose": "”"
   },
   "features": {
     "title": "Features",

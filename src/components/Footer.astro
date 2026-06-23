@@ -13,17 +13,11 @@ const currentYear = String(new Date().getFullYear());
 type NavLink = { href: string; label: string };
 
 const navLinks: NavLink[] = [
-  { href: getLocalizedPath("", lang), label: t("navigation.home") },
   {
-    href: getLocalizedPath(lang === "de" ? "ueber-uns" : "about", lang),
-    label: t("navigation.about"),
-  },
-  {
-    href: getLocalizedPath(lang === "de" ? "leistungen" : "services", lang),
-    label: t("navigation.services"),
+    href: getLocalizedPath(lang === "de" ? "funktionen" : "features", lang),
+    label: t("navigation.features"),
   },
   { href: getLocalizedPath("blog", lang), label: t("navigation.blog") },
-  { href: getLocalizedPath("team", lang), label: t("navigation.team") },
   {
     href: getLocalizedPath(lang === "de" ? "kontakt" : "contact", lang),
     label: t("navigation.contact"),
@@ -67,7 +61,7 @@ const legalLinks: NavLink[] = [
         <p
           class="text-sm font-semibold text-text-on-dark/50 uppercase tracking-wider mb-4"
         >
-          {t("navigation.home")}
+          {t("site.name")}
         </p>
         <ul class="space-y-2">
           {

@@ -8,7 +8,7 @@ This is the public marketing site for the **passionfruit** website template — 
 - **Primary CTA:** `pnpm create passionfruit my-site`.
 - **Languages:** German at root, English at `/en/` (bilingual is the framework's USP — we eat the dog food).
 - **Hosting:** Cloudflare Pages at `passionfruit.passion4it.de`.
-- **Pages:** Home, Features (`/funktionen/`, `/en/features/`), Blog, Contact, Imprint, Privacy — **plus the template's demo sections we dogfood:** About (`/ueber-uns/`), Services (`/leistungen/`), Team (`/team/`), Events (`/veranstaltungen/`), Case-Studies (`/referenzen/`), Careers (`/karriere/`). The demo sections ship with placeholder ("Greenleaf Digital") fixture content under `src/content/` — they exist to show what the template offers out of the box; replace or prune them via `/onboard` or by editing the fixtures.
+- **Pages:** Home, Features (`/funktionen/`, `/en/features/`), Blog, Contact, Imprint, Privacy. No About, no Team — the agency portfolio at passion4it.de fills that slot.
 - **Hard rule:** if you ever feel the urge to add a custom component, **ship it upstream to the passionfruit framework first**, then pull it in here. Customizing this site directly defeats the dogfood signal.
 
 ## 2. Self-improvement rule
@@ -61,12 +61,6 @@ See CONTRIBUTING.md for full details. Summary:
 
 **Page:** `src/content/pages/{de,en}/<slug>.md` — needs translationKey, title, description. Also update `src/lib/page-registry.ts`.
 
-**Event:** `src/content/events/{de,en}/<slug>.md` — needs translationKey, title, summary, startsAt, category, location (`{kind, venue?, city?, url?}`). Routed `/veranstaltungen/<slug>/` ↔ `/en/events/<slug>/`.
-
-**Job posting:** `src/content/careers/{de,en}/<slug>.md` — needs translationKey, title, location, employmentType, applyUrl, summary, postedAt. Routed `/karriere/<slug>/` ↔ `/en/careers/<slug>/`.
-
-**Case study:** `src/content/caseStudies/{de,en}/<slug>.md` — needs translationKey, personName, personRole, clientName, category, quote, portraitImage. Routed `/referenzen/<slug>/` ↔ `/en/case-studies/<slug>/`.
-
 **Translations:** Always update both `src/i18n/de.json` and `src/i18n/en.json` in lockstep. Nested key structure, accessed via `t('section.key')`.
 
 ## 7. Component conventions
@@ -82,9 +76,7 @@ See CONTRIBUTING.md for full details. Summary:
 - **Section archetypes** (`src/components/sections/`): `AsymmetricHero`, `MagazineGrid`, `StickyStory`, `EditorialQuote`, `SplitFeature`, `Trust`, `Comparison`, `FAQ`. Pick the right archetype before reaching for a custom layout.
 - **State surfaces** (`src/components/state/`): `<Skeleton variant="...">` for loading states, `<EmptyState>` (CTA required — no dead-end empties), `<ErrorState tone="warning|error|info">`. Don't roll custom gray boxes or ad-hoc error text.
 - **Sidecar docs:** every `*.astro` in `src/components/` has a sibling `*.md` sidecar (purpose, props, slots, owned i18n keys, gotchas) plus a generated index in `src/components/CLAUDE.md`. Props describe the local component, never upstream. Update the sidecar in the same commit as the component — a build-time check (`scripts/check-component-docs.mjs`, run in `prebuild`) fails on missing/malformed sidecars; `pnpm sync:component-catalog` regenerates the catalog. See `src/components/CLAUDE.md` for the schema.
-- **Collection components:** `CollectionFilter` (generic facet filter) and the per-collection cards/details — `EventCard`/`EventDetail`/`EventsFilter`, `CaseStudyCard`/`CaseStudyDetail`/`CaseStudiesFilter`, `CareerCard`/`CareerPost`, `TeamCard`. Reuse these for collection UI; don't hand-roll.
-- **Privacy-friendly embeds:** `<YouTubeFacade>` / `<SpotifyFacade>` (click-to-load facades, CSP-scoped) and `<GTMAnalytics>` for Google Tag Manager. `<LegalDocument>` wraps imprint/privacy long-form pages.
-- The `passionfruit-design`, `passionfruit-a11y`, `passionfruit-perf`, and `passionfruit-content` skills auto-load on design, accessibility, performance, and content work respectively — read them for the full decision-shortcut cheat sheets. Skills live at `.claude/skills/<name>/SKILL.md`.
+- The `passionfruit-design`, `passionfruit-a11y`, and `passionfruit-perf` skills auto-load on design, accessibility, and performance work respectively — read them for the full decision-shortcut cheat sheets.
 
 ## 8. Styling
 
@@ -126,8 +118,8 @@ The contact form (`src/components/pages/contact.astro`) submits a JSON body `{na
 ## 11. Routing
 
 - URL scheme: **apex-locale** — DE at root (`/`), EN under `/en/`.
-- Localized slugs (DE ↔ EN): `/funktionen`↔`/en/features`, `/ueber-uns`↔`/en/about`, `/leistungen`↔`/en/services`, `/veranstaltungen`↔`/en/events`, `/referenzen`↔`/en/case-studies`, `/karriere`↔`/en/careers`, `/team`↔`/en/team`, `/kontakt`↔`/en/contact`, `/impressum`↔`/en/imprint`, `/datenschutz`↔`/en/privacy`.
-- Single source of truth: `src/lib/page-registry.ts` — `PAGES` array maps `PageKey` to `{ de, en }` slug pairs; collection detail routes (blog, events, careers, caseStudies) are generated from `getCollectionDetailPaths()`.
+- Localized slugs: `/leistungen` (DE) ↔ `/en/services` (EN).
+- Single source of truth: `src/lib/page-registry.ts` — `PAGES` array maps `PageKey` to `{ de, en }` slug pairs.
 - Catch-all route: `src/pages/[...path].astro`.
 - Home pages: `src/pages/index.astro` (DE), `src/pages/en/index.astro` (EN).
 
@@ -188,7 +180,7 @@ Options: `--size` (1536x1024 for landscapes, 1024x1536 for portraits), `--qualit
 
 **Alt text** enforcement: `jsx-a11y/alt-text` is set to `error` (not warn) in the a11y ESLint config. Missing alt text on images blocks the build.
 
-**Fixture-leak gate** (`scripts/check-fixtures.mjs`, runs in `prebuild`): the template's demo brand ("Greenleaf Digital") may live only in replaceable fixtures (`src/content`, `src/i18n`, `src/data`, `src/pages/design-floor`). It must never be hardcoded into shipped code (`.astro/.ts/.js/.css` under layouts/components/lib/pages) — brand identity in code comes from the `site.name` i18n string + `Astro.site`. The check fails the build on a leak.
+**Fixture-leak gate** (`scripts/check-fixtures.mjs`, runs in `prebuild`): fails the build if the upstream template's demo brand leaks into shipped code (`.astro/.ts/.js/.css`). Brand identity in code must come from the `site.name` i18n string + `Astro.site`, never string literals.
 
 ## 15. Deployment
 

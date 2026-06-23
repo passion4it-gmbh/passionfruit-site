@@ -5,24 +5,12 @@ export type { Locale };
 
 export type PageKey =
   | "features"
-  | "about"
-  | "services"
   | "blog-index"
-  | "case-studies-index"
-  | "team"
-  | "events-index"
   | "contact"
   | "privacy"
-  | "imprint"
-  | "careers-index";
+  | "imprint";
 
-export type CollectionName =
-  | "blog"
-  | "team"
-  | "pages"
-  | "careers"
-  | "events"
-  | "caseStudies";
+export type CollectionName = "blog" | "pages";
 
 export interface PageEntry {
   key: PageKey;
@@ -40,12 +28,7 @@ export type StaticPageMatch = { kind: "static-page"; entry: PageEntry };
 export type CollectionDetailMatch = {
   kind: "collection-detail";
   collection: CollectionName;
-  entry:
-    | CollectionEntry<"blog">
-    | CollectionEntry<"pages">
-    | CollectionEntry<"careers">
-    | CollectionEntry<"events">
-    | CollectionEntry<"caseStudies">;
+  entry: CollectionEntry<"blog"> | CollectionEntry<"pages">;
 };
 
 export type RouteMatch = StaticPageMatch | CollectionDetailMatch;
@@ -61,34 +44,9 @@ export const PAGES = [
     component: () => import("~/components/pages/features.astro"),
   },
   {
-    key: "about" as const,
-    slug: { de: "ueber-uns", en: "about" },
-    component: () => import("~/components/pages/about.astro"),
-  },
-  {
-    key: "services" as const,
-    slug: { de: "leistungen", en: "services" },
-    component: () => import("~/components/pages/services.astro"),
-  },
-  {
     key: "blog-index" as const,
     slug: { de: "blog", en: "blog" },
     component: () => import("~/components/pages/blog-index.astro"),
-  },
-  {
-    key: "events-index" as const,
-    slug: { de: "veranstaltungen", en: "events" },
-    component: () => import("~/components/pages/events-index.astro"),
-  },
-  {
-    key: "case-studies-index" as const,
-    slug: { de: "referenzen", en: "case-studies" },
-    component: () => import("~/components/pages/case-studies-index.astro"),
-  },
-  {
-    key: "team" as const,
-    slug: { de: "team", en: "team" },
-    component: () => import("~/components/pages/team.astro"),
   },
   {
     key: "contact" as const,
@@ -105,11 +63,6 @@ export const PAGES = [
     slug: { de: "impressum", en: "imprint" },
     component: () => import("~/components/pages/imprint.astro"),
   },
-  {
-    key: "careers-index" as const,
-    slug: { de: "karriere", en: "careers" },
-    component: () => import("~/components/pages/careers-index.astro"),
-  },
 ] satisfies PageEntry[];
 
 // ---------------------------------------------------------------------------
@@ -118,11 +71,7 @@ export const PAGES = [
 
 const COLLECTION_REGISTRY_KEY: Record<CollectionName, PageKey> = {
   blog: "blog-index",
-  team: "team",
-  pages: "about", // pages collection detail routes nest under about
-  careers: "careers-index",
-  events: "events-index",
-  caseStudies: "case-studies-index",
+  pages: "features",
 };
 
 // ---------------------------------------------------------------------------
@@ -144,12 +93,7 @@ export function findPageBySlug(
 // Collection detail paths
 // ---------------------------------------------------------------------------
 
-type AnyCollectionEntry =
-  | CollectionEntry<"blog">
-  | CollectionEntry<"pages">
-  | CollectionEntry<"careers">
-  | CollectionEntry<"events">
-  | CollectionEntry<"caseStudies">;
+type AnyCollectionEntry = CollectionEntry<"blog"> | CollectionEntry<"pages">;
 
 type CollectionDetailPath = {
   params: { path: string };
@@ -171,7 +115,7 @@ function toPathParam(lang: Locale, slug: string): string {
 function pushDetailPaths(
   paths: CollectionDetailPath[],
   collectionName: CollectionName,
-  entries: AnyCollectionEntry[],
+  entries: (CollectionEntry<"blog"> | CollectionEntry<"pages">)[],
   locales: Locale[],
 ): void {
   const registryKey = COLLECTION_REGISTRY_KEY[collectionName];
@@ -209,19 +153,9 @@ export async function getCollectionDetailPaths(): Promise<
   const locales: Locale[] = ["de", "en"];
   const paths: CollectionDetailPath[] = [];
 
-  // Team has no detail pages — shown on team index only.
   // Pages collection is consumed by static page components, not routed independently.
   const blog = await getCollection("blog");
   pushDetailPaths(paths, "blog", blog, locales);
-
-  const careers = await getCollection("careers");
-  pushDetailPaths(paths, "careers", careers, locales);
-
-  const eventsEntries = await getCollection("events");
-  pushDetailPaths(paths, "events", eventsEntries, locales);
-
-  const caseStudies = await getCollection("caseStudies");
-  pushDetailPaths(paths, "caseStudies", caseStudies, locales);
 
   return paths;
 }
@@ -274,12 +208,11 @@ export async function getAlternateCollectionSlug(
   translationKey: string,
 ): Promise<string | undefined> {
   const otherLang: Locale = currentLang === "de" ? "en" : "de";
-  // getCollection is overloaded per collection name; cast through unknown to
-  // extract the subset we actually use (id + data.translationKey).
-  const rawEntries = (await getCollection(
-    collectionName as Parameters<typeof getCollection>[0],
-  )) as unknown as { id: string; data: { translationKey: string } }[];
-  const entries = rawEntries;
+  const rawEntries = await getCollection(collectionName);
+  const entries = rawEntries as {
+    id: string;
+    data: { translationKey: string };
+  }[];
   const paired = entries.find((e) => {
     return (
       e.data.translationKey === translationKey &&

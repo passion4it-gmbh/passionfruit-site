@@ -53,21 +53,11 @@ function collectStaticBlocks(site: URL): string[] {
   return blocks;
 }
 
-type AnyEntry =
-  | CollectionEntry<"blog">
-  | CollectionEntry<"team">
-  | CollectionEntry<"pages">
-  | CollectionEntry<"careers">
-  | CollectionEntry<"events">
-  | CollectionEntry<"caseStudies">;
+type AnyEntry = CollectionEntry<"blog"> | CollectionEntry<"pages">;
 
 const COLLECTION_REGISTRY_KEY: Record<CollectionName, PageKey> = {
   blog: "blog-index",
-  team: "team",
-  pages: "about",
-  careers: "careers-index",
-  events: "events-index",
-  caseStudies: "case-studies-index",
+  pages: "features",
 };
 
 function collectCollectionBlocks(
@@ -133,25 +123,13 @@ function collectCollectionBlocks(
 }
 
 export const GET: APIRoute = async ({ site }) => {
-  // `site` is set in astro.config.mjs; this fallback only guards local/test
-  // runs without it. Mirrors the config default rather than any brand domain.
-  const siteUrl = site ?? new URL("https://example.com");
+  const siteUrl = site ?? new URL("https://passionfruit.passion4it.de");
 
-  const [blog, team, careers, events, caseStudies] = await Promise.all([
-    getCollection("blog"),
-    getCollection("team"),
-    getCollection("careers"),
-    getCollection("events"),
-    getCollection("caseStudies"),
-  ]);
+  const blog = await getCollection("blog");
 
   const urlBlocks: string[] = [
     ...collectStaticBlocks(siteUrl),
     ...collectCollectionBlocks(siteUrl, "blog", blog),
-    ...collectCollectionBlocks(siteUrl, "team", team),
-    ...collectCollectionBlocks(siteUrl, "careers", careers),
-    ...collectCollectionBlocks(siteUrl, "events", events),
-    ...collectCollectionBlocks(siteUrl, "caseStudies", caseStudies),
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

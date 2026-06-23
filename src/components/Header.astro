@@ -18,18 +18,11 @@ const homeHref = getLocalizedPath("", lang);
 type NavItem = { labelKey: string; slug: string };
 
 const navItems: NavItem[] = [
-  { labelKey: "navigation.home", slug: "" },
-  { labelKey: "navigation.about", slug: lang === "de" ? "ueber-uns" : "about" },
   {
-    labelKey: "navigation.services",
-    slug: lang === "de" ? "leistungen" : "services",
+    labelKey: "navigation.features",
+    slug: lang === "de" ? "funktionen" : "features",
   },
   { labelKey: "navigation.blog", slug: "blog" },
-  {
-    labelKey: "navigation.caseStudies",
-    slug: lang === "de" ? "referenzen" : "case-studies",
-  },
-  { labelKey: "navigation.team", slug: "team" },
   {
     labelKey: "navigation.contact",
     slug: lang === "de" ? "kontakt" : "contact",
@@ -63,7 +56,7 @@ const hamburgerColor = isOnDark ? "text-text-on-dark" : "text-text-heading";
 
 <header
   id="site-header"
-  class={`pf-vt-header sticky top-0 z-50 ${headerBg} backdrop-blur-xl backdrop-saturate-150 border-b ${headerBorder}`}
+  class={`sticky top-0 z-50 ${headerBg} backdrop-blur-xl backdrop-saturate-150 border-b ${headerBorder}`}
 >
   <div class="container">
     <div class="flex items-center justify-between h-16">
