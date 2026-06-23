@@ -25,7 +25,7 @@ This isn't a marketing line. The site you're reading — `passionfruit.passion4i
 
 passionfruit comes with everything a modern site needs and nothing you don't:
 
-- **Astro 6, TypeScript strict, Tailwind v4** — fast builds, zero JavaScript by default, clean code
+- **Astro 7, TypeScript strict, Tailwind v4** — fast builds, zero JavaScript by default, clean code
 - **German + English as the baseline** — not a "Pro feature", but the architecture of the page registry and content collections
 - **GDPR-compliant** — cookie consent built in, analytics on EU servers, no data leaks via Google Fonts
 - **WCAG AA** — focus rings, alt-text required, 44 px touch targets, `prefers-reduced-motion` respected

@@ -25,7 +25,7 @@ Das ist kein Marketing-Spruch. Diese Website hier — `passionfruit.passion4it.d
 
 passionfruit kommt mit allem, was man heute von einer modernen Website erwartet, und nichts, was man nicht braucht:
 
-- **Astro 6, TypeScript strict, Tailwind v4** — schnelle Builds, null JavaScript per Default, sauberer Code
+- **Astro 7, TypeScript strict, Tailwind v4** — schnelle Builds, null JavaScript per Default, sauberer Code
 - **DE + EN als Grundannahme** — kein „Pro-Feature", sondern die Architektur des Page-Registry und der Content-Collections
 - **DSGVO-konform** — Cookie-Consent eingebaut, Analytics auf EU-Servern, kein Daten-Leak via Google Fonts
 - **WCAG AA** — Fokus-Ringe, alt-Text-Pflicht, 44 px Touch-Targets, `prefers-reduced-motion` respektiert
