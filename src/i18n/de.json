@@ -5,9 +5,14 @@
     "description": "passionfruit — die zweisprachige Website-Vorlage für Claude Code. Repo erstellen, /onboard tippen, fertig."
   },
   "navigation": {
-    "features": "Funktionen",
+    "home": "Startseite",
+    "about": "Über uns",
+    "services": "Leistungen",
     "blog": "Blog",
-    "contact": "Kontakt"
+    "caseStudies": "Referenzen",
+    "team": "Team",
+    "contact": "Kontakt",
+    "features": "Funktionen"
   },
   "footer": {
     "copyright": "© {year} PASSION4IT GmbH. Alle Rechte vorbehalten.",
@@ -18,7 +23,8 @@
   "cta": {
     "contact": "Kontakt aufnehmen",
     "readMore": "Weiterlesen",
-    "backToBlog": "Zurück zum Blog"
+    "backToBlog": "Zurück zum Blog",
+    "backToTeam": "Zurück zum Team"
   },
   "blog": {
     "title": "Blog",
@@ -27,6 +33,10 @@
     "author": "Von {name}",
     "readMore": "Weiterlesen",
     "noPosts": "Noch keine Beiträge."
+  },
+  "team": {
+    "title": "Unser Team",
+    "description": "Lernen Sie unser Team kennen."
   },
   "contact": {
     "title": "Kontakt",
@@ -54,6 +64,38 @@
     "notFoundDescription": "Die gesuchte Seite existiert leider nicht.",
     "backHome": "Zurück zur Startseite"
   },
+  "state": {
+    "404": {
+      "title": "Diese Seite gibt es nicht (mehr)",
+      "body": "Vielleicht ist sie umgezogen, vielleicht hat sie nie existiert. Zurück auf bekanntem Terrain:",
+      "cta": "Zur Startseite"
+    },
+    "500": {
+      "title": "Etwas ist schiefgelaufen — auf unserer Seite",
+      "body": "Wir wissen davon und arbeiten daran. Bitte versuchen Sie es in einem Moment erneut, oder kehren Sie zur Startseite zurück.",
+      "cta": "Zur Startseite"
+    },
+    "empty": {
+      "posts": {
+        "headline": "Noch keine Beiträge",
+        "body": "Hier entsteht in Kürze etwas. Bis dahin lohnt sich ein Blick auf unsere Leistungen.",
+        "cta": "Zu den Leistungen"
+      },
+      "filters": {
+        "headline": "Keine Treffer für diese Auswahl",
+        "body": "Mit den aktuellen Filtern finden wir nichts. Setzen Sie sie zurück und stöbern Sie weiter.",
+        "cta": "Filter zurücksetzen"
+      }
+    },
+    "error": {
+      "generic": {
+        "headline": "Da ist etwas schiefgelaufen",
+        "body": "Wir konnten Ihre Anfrage gerade nicht verarbeiten. Bitte versuchen Sie es erneut."
+      },
+      "retry": "Erneut versuchen"
+    },
+    "loading": "Wird geladen"
+  },
   "cookie": {
     "title": "Diese Website verwendet Cookies",
     "description": "Wir verwenden Cookies, um dein Erlebnis zu verbessern und den Website-Traffic zu analysieren.",
@@ -72,6 +114,29 @@
       "cta": "Loslegen",
       "ctaSecondary": "Funktionen ansehen"
     },
+    "features": {
+      "title": "Was wir bieten",
+      "subtitle": "Maßgeschneiderte digitale Lösungen für Ihr Unternehmen."
+    },
+    "testimonials": {
+      "title": "Was unsere Kunden sagen"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen"
+    },
+    "ctaSection": {
+      "title": "Bereit für deine eigene Website?",
+      "subtitle": "Ein Befehl, ein paar Antworten, fertig. Kostenloses Hosting, kostenlose Vorlage, MIT-Lizenz.",
+      "cta": "Kontakt aufnehmen",
+      "command": "pnpm create passionfruit my-site",
+      "commandLabel": "Befehl kopieren",
+      "commandCopied": "Kopiert",
+      "altLabel": "Schon dabei mit Claude Code?",
+      "commandClaudePrereq": "/plugin marketplace add passion4it-gmbh/passionfruit",
+      "commandClaude": "/create-passionfruit-site",
+      "github": "Auf GitHub ansehen",
+      "releases": "Releases beobachten"
+    },
     "howItWorks": {
       "eyebrow": "So funktioniert's",
       "title": "Drei Schritte zu deiner Website",
@@ -88,47 +153,138 @@
         "title": "Live gehen mit /deploy",
         "description": "Claude richtet Cloudflare Pages ein, verknüpft die Domain, schaltet Vorschau-Deployments für PRs ein. Jeder Push auf main veröffentlicht."
       }
-    },
-    "faq": {
-      "title": "Häufig gestellte Fragen"
-    },
-    "ctaSection": {
-      "title": "Bereit für deine eigene Website?",
-      "subtitle": "Ein Befehl, ein paar Antworten, fertig. Kostenloses Hosting, kostenlose Vorlage, MIT-Lizenz.",
-      "command": "pnpm create passionfruit my-site",
-      "commandLabel": "Befehl kopieren",
-      "commandCopied": "Kopiert",
-      "altLabel": "Schon dabei mit Claude Code?",
-      "commandClaudePrereq": "/plugin marketplace add passion4it-gmbh/passionfruit",
-      "commandClaude": "/create-passionfruit-site",
-      "github": "Auf GitHub ansehen",
-      "releases": "Releases beobachten"
     }
   },
-  "features": {
-    "title": "Funktionen",
-    "description": "Alles, was passionfruit aus der Box mitbringt."
+  "services": {
+    "title": "Unsere Leistungen",
+    "description": "Entdecken Sie unser Leistungsangebot.",
+    "webDesign": {
+      "title": "Webdesign",
+      "description": "Moderne, responsive Websites, die begeistern."
+    },
+    "development": {
+      "title": "Webentwicklung",
+      "description": "Technisch einwandfreie Lösungen mit modernsten Technologien."
+    },
+    "consulting": {
+      "title": "Beratung",
+      "description": "Strategische Beratung für Ihre digitale Transformation."
+    }
+  },
+  "about": {
+    "title": "Über uns",
+    "description": "Erfahren Sie mehr über Greenleaf Digital.",
+    "story": {
+      "eyebrow": "Unsere Geschichte",
+      "title": "Wir glauben, dass jeder eine großartige Website verdient",
+      "text": "Greenleaf Digital wurde mit einer einfachen Idee gegründet: Professionelle Webentwicklung sollte für jeden zugänglich sein. Wir glauben, dass moderne Technologien und KI-gestützte Workflows die Art verändern, wie Websites entstehen — und dass diese Veränderung allen zugutekommen sollte."
+    },
+    "values": {
+      "eyebrow": "Unsere Werte",
+      "title": "Was uns antreibt",
+      "quality": {
+        "title": "Qualität vor Quantität",
+        "description": "Jedes Projekt verdient höchste Sorgfalt. Wir liefern keine Massenware, sondern maßgeschneiderte Lösungen."
+      },
+      "transparency": {
+        "title": "Transparenz",
+        "description": "Offene Kommunikation in jedem Projektschritt. Keine versteckten Kosten, keine Überraschungen."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Wir nutzen die neuesten Technologien — nicht um des Trends willen, sondern weil sie bessere Ergebnisse liefern."
+      },
+      "accessibility": {
+        "title": "Zugänglichkeit",
+        "description": "Unsere Websites sind für alle Menschen nutzbar. Barrierefreiheit ist kein Feature, sondern Standard."
+      }
+    },
+    "stats": {
+      "projects": "Projekte",
+      "satisfaction": "Kundenzufriedenheit",
+      "technologies": "Technologien",
+      "languages": "Sprachen"
+    }
+  },
+  "legal": {
+    "lastUpdated": "Zuletzt aktualisiert:"
+  },
+  "filter": {
+    "reset": "Filter zurücksetzen",
+    "allLabel": "Alle",
+    "ariaLabel": "Inhalte filtern"
+  },
+  "podcast": {
+    "play": "{title} auf Spotify abspielen"
+  },
+  "video": {
+    "play": "Video abspielen: {title}"
   },
   "comparison": {
     "feature": "Merkmal",
     "yes": "Ja",
     "no": "Nein"
   },
-  "state": {
-    "loading": "Wird geladen",
-    "empty": {
-      "posts": {
-        "headline": "Noch keine Beiträge",
-        "body": "Hier entsteht in Kürze etwas. Bis dahin lohnt sich ein Blick auf unsere Leistungen.",
-        "cta": "Zu den Leistungen"
-      }
-    },
-    "error": {
-      "generic": {
-        "headline": "Da ist etwas schiefgelaufen",
-        "body": "Wir konnten Ihre Anfrage gerade nicht verarbeiten. Bitte versuchen Sie es erneut."
-      },
-      "retry": "Erneut versuchen"
+  "careers": {
+    "title": "Karriere",
+    "description": "Werde Teil unseres Teams. Offene Stellen bei Greenleaf Digital.",
+    "apply": "Jetzt bewerben",
+    "openPosition": "Offene Position",
+    "postedOn": "Veröffentlicht am",
+    "closesOn": "Bewerbungsfrist",
+    "noOpenings": "Keine offenen Stellen aktuell",
+    "backToCareers": "Zurück zu Karriere",
+    "opensInNewTab": "Öffnet in einem neuen Tab",
+    "employmentType": {
+      "full-time": "Vollzeit",
+      "part-time": "Teilzeit",
+      "contractor": "Freiberuflich",
+      "internship": "Praktikum"
     }
+  },
+  "events": {
+    "title": "Veranstaltungen",
+    "description": "Webinare, Workshops und Konferenzen von Greenleaf Digital.",
+    "noResults": "Keine Veranstaltungen gefunden.",
+    "register": "Jetzt anmelden",
+    "details": "Details ansehen",
+    "backToEvents": "Zurück zu den Veranstaltungen",
+    "dateTime": "Datum & Uhrzeit",
+    "speakers": "Referenten",
+    "openMap": "Auf Karte anzeigen",
+    "location": {
+      "online": "Online",
+      "inPerson": "Vor Ort",
+      "hybrid": "Hybrid (Vor Ort + Online)",
+      "atVenue": "Veranstaltungsort"
+    },
+    "filter": {
+      "category": "Kategorie",
+      "tag": "Thema"
+    }
+  },
+  "caseStudies": {
+    "title": "Referenzen",
+    "description": "Erfahren Sie, wie unsere Kunden von der Zusammenarbeit mit Greenleaf Digital profitieren.",
+    "noResults": "Keine Referenzen gefunden.",
+    "readMore": "Mehr lesen",
+    "watchInterview": "Interview ansehen",
+    "videoAvailable": "Video verfügbar",
+    "tagsLabel": "Themen",
+    "filterCategory": "Kategorie",
+    "filterTag": "Thema",
+    "backToCaseStudies": "Zurück zu den Referenzen",
+    "siblingNav": "Weitere Referenzen",
+    "previousReference": "Vorherige Referenz",
+    "nextReference": "Nächste Referenz",
+    "srName": "Name",
+    "srRole": "Position",
+    "srCompany": "Unternehmen",
+    "quoteOpen": "„",
+    "quoteClose": "“"
+  },
+  "features": {
+    "title": "Funktionen",
+    "description": "Alles, was passionfruit aus der Box mitbringt."
   }
 }
