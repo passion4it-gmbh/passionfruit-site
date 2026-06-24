@@ -102,14 +102,22 @@ You can run either, both, or neither. Most users want GA4 (familiar dashboard); 
 
 ## 10. Contact form
 
-The contact form (`src/components/pages/contact.astro`) submits a JSON body `{name, email, message, company}` via POST to `/api/contact`. The `company` field is a honeypot — any non-empty value causes the request to be silently dropped (200 returned to the visitor, no email sent).
+The contact form (`src/components/pages/contact.astro`) submits a JSON body `{name, email, message, honeypot, turnstileToken, lang}` via POST to `/api/contact`. The honeypot is a hidden field rendered with the DOM name `company`; its value is sent on the wire as `honeypot`. Any non-empty value causes the request to be silently dropped (200 returned to the visitor, no email sent).
 
-**Delivery:** `functions/api/contact.ts` (Cloudflare Pages Function) calls the Brevo transactional email API. To: `info@passion4it.de`, From: `kontakt@passion4it.de`, Reply-To: the visitor's address.
+**Delivery:** `functions/api/contact.ts` (Cloudflare Pages Function) calls the Brevo transactional email API. Nothing is hardcoded — the To, From, and From display name all come from env vars (see below); Reply-To is the visitor's address, and the subject/body are localized by the `lang` field. **Spam protection:** honeypot + optional Cloudflare Turnstile (gated by `TURNSTILE_SECRET_KEY`) + Cloudflare edge limits — no app-level rate limiting by design.
+
+The address shown on the page and the `mailto:` fallback are a separate thing: they come from the `contact.info.email` i18n string (currently `info@passion4it.de` in both locales), independent of the Function's `CONTACT_RECIPIENT`.
 
 **Env vars:**
 
 - `PUBLIC_FORM_ENDPOINT=/api/contact` — build-time flag; enables real delivery via the Function. Leave EMPTY (default in `.env.example`) to fall back to a `mailto:` link — no Function is called.
-- `BREVO_API_KEY` — secret. Set in the Cloudflare Pages project dashboard (Settings → Environment Variables) for production. For local testing with `wrangler pages dev`, add it to a git-ignored `.dev.vars` file (never commit this file).
+- `CONTACT_RECIPIENT` — secret; the address form submissions are delivered to (the To:).
+- `CONTACT_SENDER` — secret; a Brevo-verified sender address (the From:).
+- `CONTACT_SENDER_NAME` — optional secret; From: display name (default: `Website contact form`).
+- `BREVO_API_KEY` — secret; Brevo transactional API key.
+- `PUBLIC_TURNSTILE_SITE_KEY` (public, build-time) / `TURNSTILE_SECRET_KEY` (secret) — set **together** to enable Turnstile verification; leave both empty to rely on the honeypot alone. If `CONTACT_RECIPIENT`, `CONTACT_SENDER`, or `BREVO_API_KEY` is missing the Function returns a `config` error.
+
+Set the secrets in the Cloudflare Pages dashboard (Settings → Environment Variables) for production. For local testing with `wrangler pages dev`, add them to a git-ignored `.dev.vars` file (never commit it).
 
 **DNS on `passion4it.de`:** To authenticate the sending domain in Brevo, add the Brevo code TXT record, the DKIM TXT record, and a DMARC record if none already exists. **SPF and MX records are NOT changed — Microsoft 365 keeps the mailboxes.** Brevo sends via its own return-path and achieves DMARC compliance through DKIM alignment.
 
