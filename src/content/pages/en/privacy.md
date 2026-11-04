@@ -22,7 +22,7 @@ Legal basis: Art. 6 (1) f GDPR (legitimate interest in a stable, secure web pres
 
 ## Cookies and consent
 
-We set only technically necessary cookies (for example, the consent record from the cookie banner). Analytics cookies are loaded **only after you explicitly opt in** via the banner. You can revoke that decision at any time using the consent toggle in the lower left corner.
+We set only technically necessary cookies (for example, the consent record from the cookie banner). Analytics cookies are loaded **only after you explicitly opt in** via the banner. You can revoke that decision at any time via “Cookie settings” in the footer.
 
 ## Analytics — PostHog (EU)
 

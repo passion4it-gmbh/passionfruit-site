@@ -22,7 +22,7 @@ Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sta
 
 ## Cookies und Einwilligung
 
-Wir setzen ausschließlich technisch notwendige Cookies (zum Beispiel den Consent-Eintrag des Cookie-Banners). Analyse-Cookies laden wir **erst nach deiner ausdrücklichen Einwilligung** über das Banner. Du kannst diese Entscheidung jederzeit unten links über den Consent-Schalter widerrufen.
+Wir setzen ausschließlich technisch notwendige Cookies (zum Beispiel den Consent-Eintrag des Cookie-Banners). Analyse-Cookies laden wir **erst nach deiner ausdrücklichen Einwilligung** über das Banner. Du kannst diese Entscheidung jederzeit über „Cookie-Einstellungen“ im Footer widerrufen.
 
 ## Analyse — PostHog (EU)
 

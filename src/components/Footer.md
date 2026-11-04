@@ -43,6 +43,7 @@ import Footer from "~/components/Footer.astro";
 - `navigation.contact`
 - `footer.privacy`
 - `footer.imprint`
+- `footer.cookieSettings`
 - `footer.copyright`
 - `footer.builtWith`
 
@@ -50,6 +51,7 @@ Nav link slugs are resolved inline via `lang === "de"` ternaries: `funktionen` â
 
 ## Gotchas
 
+- **Keep the cookie settings button.** It's how visitors change or withdraw consent, and the privacy policy points to it. `id="cookie-settings"` is what `CookieConsent` listens for, so it must appear exactly once per page.
 - **Site nav differs from the framework template.** Footer nav mirrors the Header: Features, Blog, Contact only. The framework seed includes About, Services, Team entries that are not present here.
 - **Social links are a placeholder.** The brand column contains a `<!-- TODO: Add social links -->` comment. Fill these in during `/onboard` â€” they are not driven by i18n or props.
 - **Copyright year is build-time.** `currentYear` is computed from `new Date().getFullYear()` at build time, not at request time. Acceptable for a static site; would need runtime resolution for on-demand rendering.
