@@ -33,6 +33,8 @@ const isEnabled = Boolean(GA_MEASUREMENT_ID);
 		});
 		window.gtag('config', GA_MEASUREMENT_ID, {
 			anonymize_ip: true,
+			// Host-only cookies, so CookieConsent's autoclear can reach them.
+			cookie_domain: 'none',
 			send_page_view: true,
 		});
 
@@ -48,11 +50,27 @@ const isEnabled = Boolean(GA_MEASUREMENT_ID);
 		setTimeout(initGoogleAnalytics, 200);
 	}
 
-	window.addEventListener('passionfruit:consent-changed', () => {
-		initGoogleAnalytics();
+	window.addEventListener('passionfruit:consent-changed', (event) => {
+		const granted = event.detail.analytics;
+
+		// Denying consent alone still sends cookieless pings, this stops them too.
+		window['ga-disable-' + GA_MEASUREMENT_ID] = !granted;
+
+		if (window.gtag) {
+			const state = granted ? 'granted' : 'denied';
+			window.gtag('consent', 'update', {
+				analytics_storage: state,
+				functionality_storage: state,
+				security_storage: state,
+			});
+		}
+
+		if (granted) initGoogleAnalytics();
 	});
 
 	document.addEventListener('astro:after-swap', () => {
+		if (!window.hasAnalyticsConsent?.()) return;
+
 		if (window.__gaLoaded && typeof window.gtag === 'function') {
 			window.gtag('event', 'page_view', {
 				page_location: window.location.href,

@@ -1,7 +1,7 @@
 ---
 translationKey: "imprint"
 title: "Impressum"
-description: "Anbieterkennzeichnung gemäß § 5 TMG und § 18 Abs. 2 MStV."
+description: "Anbieterkennzeichnung gemäß § 5 DDG und § 18 Abs. 2 MStV."
 ---
 
 ## Anbieter
@@ -46,7 +46,7 @@ Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer 
 
 ## Haftung für Inhalte
 
-Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+Für eigene Inhalte auf diesen Seiten sind wir nach den allgemeinen Gesetzen verantwortlich.
 
 ## Haftung für Links
 
