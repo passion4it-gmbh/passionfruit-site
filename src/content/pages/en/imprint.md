@@ -46,7 +46,7 @@ We are not willing or obligated to participate in dispute resolution proceedings
 
 ## Liability for content
 
-We are responsible for our own content on these pages under general law. Under Art. 8 of Regulation (EU) 2022/2065 (Digital Services Act), however, we have no general obligation to monitor third-party information transmitted or stored, or to investigate circumstances that suggest unlawful activity.
+We are responsible for our own content on these pages under general law.
 
 ## Liability for links
 

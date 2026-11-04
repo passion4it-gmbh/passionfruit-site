@@ -46,7 +46,7 @@ Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer 
 
 ## Haftung für Inhalte
 
-Für eigene Inhalte auf diesen Seiten sind wir nach den allgemeinen Gesetzen verantwortlich. Nach Art. 8 der Verordnung (EU) 2022/2065 (Digital Services Act) sind wir jedoch nicht allgemein verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+Für eigene Inhalte auf diesen Seiten sind wir nach den allgemeinen Gesetzen verantwortlich.
 
 ## Haftung für Links
 
