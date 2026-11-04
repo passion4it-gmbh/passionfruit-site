@@ -18,7 +18,7 @@ Der Name landet in deutlich mehr Dateien, als du denkst: i18n-JSONs (DE und EN),
 
 ## 2. Was machst du? (Ein Satz)
 
-Dieser eine Satz wird zur Meta-Description, zum Hero-Subtitle und — wenn du keine Custom-OG-Bilder hochlädst — zum Default-Sharing-Snippet. Investier zwei Minuten Hirnschmalz hier. Eine gute Beschreibung lautet nicht „Wir machen Webdesign" sondern „Wir bauen Online-Shops für regionale Manufakturen, die internationale Kunden gewinnen wollen".
+Dieser eine Satz wird zur Meta-Description, zum Hero-Subtitle und — wenn du keine Custom-OG-Bilder hochlädst — zum Default-Sharing-Snippet. Investier zwei Minuten Hirnschmalz hier. Eine gute Beschreibung lautet nicht „Wir machen Webdesign“ sondern „Wir bauen Online-Shops für regionale Manufakturen, die internationale Kunden gewinnen wollen“.
 
 ## 3. Was ist deine primäre Sprache?
 
@@ -30,7 +30,7 @@ Wenn nein, baut Claude die Vorlage zu einer einsprachigen Site um: Die `/en/`-Ro
 
 ## 5. Welche Akzentfarbe?
 
-Vier Presets sind direkt anwählbar: Indigo, Smaragd, Bernstein, Rosa. Oder du beschreibst deine Markenfarben mit Worten („tiefes Petrol mit warmen Akzenten") und Claude leitet die Tokens ab. Geändert werden drei CSS-Variablen in `src/styles/global.css`: `--color-accent`, `--color-accent-hover`, `--color-accent-glow`. Der Rest des Designs adaptiert sich automatisch.
+Vier Presets sind direkt anwählbar: Indigo, Smaragd, Bernstein, Rosa. Oder du beschreibst deine Markenfarben mit Worten („tiefes Petrol mit warmen Akzenten“) und Claude leitet die Tokens ab. Geändert werden drei CSS-Variablen in `src/styles/global.css`: `--color-accent`, `--color-accent-hover`, `--color-accent-glow`. Der Rest des Designs adaptiert sich automatisch.
 
 ## 6. Welche Seiten brauchst du?
 
@@ -58,13 +58,13 @@ Nach den acht Antworten arbeitet Claude die folgenden Dateien in Lockstep durch:
 - `src/components/pages/imprint.astro` und `privacy.astro` (Adresse, Geschäftsführer)
 - `CLAUDE.md` Abschnitt 1 (Projektkontext für zukünftige Sessions)
 - `STYLE_GUIDE.md` (Farb-Sektion)
-- `README.md` (Marketing-Boilerplate raus, kurzer business-spezifischer Text rein — die „Staying Current"-Sektion bleibt verbatim drin, weil sie erklärt, wie du Framework-Updates ziehst)
+- `README.md` (Marketing-Boilerplate raus, kurzer business-spezifischer Text rein — die „Staying Current“-Sektion bleibt verbatim drin, weil sie erklärt, wie du Framework-Updates ziehst)
 
 Am Ende macht Claude einen Commit: `feat: initial setup — [Firmenname] website`.
 
 ## Migration einer bestehenden Site
 
-`/onboard` hat eine zweite Variante: Wenn du sagst „ich migriere eine bestehende Website", fragt Claude nach der URL, crawlt die Site (oder lässt sich von dir die Seiten beschreiben), und füllt die Antworten für dich aus. Danach hilft dir der `/goal`-Skill, die alten Inhalte systematisch in die neue Struktur zu übernehmen — Seite für Seite, mit modernem Design.
+`/onboard` hat eine zweite Variante: Wenn du sagst „ich migriere eine bestehende Website“, fragt Claude nach der URL, crawlt die Site (oder lässt sich von dir die Seiten beschreiben), und füllt die Antworten für dich aus. Danach hilft dir der `/goal`-Skill, die alten Inhalte systematisch in die neue Struktur zu übernehmen — Seite für Seite, mit modernem Design.
 
 ## Was als Nächstes
 

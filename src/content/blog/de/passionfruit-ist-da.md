@@ -26,7 +26,7 @@ Das ist kein Marketing-Spruch. Diese Website hier — `passionfruit.passion4it.d
 passionfruit kommt mit allem, was man heute von einer modernen Website erwartet, und nichts, was man nicht braucht:
 
 - **Astro 6, TypeScript strict, Tailwind v4** — schnelle Builds, null JavaScript per Default, sauberer Code
-- **DE + EN als Grundannahme** — kein „Pro-Feature", sondern die Architektur des Page-Registry und der Content-Collections
+- **DE + EN als Grundannahme** — kein „Pro-Feature“, sondern die Architektur des Page-Registry und der Content-Collections
 - **DSGVO-konform** — Cookie-Consent eingebaut, Analytics auf EU-Servern, kein Daten-Leak via Google Fonts
 - **WCAG AA** — Fokus-Ringe, alt-Text-Pflicht, 44 px Touch-Targets, `prefers-reduced-motion` respektiert
 - **Qualitäts-Gates** — ESLint, Prettier, cspell, linkinator, ein Bilingual-Check, der monolinguale Versehen verhindert
@@ -38,7 +38,7 @@ Die komplette Feature-Liste mit Hintergründen findest du auf der [Funktionen-Se
 
 Claude Code ist überraschend gut darin, Astro, Tailwind und TypeScript zu schreiben — vorausgesetzt, das Projekt hat klare Konventionen. passionfruit liefert genau diese Konventionen: ein gepflegtes `CLAUDE.md`, ein `STYLE_GUIDE.md`, ein `CONTRIBUTING.md`, dazu sechs Skills (`/onboard`, `/brand`, `/deploy`, `/new-post`, …), die Standard-Aufgaben kapseln.
 
-Das Ergebnis: Du beschreibst, was du willst. Claude liest die Konventionen, schreibt den Code, hält die Bilingual-Symmetrie ein, hält die DSGVO-Disziplin ein, hält die Design-Tokens ein. Du musst nicht wissen, was Astro Content Collections sind. Du musst nur sagen: „Füg mir einen Newsletter-Block am Footer hinzu".
+Das Ergebnis: Du beschreibst, was du willst. Claude liest die Konventionen, schreibt den Code, hält die Bilingual-Symmetrie ein, hält die DSGVO-Disziplin ein, hält die Design-Tokens ein. Du musst nicht wissen, was Astro Content Collections sind. Du musst nur sagen: „Füg mir einen Newsletter-Block am Footer hinzu“.
 
 ## Was als Nächstes kommt
 

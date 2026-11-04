@@ -28,6 +28,8 @@ This is not optional. These files are the project's memory. If they drift from r
 
 If the site still shows "passionfruit", run `/onboard` to personalize it for your business. After onboarding, run `/brand` to replace the placeholder favicon and social sharing image with your own logo.
 
+**If a user says `/onboard` "doesn't work":** they are likely in the Claude Desktop _chat_ app, where repo skills and slash commands don't exist. Point them to a Claude Code surface — [claude.ai/code](https://code.claude.com/docs/en/claude-code-on-the-web) (no install), the **Code** tab of the [desktop app](https://code.claude.com/docs/en/desktop), the CLI, or an IDE extension. In any of those, plain language works too: "set this site up for my business" triggers onboarding without the slash command.
+
 ## 4. Tech stack
 
 | Tool            | Version / notes                                                                    |
@@ -142,6 +144,7 @@ Before committing:
 - [ ] No hex literals in components
 - [ ] New collection entries have `translationKey` in both locales
 - [ ] New i18n strings added to both `de.json` and `en.json`
+- [ ] German quotes are typed as literal `„…“` — a straight closing `"` renders as `”`
 - [ ] Changes align with STYLE_GUIDE.md
 
 ## 13. Image generation

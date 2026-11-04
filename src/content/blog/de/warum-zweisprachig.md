@@ -14,7 +14,7 @@ passionfruit dreht diese Annahme um. **Zweisprachig ist die Grundannahme**, eins
 
 ## Was das in der Architektur bedeutet
 
-Wenn du `pnpm create passionfruit my-site` ausführst, bekommst du eine Site mit Deutsch im Apex (`/`) und Englisch unter `/en/`. Beide Sprachen existieren, beide haben echten Inhalt, beide gehen durch den Build. Wenn du im `/onboard`-Skill „nein, ich brauche nur eine Sprache" sagst, **entfernt** Claude die zweite Sprache — und nicht umgekehrt.
+Wenn du `pnpm create passionfruit my-site` ausführst, bekommst du eine Site mit Deutsch im Apex (`/`) und Englisch unter `/en/`. Beide Sprachen existieren, beide haben echten Inhalt, beide gehen durch den Build. Wenn du im `/onboard`-Skill „nein, ich brauche nur eine Sprache“ sagst, **entfernt** Claude die zweite Sprache — und nicht umgekehrt.
 
 Das ist nicht nur Pedanterie. Es bestimmt vier Architektur-Entscheidungen:
 
@@ -50,13 +50,13 @@ title: "Introducing passionfruit"
 ---
 ```
 
-Der gleiche Key existiert auch in der DE-Version. Das macht das Pairing trivial — kein Convention-over-Configuration-Voodoo, kein „dasselbe Filename muss in beiden Ordnern liegen". Nur ein Key.
+Der gleiche Key existiert auch in der DE-Version. Das macht das Pairing trivial — kein Convention-over-Configuration-Voodoo, kein „dasselbe Filename muss in beiden Ordnern liegen“. Nur ein Key.
 
 ### 3. `check-bilingual.mjs` — der Pre-Build-Wächter
 
 Ein 200-Zeilen-Skript läuft als `prebuild`-Hook. Für jede Content-Collection prüft es: existiert jeder `translationKey` in **beiden** Lokalen? Wenn nein, bricht der Build ab — bevor du auch nur deployen kannst.
 
-Das mag pedantisch klingen. Aber wir haben das Skript geschrieben, **nachdem** wir mehrfach „nur kurz" eine deutsche Seite ergänzt und vergessen hatten, die englische nachzuziehen. Drei Wochen später kommt die Beschwerde vom Kunden. Das Skript verhindert exakt diesen Fall.
+Das mag pedantisch klingen. Aber wir haben das Skript geschrieben, **nachdem** wir mehrfach „nur kurz“ eine deutsche Seite ergänzt und vergessen hatten, die englische nachzuziehen. Drei Wochen später kommt die Beschwerde vom Kunden. Das Skript verhindert exakt diesen Fall.
 
 ### 4. i18n-Keys in JSON, nicht in Komponenten
 
@@ -69,15 +69,15 @@ Jede UI-Zeichenkette wohnt in `src/i18n/de.json` oder `en.json`. Komponenten ben
 
 Konkret: Diese Website hier. Du liest sie gerade — wahrscheinlich auf Deutsch, weil du im DACH-Raum sitzt. Aber wenn du den Switcher oben rechts klickst, bist du sofort auf der englischen Version — gleiche Inhalte, gleiche Struktur, korrekt verlinkt, mit hreflang im `<head>` für Google.
 
-Wir haben diese Website nicht „nach und nach" übersetzt. Wir haben sie zweisprachig **gebaut**. Jeder Commit, der einen DE-String ergänzt, hatte den passenden EN-String dabei — sonst wäre der Build gescheitert.
+Wir haben diese Website nicht „nach und nach“ übersetzt. Wir haben sie zweisprachig **gebaut**. Jeder Commit, der einen DE-String ergänzt, hatte den passenden EN-String dabei — sonst wäre der Build gescheitert.
 
-Das ist der Unterschied zwischen „Mehrsprachigkeit als Feature" und „Mehrsprachigkeit als Architektur".
+Das ist der Unterschied zwischen „Mehrsprachigkeit als Feature“ und „Mehrsprachigkeit als Architektur“.
 
 ## Wenn du das nicht brauchst
 
 Fair: Viele Sites brauchen keine zweite Sprache. Ein Restaurant in Berlin-Neukölln, das nur deutsch sprechende Gäste bedient, braucht keine englische Übersetzung. Ein lokaler Handwerker, dessen Kundenkreis 50 km umfasst, auch nicht.
 
-Für genau diesen Fall hat `/onboard` die Frage 4: „Brauchst du eine zweite Sprache?" Antwort: nein. Claude baut zurück.
+Für genau diesen Fall hat `/onboard` die Frage 4: „Brauchst du eine zweite Sprache?“ Antwort: nein. Claude baut zurück.
 
 Aber selbst dann profitierst du indirekt: Der Page-Registry ist immer noch sauber, die i18n-Keys sind immer noch zentral, du könntest **morgen** eine zweite Sprache hinzufügen, ohne irgendwas umzubauen. Die Architektur kostet dich nichts, gewinnt dir aber Optionen.
 
@@ -91,7 +91,7 @@ Hätten wir mit einsprachig angefangen und Bilingual später draufgepfropft, wä
 - Hreflang fehlt komplett
 - Slug-Übersetzungen, die zwischen DE und EN drifte (`/leistungen` ↔ `/en/services` ist easy; `/blog/mein-post` ↔ `/en/blog/mein-post` weil jemand vergessen hat, den Slug zu übersetzen — passiert ständig)
 
-Indem wir den Fall „nur eine Sprache" als Special-Case behandeln, kriegen wir all das geschenkt — auch für einsprachige Sites.
+Indem wir den Fall „nur eine Sprache“ als Special-Case behandeln, kriegen wir all das geschenkt — auch für einsprachige Sites.
 
 ## Probier es selber
 
