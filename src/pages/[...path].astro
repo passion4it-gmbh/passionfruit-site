@@ -74,33 +74,31 @@ if (props.kind === "collection-detail") {
 }
 ---
 
-{
-  props.kind === "collection-detail" ? (
-    <BaseLayout
-      title={collectionTitle}
-      description={collectionDescription}
-      lang={lang}
-      currentSlug={slug}
-      alternateSlug={collectionAlternateSlug}
-    >
-      {blogPostingLd && (
-        <StructuredData
-          slot="structured-data"
-          type="BlogPosting"
-          data={blogPostingLd}
-        />
-      )}
-      {props.collection === "blog" && (
-        <BlogPost entry={props.entry as CollectionEntry<"blog">} lang={lang} />
-      )}
-      {props.collection === "pages" && (
-        <PageContent
-          entry={props.entry as CollectionEntry<"pages">}
-          lang={lang}
-        />
-      )}
-    </BaseLayout>
-  ) : (
-    StaticComponent && <StaticComponent lang={lang} currentSlug={slug} />
-  )
-}
+{props.kind === "collection-detail" ? (
+  <BaseLayout
+    title={collectionTitle}
+    description={collectionDescription}
+    lang={lang}
+    currentSlug={slug}
+    alternateSlug={collectionAlternateSlug}
+  >
+    {blogPostingLd && (
+      <StructuredData
+        slot="structured-data"
+        type="BlogPosting"
+        data={blogPostingLd}
+      />
+    )}
+    {props.collection === "blog" && (
+      <BlogPost entry={props.entry as CollectionEntry<"blog">} lang={lang} />
+    )}
+    {props.collection === "pages" && (
+      <PageContent
+        entry={props.entry as CollectionEntry<"pages">}
+        lang={lang}
+      />
+    )}
+  </BaseLayout>
+) : (
+  StaticComponent && <StaticComponent lang={lang} currentSlug={slug} />
+)}

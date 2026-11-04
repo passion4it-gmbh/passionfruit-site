@@ -4,11 +4,7 @@ import type { Locale } from "~/i18n";
 export type { Locale };
 
 export type PageKey =
-  | "features"
-  | "blog-index"
-  | "contact"
-  | "privacy"
-  | "imprint";
+  "features" | "blog-index" | "contact" | "privacy" | "imprint";
 
 export type CollectionName = "blog" | "pages";
 
