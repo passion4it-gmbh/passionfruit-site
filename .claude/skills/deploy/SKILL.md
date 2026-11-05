@@ -27,8 +27,10 @@ Before starting, verify:
 3. No template placeholders are left:
 
    ```bash
-   git grep --untracked -inE 'greenleaf|musterstra|musterstadt|hello@example\.com|\+49 123 456 789|DE123456789|platzhalter|is a placeholder|Brauche ich Programmierkenntnisse|Do I need programming skills|"98%"' -- src/content src/i18n src/data
+   git grep --untracked -inE 'greenleaf|musterstra|musterstadt|hello@example\.com|\+49 123 456 789|DE123456789|platzhalter|is a placeholder|Brauche ich Programmierkenntnisse|Do I need programming skills|"98%"' -- src/content src/i18n src/data ':!src/data/faqs.ts' ':!src/content/blog'
    ```
+
+   This repo is the template's own marketing site: its real FAQ asks the template's demo question, and its blog posts write about placeholders, so both are excluded.
 
    If this finds anything, stop and tell the user what's missing in plain language. A public German site with a placeholder imprint or privacy policy is a legal risk. Only continue if the user says this is a test site and confirms it.
 
