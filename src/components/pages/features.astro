@@ -3,6 +3,8 @@ import type { Locale } from "~/i18n";
 import { useTranslations, getLocalizedPath } from "~/i18n";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Button from "~/components/Button.astro";
+import Motion from "~/components/motion/Motion.astro";
+import FadeUp from "~/components/motion/FadeUp.astro";
 import { getAlternateCollectionSlug } from "~/lib/page-registry";
 import {
   Languages,
@@ -74,7 +76,7 @@ const features: Feature[] = isDe
         icon: Sparkles,
         title: "Modernes Design ohne Kompromisse",
         description:
-          "Scroll-getriebene Animationen über `animation-timeline`, Glassmorphism, fluide Typografie via `clamp()`. Tailwind v4 mit Design-Tokens in einer einzigen `@theme`-Direktive. Eine Akzentfarbe ändern bedeutet eine Zeile.",
+          "Einblend-Animationen, die „Bewegung reduzieren“ respektieren, Glassmorphism, fluide Typografie via `clamp()`. Tailwind v4 mit Design-Tokens in einer einzigen `@theme`-Direktive. Eine Akzentfarbe ändern bedeutet eine Zeile.",
         bullets: [
           "Astro 7, statische Builds, null JS standardmäßig",
           "Tailwind v4 mit `@theme`-Tokens",
@@ -172,7 +174,7 @@ const features: Feature[] = isDe
         icon: Sparkles,
         title: "Modern design without compromise",
         description:
-          "Scroll-driven animations via `animation-timeline`, glassmorphism, fluid typography via `clamp()`. Tailwind v4 with design tokens in a single `@theme` directive. Changing an accent color is one line.",
+          "Entrance animations that respect reduced motion, glassmorphism, fluid typography via `clamp()`. Tailwind v4 with design tokens in a single `@theme` directive. Changing an accent color is one line.",
         bullets: [
           "Astro 7, static builds, zero JS by default",
           "Tailwind v4 with `@theme` tokens",
@@ -282,31 +284,30 @@ const features: Feature[] = isDe
   <section class="py-24 md:py-32">
     <div class="container">
       <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
-        {features.map((feat, i) => <article
-          class="card anim-card-enter h-full"
-          style={`--delay: ${(i % 2) * 80}ms`}
-        >
-          <div
-            class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6"
-          >
-            <feat.icon class="w-6 h-6 text-accent" />
-          </div>
-          <h2 class="text-h3 text-text-heading">{feat.title}</h2>
-          <p class="text-muted mt-3 leading-relaxed">{feat.description}</p>
-          <ul class="mt-6 flex flex-col gap-2.5">
-            {feat.bullets.map((bullet) => <li
-              class="flex items-start gap-2.5 text-sm text-text"
+        {features.map((feat, i) => <FadeUp delay={(i % 2) * 80}>
+          <article class="card h-full">
+            <div
+              class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6"
             >
-              <CheckCircle class="w-4 h-4 text-accent flex-shrink-0 mt-1" />
-              <span
-                set:html={bullet.replace(
-                  /`([^`]+)`/g,
-                  '<code class="font-mono text-xs text-accent bg-accent/5 px-1.5 py-0.5 rounded">$1</code>',
-                )}
-              />
-            </li>)}
-          </ul>
-        </article>)}
+              <feat.icon class="w-6 h-6 text-accent" />
+            </div>
+            <h2 class="text-h3 text-text-heading">{feat.title}</h2>
+            <p class="text-muted mt-3 leading-relaxed">{feat.description}</p>
+            <ul class="mt-6 flex flex-col gap-2.5">
+              {feat.bullets.map((bullet) => <li
+                class="flex items-start gap-2.5 text-sm text-text"
+              >
+                <CheckCircle class="w-4 h-4 text-accent flex-shrink-0 mt-1" />
+                <span
+                  set:html={bullet.replace(
+                    /`([^`]+)`/g,
+                    '<code class="font-mono text-xs text-accent bg-accent/5 px-1.5 py-0.5 rounded">$1</code>',
+                  )}
+                />
+              </li>)}
+            </ul>
+          </article>
+        </FadeUp>)}
       </div>
     </div>
   </section>
@@ -324,62 +325,45 @@ const features: Feature[] = isDe
         style="animation-delay: 3s"
       ></div>
     </div>
-    <div class="container relative z-10 text-center anim-scale-blur">
-      <h2 class="text-h1 text-text-on-dark max-w-2xl mx-auto">
-        {t("home.ctaSection.title")}
-      </h2>
-      <p class="text-body-lg text-text-on-dark/60 mt-6 max-w-xl mx-auto">
-        {t("home.ctaSection.subtitle")}
-      </p>
+    <div class="container relative z-10 text-center">
+      <Motion effect="scale-in">
+        <h2 class="text-h1 text-text-on-dark max-w-2xl mx-auto">
+          {t("home.ctaSection.title")}
+        </h2>
+        <p class="text-body-lg text-text-on-dark/60 mt-6 max-w-xl mx-auto">
+          {t("home.ctaSection.subtitle")}
+        </p>
 
-      <div class="mt-10 flex justify-center">
-        <div
-          class="inline-flex items-center gap-2 rounded-lg bg-white/5 ring-1 ring-white/10 px-5 py-3 font-mono text-sm text-text-on-dark/90"
-        >
-          <span class="text-accent-glow">$</span>
-          <code id="features-install-cmd">{installCommand}</code>
-          <button
-            type="button"
-            data-copy-target="features-install-cmd"
-            aria-label={t("home.ctaSection.commandLabel")}
-            class="ml-2 inline-flex items-center justify-center w-8 h-8 rounded-md text-text-on-dark/60 hover:text-text-on-dark hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        <div class="mt-10 flex justify-center">
+          <div
+            class="inline-flex items-center gap-2 rounded-lg bg-white/5 ring-1 ring-white/10 px-5 py-3 font-mono text-sm text-text-on-dark/90"
           >
-            <Copy class="copy-icon w-4 h-4" />
-            <Check class="check-icon w-4 h-4 hidden text-accent-glow" />
-          </button>
+            <span class="text-accent-glow">$</span>
+            <code id="features-install-cmd">{installCommand}</code>
+            <button
+              type="button"
+              data-copy-target="features-install-cmd"
+              aria-label={t("home.ctaSection.commandLabel")}
+              class="ml-2 inline-flex items-center justify-center w-8 h-8 rounded-md text-text-on-dark/60 hover:text-text-on-dark hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <Copy class="copy-icon w-4 h-4" />
+              <Check class="check-icon w-4 h-4 hidden text-accent-glow" />
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div class="mt-8 flex flex-wrap gap-4 justify-center">
-        <Button href={repoUrl} variant="secondary" tone="on-dark">
-          <ExternalLink class="w-4 h-4 mr-2" />
-          {t("home.ctaSection.github")}
-        </Button>
-      </div>
+        <div class="mt-8 flex flex-wrap gap-4 justify-center">
+          <Button href={repoUrl} variant="secondary" tone="on-dark">
+            <ExternalLink class="w-4 h-4 mr-2" />
+            {t("home.ctaSection.github")}
+          </Button>
+        </div>
+      </Motion>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  function initScrollAnimations() {
-    if (CSS.supports("animation-timeline: scroll()")) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries)
-          if (e.isIntersecting) {
-            e.target.classList.add("in-view");
-            observer.unobserve(e.target);
-          }
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-    );
-    document
-      .querySelectorAll(
-        ".anim-card-enter, .anim-slide-up, .anim-fade, .anim-scale-blur",
-      )
-      .forEach((el) => observer.observe(el));
-  }
-
   function initCopyButtons() {
     document
       .querySelectorAll<HTMLButtonElement>("[data-copy-target]")
@@ -406,10 +390,8 @@ const features: Feature[] = isDe
       });
   }
 
-  initScrollAnimations();
   initCopyButtons();
   document.addEventListener("astro:after-swap", () => {
-    initScrollAnimations();
     initCopyButtons();
   });
 </script>
