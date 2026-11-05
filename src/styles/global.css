@@ -18,7 +18,7 @@
   --color-muted: #6b7280;
 
   /* Accent */
-  --color-accent: #6366f1;
+  --color-accent: #6265f0;
   --color-accent-hover: #4f46e5;
   --color-accent-glow: #818cf8;
 
@@ -176,6 +176,18 @@
       padding-inline: 2.5rem;
     }
   }
+}
+
+/* On dark-first pages the sticky header (h-16) overlays the first section.
+   Pull main up under it, and give a first <Section> the header height back
+   so its content sits optically centred instead of bottom-heavy.
+   Unlayered on purpose: it must beat Section's own (unlayered) padding. */
+main[data-under-header] {
+  margin-top: -4rem;
+}
+
+main[data-under-header] > .pf-section:first-child {
+  padding-block-start: calc(var(--pf-section-pad) + 4rem);
 }
 
 /* ============================================================

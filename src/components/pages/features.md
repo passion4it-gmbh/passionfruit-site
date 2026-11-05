@@ -62,4 +62,4 @@ Feature cards are defined inline as a typed `Feature[]` array (not from a conten
 - **Alternate slug lookup is best-effort.** `getAlternateCollectionSlug` is called but the pages-collection entry is optional; if absent, `alternateSlug` is undefined and the hreflang link is silently omitted.
 - **Bullet backtick syntax requires `set:html`.** Bullets use backtick notation (e.g. `` `check-bilingual.mjs` ``) which is transformed to `<code>` via a `replace()` call and rendered with `set:html`. Never put untrusted user content here.
 - **CTA reuses `home.ctaSection.*` keys.** Changes to those i18n strings affect both the home page and this features page.
-- **Scroll animations and copy button require re-init on view transitions.** Both `initScrollAnimations` and `initCopyButtons` re-attach on `astro:after-swap`.
+- **Copy button requires re-init on view transitions.** `initCopyButtons` re-attaches on `astro:after-swap`. Scroll entrances use `<FadeUp>` / `<Motion>`, which re-init themselves.

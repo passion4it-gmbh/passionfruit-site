@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Button from "~/components/Button.astro";
+import Motion from "~/components/motion/Motion.astro";
+import FadeUp from "~/components/motion/FadeUp.astro";
 import FAQ from "~/components/sections/FAQ.astro";
 import heroFruit from "~/assets/og/bg.png";
 import { useTranslations, getLocalizedPath } from "~/i18n";
@@ -63,7 +65,7 @@ const installCommand = t("home.ctaSection.command");
 
     <div class="container relative z-10 py-24">
       <div class="max-w-3xl mx-auto text-center">
-        <p class="eyebrow hero-stagger" style="--delay: 100ms">
+        <p class="eyebrow hero-stagger text-accent-glow" style="--delay: 100ms">
           {t("site.name")}
         </p>
 
@@ -137,61 +139,69 @@ const installCommand = t("home.ctaSection.command");
   <!-- ═══════════ HOW IT WORKS ═══════════ -->
   <section class="relative py-28 md:py-40 bg-grid">
     <div class="container">
-      <div class="max-w-2xl anim-slide-up">
-        <p class="eyebrow">{t("home.howItWorks.eyebrow")}</p>
-        <h2 class="text-h2 text-text-heading mt-4">
-          {t("home.howItWorks.title")}
-        </h2>
-        <p class="text-body-lg text-muted mt-4">
-          {t("home.howItWorks.subtitle")}
-        </p>
-      </div>
+      <FadeUp>
+        <div class="max-w-2xl">
+          <p class="eyebrow">{t("home.howItWorks.eyebrow")}</p>
+          <h2 class="text-h2 text-text-heading mt-4">
+            {t("home.howItWorks.title")}
+          </h2>
+          <p class="text-body-lg text-muted mt-4">
+            {t("home.howItWorks.subtitle")}
+          </p>
+        </div>
+      </FadeUp>
 
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-16">
-        <div class="card anim-card-enter" style="--delay: 0ms">
-          <div
-            class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6"
-          >
-            <Terminal class="w-6 h-6 text-accent" />
+        <FadeUp>
+          <div class="card h-full">
+            <div
+              class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6"
+            >
+              <Terminal class="w-6 h-6 text-accent" />
+            </div>
+            <p class="text-sm font-semibold text-accent">01</p>
+            <h3 class="text-h3 text-text-heading mt-2">
+              {t("home.howItWorks.step1.title")}
+            </h3>
+            <p class="text-muted mt-3 leading-relaxed">
+              {t("home.howItWorks.step1.description")}
+            </p>
           </div>
-          <p class="text-sm font-semibold text-accent">01</p>
-          <h3 class="text-h3 text-text-heading mt-2">
-            {t("home.howItWorks.step1.title")}
-          </h3>
-          <p class="text-muted mt-3 leading-relaxed">
-            {t("home.howItWorks.step1.description")}
-          </p>
-        </div>
+        </FadeUp>
 
-        <div class="card anim-card-enter" style="--delay: 100ms">
-          <div
-            class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6"
-          >
-            <MessagesSquare class="w-6 h-6 text-accent" />
+        <FadeUp delay={100}>
+          <div class="card h-full">
+            <div
+              class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6"
+            >
+              <MessagesSquare class="w-6 h-6 text-accent" />
+            </div>
+            <p class="text-sm font-semibold text-accent">02</p>
+            <h3 class="text-h3 text-text-heading mt-2">
+              {t("home.howItWorks.step2.title")}
+            </h3>
+            <p class="text-muted mt-3 leading-relaxed">
+              {t("home.howItWorks.step2.description")}
+            </p>
           </div>
-          <p class="text-sm font-semibold text-accent">02</p>
-          <h3 class="text-h3 text-text-heading mt-2">
-            {t("home.howItWorks.step2.title")}
-          </h3>
-          <p class="text-muted mt-3 leading-relaxed">
-            {t("home.howItWorks.step2.description")}
-          </p>
-        </div>
+        </FadeUp>
 
-        <div class="card anim-card-enter" style="--delay: 200ms">
-          <div
-            class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6"
-          >
-            <Rocket class="w-6 h-6 text-accent" />
+        <FadeUp delay={200}>
+          <div class="card h-full">
+            <div
+              class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6"
+            >
+              <Rocket class="w-6 h-6 text-accent" />
+            </div>
+            <p class="text-sm font-semibold text-accent">03</p>
+            <h3 class="text-h3 text-text-heading mt-2">
+              {t("home.howItWorks.step3.title")}
+            </h3>
+            <p class="text-muted mt-3 leading-relaxed">
+              {t("home.howItWorks.step3.description")}
+            </p>
           </div>
-          <p class="text-sm font-semibold text-accent">03</p>
-          <h3 class="text-h3 text-text-heading mt-2">
-            {t("home.howItWorks.step3.title")}
-          </h3>
-          <p class="text-muted mt-3 leading-relaxed">
-            {t("home.howItWorks.step3.description")}
-          </p>
-        </div>
+        </FadeUp>
       </div>
     </div>
   </section>
@@ -213,82 +223,62 @@ const installCommand = t("home.ctaSection.command");
       ></div>
     </div>
 
-    <div class="container relative z-10 text-center anim-scale-blur">
-      <h2 class="text-h1 text-text-on-dark max-w-3xl mx-auto">
-        {t("home.ctaSection.title")}
-      </h2>
-      <p class="text-body-lg text-text-on-dark/60 mt-6 max-w-xl mx-auto">
-        {t("home.ctaSection.subtitle")}
-      </p>
+    <div class="container relative z-10 text-center">
+      <Motion effect="scale-in">
+        <h2 class="text-h1 text-text-on-dark max-w-3xl mx-auto">
+          {t("home.ctaSection.title")}
+        </h2>
+        <p class="text-body-lg text-text-on-dark/60 mt-6 max-w-xl mx-auto">
+          {t("home.ctaSection.subtitle")}
+        </p>
 
-      <div class="mt-10">
-        <div class="flex justify-center">
-          <div
-            class="inline-flex items-center gap-2 rounded-lg bg-white/5 ring-1 ring-white/10 px-5 py-3 font-mono text-sm text-text-on-dark/90"
-          >
-            <span class="text-accent-glow">$</span>
-            <code id="cta-install-cmd">{installCommand}</code>
-            <button
-              type="button"
-              data-copy-target="cta-install-cmd"
-              aria-label={t("home.ctaSection.commandLabel")}
-              class="ml-2 inline-flex items-center justify-center w-8 h-8 rounded-md text-text-on-dark/60 hover:text-text-on-dark hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        <div class="mt-10">
+          <div class="flex justify-center">
+            <div
+              class="inline-flex items-center gap-2 rounded-lg bg-white/5 ring-1 ring-white/10 px-5 py-3 font-mono text-sm text-text-on-dark/90"
             >
-              <Copy class="copy-icon w-4 h-4" />
-              <Check class="check-icon w-4 h-4 hidden text-accent-glow" />
-            </button>
+              <span class="text-accent-glow">$</span>
+              <code id="cta-install-cmd">{installCommand}</code>
+              <button
+                type="button"
+                data-copy-target="cta-install-cmd"
+                aria-label={t("home.ctaSection.commandLabel")}
+                class="ml-2 inline-flex items-center justify-center w-8 h-8 rounded-md text-text-on-dark/60 hover:text-text-on-dark hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <Copy class="copy-icon w-4 h-4" />
+                <Check class="check-icon w-4 h-4 hidden text-accent-glow" />
+              </button>
+            </div>
+          </div>
+          <div class="mt-6 mx-auto max-w-md text-center text-xs">
+            <p class="text-text-on-dark/50">
+              {t("home.ctaSection.altLabel")}
+            </p>
+            <div
+              class="mt-2 flex flex-col items-center gap-1 font-mono text-text-on-dark/70 break-words"
+            >
+              <code>{t("home.ctaSection.commandClaudePrereq")}</code>
+              <code>{t("home.ctaSection.commandClaude")}</code>
+            </div>
           </div>
         </div>
-        <div class="mt-6 mx-auto max-w-md text-center text-xs">
-          <p class="text-text-on-dark/50">
-            {t("home.ctaSection.altLabel")}
-          </p>
-          <div
-            class="mt-2 flex flex-col items-center gap-1 font-mono text-text-on-dark/70 break-words"
-          >
-            <code>{t("home.ctaSection.commandClaudePrereq")}</code>
-            <code>{t("home.ctaSection.commandClaude")}</code>
-          </div>
-        </div>
-      </div>
 
-      <div class="mt-8 flex flex-wrap gap-4 justify-center">
-        <Button href={repoUrl} variant="secondary" tone="on-dark">
-          <ExternalLink class="w-4 h-4 mr-2" />
-          {t("home.ctaSection.github")}
-        </Button>
-        <Button href={releasesUrl} variant="secondary" tone="on-dark">
-          <Bell class="w-4 h-4 mr-2" />
-          {t("home.ctaSection.releases")}
-        </Button>
-      </div>
+        <div class="mt-8 flex flex-wrap gap-4 justify-center">
+          <Button href={repoUrl} variant="secondary" tone="on-dark">
+            <ExternalLink class="w-4 h-4 mr-2" />
+            {t("home.ctaSection.github")}
+          </Button>
+          <Button href={releasesUrl} variant="secondary" tone="on-dark">
+            <Bell class="w-4 h-4 mr-2" />
+            {t("home.ctaSection.releases")}
+          </Button>
+        </div>
+      </Motion>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  function initScrollAnimations() {
-    if (CSS.supports("animation-timeline: scroll()")) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
-          }
-        }
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-    );
-
-    document
-      .querySelectorAll(
-        ".anim-scale-blur, .anim-slide-up, .anim-slide-left, .anim-slide-right, .anim-fade, .anim-card-enter",
-      )
-      .forEach((el) => observer.observe(el));
-  }
-
   function initCopyButtons() {
     document
       .querySelectorAll<HTMLButtonElement>("[data-copy-target]")
@@ -315,10 +305,8 @@ const installCommand = t("home.ctaSection.command");
       });
   }
 
-  initScrollAnimations();
   initCopyButtons();
   document.addEventListener("astro:after-swap", () => {
-    initScrollAnimations();
     initCopyButtons();
   });
 </script>
