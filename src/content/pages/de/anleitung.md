@@ -165,7 +165,7 @@ Claude nimmt dir viel Arbeit ab, aber nicht alles.
 
 **Am Pull Request erscheint kein Vorschau-Link.** Cloudflare baut Vorschauen nur für Zweige im selben Repository. Prüfe im Cloudflare-Projekt die Einstellungen unter **Settings → Builds**.
 
-**Ich finde einen Knopf nicht, den Claude nennt.** Das Cloudflare-Dashboard ändert sich hin und wieder. Beschreib Claude, was du auf dem Bildschirm siehst, dann passt Claude die Anleitung an.
+**Ich finde einen Knopf nicht, den Claude nennt.** Das Cloudflare-Dashboard ändert sich hin und wieder. Schreib Claude, was du auf dem Bildschirm siehst, dann passt Claude die Anleitung an.
 
 ## Alle Befehle auf einen Blick
 
