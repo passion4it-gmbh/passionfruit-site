@@ -4,7 +4,7 @@ import { getLocalizedPath, type Locale } from "~/i18n";
 export type { Locale };
 
 export type PageKey =
-  "features" | "blog-index" | "contact" | "privacy" | "imprint";
+  "features" | "guide" | "blog-index" | "contact" | "privacy" | "imprint";
 
 export type CollectionName = "blog" | "pages";
 
@@ -38,6 +38,11 @@ export const PAGES = [
     key: "features" as const,
     slug: { de: "funktionen", en: "features" },
     component: () => import("~/components/pages/features.astro"),
+  },
+  {
+    key: "guide" as const,
+    slug: { de: "anleitung", en: "guide" },
+    component: () => import("~/components/pages/guide.astro"),
   },
   {
     key: "blog-index" as const,

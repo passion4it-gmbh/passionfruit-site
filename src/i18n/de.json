@@ -8,7 +8,8 @@
     "home": "Startseite",
     "blog": "Blog",
     "contact": "Kontakt",
-    "features": "Funktionen"
+    "features": "Funktionen",
+    "guide": "Anleitung"
   },
   "footer": {
     "copyright": "© {year} PASSION4IT GmbH. Alle Rechte vorbehalten.",
@@ -140,7 +141,7 @@
       },
       "step2": {
         "title": "Claude öffnen und /onboard",
-        "description": "Acht Fragen — Firmenname, Sprachen, Farben, Seiten, Kontaktdaten. Claude personalisiert die Vorlage, ändert i18n, Branding und Inhalte."
+        "description": "Zehn Fragen — Firmenname, Sprachen, Farben, Seiten, Kontaktdaten. Claude personalisiert die Vorlage, ändert i18n, Branding und Inhalte."
       },
       "step3": {
         "title": "Live gehen mit /deploy",
