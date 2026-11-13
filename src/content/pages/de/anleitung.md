@@ -155,6 +155,19 @@ Claude nimmt dir viel Arbeit ab, aber nicht alles.
 - **Klicken in fremden Diensten.** Konten bei GitHub, Cloudflare und Brevo legst du selbst an, Einstellungen dort nimmst du selbst vor.
 - **Freigeben.** Was live geht, entscheidest du, indem du den Pull Request zusammenführst.
 
+## Lieber mit Begleitung: das Einstiegspaket
+
+Du willst nicht allein starten? PASSION4IT, das Team hinter passionfruit, begleitet deinen Einstieg. Das Paket kostet einmalig 1.500 € netto und besteht aus vier Bausteinen.
+
+1. **Arbeitsumgebung einrichten.** Wir richten gemeinsam mit dir alle Werkzeuge ein, von GitHub über Node.js bis Claude, bis alles auf deinem Rechner läuft.
+2. **Einführung in die Arbeit mit Claude Code.** Du lernst, gute Anweisungen zu formulieren, ein eigenes Playbook anzulegen und Ergebnisse zu prüfen und freizugeben.
+3. **Eine erste Seite gemeinsam bauen.** Zusammen entsteht eine echte Seite für deine Organisation. Sie dient als Vorlage für alle weiteren.
+4. **KI-Schulung für dein Team.** Grundlagen und Risiken, KI im Arbeitsalltag, Kennzeichnungspflicht und EU AI Act, damit dein Team KI sicher und regelkonform einsetzt.
+
+Am Ende steht deine zweisprachige Website mit KI-gestütztem Textkonzept, und dein Team pflegt sie selbst weiter.
+
+[Erstgespräch mit PASSION4IT buchen](https://passion4it.de/booking/?utm_source=passionfruit.passion4it.de&utm_medium=referral&utm_campaign=passionfruit-anleitung)
+
 ## Wenn etwas hakt
 
 **Ich tippe `/onboard` und nichts passiert.** Du bist im Claude-Chat statt in Claude Code. Wechsle zu claude.ai/code oder in den Reiter **Code** der Desktop-App.

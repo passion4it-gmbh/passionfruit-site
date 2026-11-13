@@ -155,6 +155,19 @@ Claude takes a lot of work off your hands, but not everything.
 - **Clicking in other services.** You create the GitHub, Cloudflare and Brevo accounts yourself and change settings there yourself.
 - **Approving.** You decide what goes live by merging the pull request.
 
+## Prefer a guided start: the onboarding package
+
+Don't want to start on your own? PASSION4IT, the team behind passionfruit, guides your first steps. The package is a one-off €1,500 (net) and has four parts.
+
+1. **Setting up your workspace.** Together we install every tool you need, from GitHub and Node.js to Claude, until everything runs on your computer.
+2. **Introduction to working with Claude Code.** You learn to write good instructions, build your own playbook, and review and approve results.
+3. **Building a first page together.** We create a real page for your organization. It serves as the template for everything that follows.
+4. **AI training for your team.** Basics and risks, AI in daily work, labeling duties and the EU AI Act, so your team uses AI safely and in line with the rules.
+
+You end up with your bilingual website and an AI-assisted copy concept, and your team maintains it from there.
+
+[Book an intro call with PASSION4IT](https://passion4it.de/en/booking/?utm_source=passionfruit.passion4it.de&utm_medium=referral&utm_campaign=passionfruit-anleitung)
+
 ## Troubleshooting
 
 **I type `/onboard` and nothing happens.** You are in the Claude chat rather than Claude Code. Switch to claude.ai/code or the **Code** tab of the desktop app.
